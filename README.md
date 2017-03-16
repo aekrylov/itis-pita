@@ -6,7 +6,7 @@ Spring based web app for ITIS administration
 
 0. Install tomcat and maven
 1. Clone the repo
-2. [**TODO** how to run web server]. Maven will download all the dependencies
+2. Launch embed server using `mvn tomcat7:run `. Maven will download all the dependencies
 
 ## How to contribute
 

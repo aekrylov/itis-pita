@@ -4,7 +4,7 @@
 
     <groupId>ru.kpfu.itis</groupId>
     <artifactId>itis-pita</artifactId>
-
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -31,6 +31,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.3.7.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.25</version>
+        </dependency>
                               
         <dependency>
             <groupId>junit</groupId>
@@ -54,12 +60,23 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                
+                <configuration>
+                    <warSourceDirectory>web</warSourceDirectory>
+                </configuration>
+            </plugin>
+            
+            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 
                 <configuration>
-                    <path>/pita</path>
+                    <path>/</path>
+                    <warSourceDirectory>web</warSourceDirectory>
                 </configuration>
             </plugin>
 

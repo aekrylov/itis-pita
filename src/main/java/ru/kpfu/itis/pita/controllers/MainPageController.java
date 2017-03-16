@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MainPageController {
 
-    @RequestMapping(value = "/", method = {RequestMethod.GET})
+    @RequestMapping(path = "/hi")
     @ResponseBody
     public String doGet() {
         return "main page body";
