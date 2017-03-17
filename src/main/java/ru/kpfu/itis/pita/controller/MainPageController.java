@@ -23,6 +23,6 @@ public class MainPageController {
     @RequestMapping(path = "/hi")
     public ModelAndView doGet(ModelMap modelMap) {
         modelMap.put("user", userRepository.findOne(1));
-        return new ModelAndView("hi.jsp", modelMap);
+        return new ModelAndView("hi", modelMap);
     }
 }
