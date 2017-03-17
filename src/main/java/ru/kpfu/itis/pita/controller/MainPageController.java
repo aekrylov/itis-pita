@@ -25,4 +25,9 @@ public class MainPageController {
         modelMap.put("user", userRepository.findOne(1));
         return new ModelAndView("hi.jsp", modelMap);
     }
+
+    @RequestMapping(path = "/login")
+    public String login(){
+        return "login.jsp";
+    }
 }
