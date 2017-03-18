@@ -7,7 +7,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.repository.UserRepository;
 
@@ -27,9 +29,13 @@ public class LoginPageController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public ModelAndView doPost(ModelMap modelMap, @ModelAttribute User user) {
+    public ModelAndView doPost(ModelMap modelMap, @RequestParam String email, @RequestParam String password_hash) {
         /*SessionFactory sessionFactory;
         sessionFactory.getCurrentSession().save(user);*/
+        /*something don't work*/
+        if(userRepository.findByEmailAndPasswordHash(email, password_hash) != null) {
+            return new ModelAndView(new RedirectView("/profile"));
+        }
         return new ModelAndView("login.jsp", modelMap);
     }
 
