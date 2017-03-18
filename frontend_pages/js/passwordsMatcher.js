@@ -8,7 +8,7 @@ function passwordsMatcher() {
 
     if (pass !== pass_rep) {
         if ( !$("#repeated_password").parent().hasClass("has-error")) {
-            $("#repeated_password").parent().append('\<label class="control-label" id ="passwords_not_matching_warning" for="input_login">Пароли не совпадают</label>');
+            $("#repeated_password").parent().append('\<label class="control-label" id ="repeated_password_warning" for="repeated_password">Пароли не совпадают</label>');
             $("#repeated_password").parent().addClass("has-error");
         }
         return false;
