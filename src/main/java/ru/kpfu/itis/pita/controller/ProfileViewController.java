@@ -18,10 +18,11 @@ public class ProfileViewController {
 
     @Autowired
     private UserRepository userRepository;
-    @RequestMapping(path = "/profile?id=*", method = RequestMethod.GET)
-    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id") String id) {
-        if (userRepository.findById(id)!= null){
-            User user = userRepository.findById(id);
+
+    @RequestMapping(path = "/profile", method = RequestMethod.GET)
+    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id") int id) {
+        if (userRepository.findOne(id)!= null){
+            User user = userRepository.findOne(id);
             modelMap.addAttribute("user", user);
         } else{
             modelMap.addAttribute("error", "Error: no such user");
