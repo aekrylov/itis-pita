@@ -17,8 +17,8 @@
 <div class="col-md-12">
     <div class="login-block">
         <h1>Вход:</h1>
-        <input type="text" value="" placeholder="E-mail" id="username" />
-        <input type="password" value="" placeholder="Пароль" id="password" />
+        <input type="text" value="" placeholder="E-mail" id="email" />
+        <input type="password" value="" placeholder="Пароль" id="password_hash" />
         <div class="form-group">
             <label class="login-checkbox">
                 <input type="checkbox" value="remember-me" id="checkbox"> Запомнить

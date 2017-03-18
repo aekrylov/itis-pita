@@ -26,8 +26,5 @@ public class MainPageController {
         return new ModelAndView("hi.jsp", modelMap);
     }
 
-    @RequestMapping(path = "/login")
-    public String login(){
-        return "login.jsp";
-    }
+
 }
