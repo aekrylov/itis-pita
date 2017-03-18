@@ -5,8 +5,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
-        <%@include file='../../css/bootstrap.css' %>
-        <%@include file='../../css/style.css' %>
+        <%@include file='/css/bootstrap.css' %>
+        <%@include file='/css/style.css' %>
     </style>
     <title>Вход | PITA</title>
 </head>
@@ -17,14 +17,16 @@
 <div class="col-md-12">
     <div class="login-block">
         <h1>Вход:</h1>
-        <input type="text" value="" placeholder="E-mail" id="username" />
-        <input type="password" value="" placeholder="Пароль" id="password" />
-        <div class="form-group">
-            <label class="login-checkbox">
-                <input type="checkbox" value="remember-me" id="checkbox"> Запомнить
-            </label>
-            <button type="submit" class="btn-login" >Войти</button>
-        </div>
+        <form method="post" action="/login">
+            <input type="text" placeholder="E-mail" id="email" name="email"/>
+            <input type="text" placeholder="Пароль" id="password_hash" name="password_hash"/>
+            <div class="form-group">
+                <label class="login-checkbox">
+                    <input type="checkbox" value="remember-me" id="checkbox"> Запомнить
+                </label>
+                <button type="submit" class="btn-login">Войти</button>
+            </div>
+        </form>
         <div class="form-group bottom-links-login">
             <a href="#" id="forgot-pass">Забыли пароль?</a> | <a href="#" id="signup"> Регистрация</a>
         </div>
