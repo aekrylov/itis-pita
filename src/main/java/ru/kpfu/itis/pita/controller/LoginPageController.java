@@ -33,8 +33,9 @@ public class LoginPageController {
         /*SessionFactory sessionFactory;
         sessionFactory.getCurrentSession().save(user);*/
         /*something don't work*/
-        if(userRepository.findByEmailAndPasswordHash(email, password_hash) != null) {
-            return new ModelAndView(new RedirectView("/profile"));
+        User user = userRepository.findByEmailAndPasswordHash(email, password_hash);
+        if(user != null) {
+            return new ModelAndView(new RedirectView("/profile?id="+user.getId()));
         }
         return new ModelAndView("login.jsp", modelMap);
     }
