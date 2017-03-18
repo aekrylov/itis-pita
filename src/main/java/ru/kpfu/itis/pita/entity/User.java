@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 
 /**
