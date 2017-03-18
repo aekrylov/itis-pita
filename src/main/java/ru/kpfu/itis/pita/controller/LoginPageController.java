@@ -39,4 +39,9 @@ public class LoginPageController {
         return new ModelAndView("login.jsp", modelMap);
     }
 
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public ModelAndView loguot() {
+        return new ModelAndView(new RedirectView("/login"));
+    }
+
 }
