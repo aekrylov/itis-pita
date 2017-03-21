@@ -127,6 +127,10 @@
     </dependencies>
 
     <build>
+
+        <!-- static final name for easy integration with IDEs -->
+        <finalName>itis-pita</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
