@@ -10,13 +10,14 @@ Spring based web app for ITIS administration
     - Spring Data JPA
 - Hibernate
 - Freemarker
+- PostgreSQL database
 
 ## How to run
 
 0. Install tomcat and maven
 1. Clone the repo
 2. Copy [db.properties-template](./src/main/resources/db.properties-template) to db.properties and replace all placeholders with your actual values
-3. Launch embed server using `mvn heroku:run-war`
+3. Launch embed server using `mvn heroku:run-war` or `mvn tomcat7:run`
 
 
 ## How to contribute

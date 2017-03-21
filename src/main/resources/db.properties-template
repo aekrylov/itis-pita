@@ -1,2 +1,4 @@
 #name chosen for Heroku compatibility
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/inf4_pita
+JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/inf4_pita
+JDBC_DATABASE_USERNAME=postgres
+JDBC_DATABASE_PASSWORD=postgres
