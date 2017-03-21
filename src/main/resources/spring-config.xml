@@ -11,6 +11,7 @@
     <!-- load db properties -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:db.properties" />
+        <property name="ignoreResourceNotFound" value="true" />
         <property name="systemPropertiesMode" value="1" /> <!-- fallback -->
     </bean>
 
