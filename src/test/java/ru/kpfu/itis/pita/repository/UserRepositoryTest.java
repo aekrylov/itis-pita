@@ -1,11 +1,21 @@
 package ru.kpfu.itis.pita.repository;
 
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import org.dbunit.dataset.xml.XmlDataSet;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import ru.kpfu.itis.pita.entity.User;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -14,8 +24,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:spring-config.xml"
+        "classpath:spring-config-test.xml"
 })
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+        TransactionalTestExecutionListener.class,
+        DbUnitTestExecutionListener.class})
+@DatabaseSetup(value = "/datasets/users.xml")
 public class UserRepositoryTest {
 
     @Autowired
@@ -23,12 +37,17 @@ public class UserRepositoryTest {
 
     @Test
     public void testSelectById() {
-        //TODO mock up DB properly
         Assert.assertEquals(ur.findOne(1).getEmail(), "admin@adm.in");
     }
 
     @Test
-    public void TestSelectByEmail() {
+    public void testSelectByEmail() {
         Assert.assertEquals(ur.findByEmail("admin@adm.in").getId(), 1);
+    }
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void testInsertMandatoryFields() {
+        User user = new User();
+        ur.save(user);
     }
 }

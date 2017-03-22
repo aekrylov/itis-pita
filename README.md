@@ -2,12 +2,23 @@
 
 Spring based web app for ITIS administration
 
+## Technologies used
+
+- Spring
+    - Spring Core
+    - Spring MVC
+    - Spring Data JPA
+- Hibernate
+- Freemarker
+- PostgreSQL database
+
 ## How to run
 
 0. Install tomcat and maven
 1. Clone the repo
-2. Change values in [db.properties](src/main/resources/db.properties) file
-2. Launch embed server using `mvn tomcat7:run `. Maven will download all the dependencies
+2. Copy [db.properties-template](src/main/resources/db.properties) to db.properties and replace all placeholders with your actual values
+3. Launch embed server using `mvn heroku:run-war` or `mvn tomcat7:run`
+
 
 ## How to contribute
 

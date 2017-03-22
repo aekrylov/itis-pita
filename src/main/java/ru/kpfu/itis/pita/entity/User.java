@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 
 /**
@@ -25,6 +27,16 @@ public class User {
 
     private boolean active;
 
+    public User() {}
+
+    public User(String name, String email, String phone, String passwordHash, String role) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.passwordHash = passwordHash;
+        this.role = role;
+    }
+
     @Id
     @GeneratedValue
     public int getId() {
@@ -35,7 +47,7 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -105,5 +117,15 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User[id=%d; name=%s; email=%s;]", id, name, email);
     }
 }
