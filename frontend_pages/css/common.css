@@ -4,7 +4,7 @@
  If you want to add your custom css, please write your own special css-file for each page.
 */
 body {
-    background: url('static/img/kfu_backgroud.jpg') fixed; /* fixed stops background from scrolling */
+    background: url('../img/kfu_backgroud.jpg') fixed; /* fixed stops background from scrolling */
     background-size: cover;
 
 }
