@@ -1,0 +1,67 @@
+/*
+ It's common css file for all pages
+ Do not revrite it.
+ If you want to add your custom css, please write your own special css-file for each page.
+*/
+body {
+    background: url('../img/kfu_backgroud.jpg') fixed; /* fixed stops background from scrolling */
+    background-size: cover;
+
+}
+header {
+    min-height: 10px;
+    background-color: #3f3b3c;
+}
+footer {
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+    background-color: #1d4f50;
+}
+
+
+
+.pita-header {
+
+    color: white;
+    background-color: rgba(29, 79, 80, 0.8);
+    border-radius: 0;
+    border-color: transparent;
+    min-height: 70px;
+    padding-top: 10px;
+
+}
+
+.pita-header .navbar-collapse,a  {
+    color: white;
+}
+
+.pita-header .navbar-nav a:hover, .nav .open > a:focus  {
+    border-radius: 0px;
+    background-color: #F0BB29;
+}
+
+.header-logo {
+    max-height: 55px;
+    margin-top: -18px;
+}
+.divider-vertical {
+    height: inherit;
+    margin: 0 0 0 9px;
+    padding: 0 0 0 9px;
+    border-right: 1px solid #F0BB29;
+}
+#avatar-link {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+#avatar-link:hover {
+    background-color: inherit;
+}
+.avatar {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-height: 55px;
+    margin-top: 5px;
+}
