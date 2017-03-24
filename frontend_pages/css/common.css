@@ -3,6 +3,9 @@
  Do not revrite it.
  If you want to add your custom css, please write your own special css-file for each page.
 */
+html, body {
+    height: 100%;
+}
 body {
     background: url('../img/kfu_backgroud.jpg') fixed; /* fixed stops background from scrolling */
     background-size: cover;
@@ -18,8 +21,15 @@ footer {
     width: 100%;
     background-color: #1d4f50;
 }
-
-
+.push {
+    height: 50px; /* .push must be the same height as .footer */
+}
+.page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
+}
 
 .pita-header {
 

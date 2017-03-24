@@ -75,16 +75,17 @@
     </nav>
     <!--End of header -->
 
-    <div>
+    <div class="container">
         <@body>
             Dummy body
         </@body>
     </div>
+    <div class="push"></div>
 
-    <footer>
-    <#-- include 'footer.ftl'??? -->
-    </footer>
 </div>
+<footer>
+<#-- include 'footer.ftl'??? -->
+</footer>
 </body>
 </html>
 </#macro>
