@@ -7,7 +7,15 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <security:http auto-config="true">
+    <!-- TODO password hashing -->
+
+    <security:http>
+        <!-- TODO enable CSRF -->
+        <!-- TODO remember me -->
+        <!-- TODO secure urls -->
+        <security:csrf disabled="true" />
+        <security:form-login login-page="/login" username-parameter="email" password-parameter="password_hash"/>
+        <security:logout logout-url="/logout" logout-success-url="/login" />
     </security:http>
 
     <security:user-service>
