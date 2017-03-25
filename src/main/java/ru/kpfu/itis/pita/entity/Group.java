@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -30,6 +29,28 @@ public class Group {
     @ManyToMany
     @JoinTable(name = "groups_interests")
     private Collection<Interest> interests;
+
+    @ManyToMany
+    @JoinTable(name = "groups_members", joinColumns = {
+            @JoinColumn(name = "group_id", referencedColumnName = "id")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "user_id", referencedColumnName = "id")
+    })
+    private Collection<User> members;
+
+    @ManyToMany
+    @JoinTable(name = "groups_admins")
+    private Collection<User> admins;
+
+    public Group() {}
+
+    public Group(String name, String description, User creator, Collection<Interest> interests) {
+        this.name = name;
+        this.description = description;
+        this.creator = creator;
+        this.interests = interests;
+        //todo add creator to members?
+    }
 
     public int getId() {
         return id;
@@ -69,6 +90,22 @@ public class Group {
 
     public void setInterests(Collection<Interest> interests) {
         this.interests = interests;
+    }
+
+    public Collection<User> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(Collection<User> admins) {
+        this.admins = admins;
+    }
+
+    public Collection<User> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Collection<User> members) {
+        this.members = members;
     }
 
     @Override

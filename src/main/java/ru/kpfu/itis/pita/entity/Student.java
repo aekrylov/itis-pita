@@ -2,6 +2,7 @@ package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -21,6 +22,10 @@ public class Student implements Serializable {
 
     @ManyToOne(optional = false)
     private AcademicGroup academicGroup;
+
+    @ManyToMany
+    @JoinTable(name = "students_interests")
+    private Collection<Interest> interests;
 
     public User getUser() {
         return user;
@@ -44,6 +49,14 @@ public class Student implements Serializable {
 
     public void setAcademicGroup(AcademicGroup academicGroup) {
         this.academicGroup = academicGroup;
+    }
+
+    public Collection<Interest> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(Collection<Interest> interests) {
+        this.interests = interests;
     }
 
     @Override

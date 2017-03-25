@@ -1,8 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
-import org.springframework.context.annotation.Scope;
-
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -26,6 +25,8 @@ public class User {
     private String role;
 
     private boolean active;
+
+    private Collection<Group> groups;
 
     public User() {}
 
@@ -117,6 +118,18 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "groups_members", joinColumns = {
+            @JoinColumn(name = "user_id")
+    }, inverseJoinColumns = {@JoinColumn(name = "group_id")})
+    public Collection<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        this.groups = groups;
     }
 
     @Override
