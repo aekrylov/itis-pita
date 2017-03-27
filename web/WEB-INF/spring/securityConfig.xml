@@ -26,4 +26,14 @@
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
         </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <property name="hierarchy">
+            <value>
+                ROLE_SUPERUSER > ROLE_DEAN
+                ROLE_SUPERUSER > ROLE_WORKER
+                ROLE_SUPERUSER > ROLE_STUDENT
+            </value>
+        </property>
+    </bean>
 </beans>
