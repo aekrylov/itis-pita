@@ -1,10 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by taa on 26.03.17.
@@ -13,37 +10,37 @@ import java.util.Map;
 @Table(name = "courses")
 public class Course{
 
-    @Column(name = "group_id")
-    private int groupId;
+    @Id
+    private int id;
 
-    @ManyToOne(targetEntity = Group.class)
-    @JoinColumn(name = "group_id", referencedColumnName = "id")
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private Group group;
 
-    @Column
+    @Column(nullable = false)
     private int capacity;
 
-    @Column
-    private String title;
-
-    @Column
-    private String description;
-
-    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    //todo merge with group admins?
+    @ManyToMany
+    @JoinTable(name= "courses_teachers",joinColumns = {
+            @JoinColumn(name = "course_id")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "teacher_id")
+    })
     private Collection<User> teachers;
 
-    @Column
-    private String photo;
-
+    //todo implement timetable
+/*
     @Column
     private Map<Date, String> timetable;
+*/
 
-    public int getGroupId() {
-        return groupId;
+    public int getId() {
+        return id;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getCapacity() {
@@ -54,22 +51,6 @@ public class Course{
         this.capacity = capacity;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Collection<User> getTeachers() {
         return teachers;
     }
@@ -78,19 +59,21 @@ public class Course{
         this.teachers = teachers;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
+/*
     public Map<Date, String> getTimetable() {
         return timetable;
     }
 
     public void setTimetable(Map<Date, String> timetable) {
         this.timetable = timetable;
+    }
+*/
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
