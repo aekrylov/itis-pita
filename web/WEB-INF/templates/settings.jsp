@@ -11,8 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Настройки</title>
-    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="/formhelper/css/bootstrap-formhelpers.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/formhelper/css/bootstrap-formhelpers.css" rel="stylesheet" media="screen">
 </head>
 
 <body>

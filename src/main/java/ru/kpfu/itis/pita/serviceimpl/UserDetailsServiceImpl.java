@@ -1,4 +1,4 @@
-package ru.kpfu.itis.pita.service;
+package ru.kpfu.itis.pita.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
