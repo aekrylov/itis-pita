@@ -1,9 +1,6 @@
 package ru.kpfu.itis.pita.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -15,10 +12,13 @@ import java.io.Serializable;
 @Table(name = "labs")
 public class Lab implements Serializable {
 
+    @Id
+    private int id;
+
     //TODO
 
-    @Id
-    @OneToOne
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private Group group;
 
     public Group getGroup() {
@@ -42,5 +42,13 @@ public class Lab implements Serializable {
     @Override
     public int hashCode() {
         return group.hashCode();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

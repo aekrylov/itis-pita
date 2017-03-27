@@ -24,7 +24,7 @@ public class User {
     //TODO enum
     private String role;
 
-    private boolean active;
+    private boolean active = true;
 
     private Collection<Group> groups;
 
