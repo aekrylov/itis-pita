@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- TODO password hashing -->
+
+    <security:http>
+        <!-- TODO enable CSRF -->
+        <!-- TODO remember me -->
+        <!-- TODO secure urls -->
+        <security:csrf disabled="true" />
+        <security:form-login login-page="/login" username-parameter="email" password-parameter="password_hash"/>
+        <security:logout logout-url="/logout" logout-success-url="/login" />
+    </security:http>
+
+    <security:user-service>
+        <security:user name="user" authorities="ROLE_USER" password="password" />
+    </security:user-service>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>

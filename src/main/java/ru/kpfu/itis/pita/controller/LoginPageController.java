@@ -1,10 +1,8 @@
 package ru.kpfu.itis.pita.controller;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +17,9 @@ import ru.kpfu.itis.pita.repository.UserRepository;
 
 @Controller
 public class LoginPageController {
+    /**
+     * TODO handled by Spring security, remove that?
+     */
 
     @Autowired
     private UserRepository userRepository;
