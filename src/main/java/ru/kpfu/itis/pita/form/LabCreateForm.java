@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/27/17 5:51 PM
@@ -10,7 +12,7 @@ public class LabCreateForm {
     private String name;
     private String description;
 
-    //private MultipartFile image;
+    private MultipartFile image;
 
     public String getName() {
         return name;
@@ -28,7 +30,6 @@ public class LabCreateForm {
         this.description = description;
     }
 
-/*
     public MultipartFile getImage() {
         return image;
     }
@@ -36,5 +37,4 @@ public class LabCreateForm {
     public void setImage(MultipartFile image) {
         this.image = image;
     }
-*/
 }

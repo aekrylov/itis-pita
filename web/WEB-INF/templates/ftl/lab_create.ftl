@@ -1,7 +1,7 @@
 <#include 'base.ftl' >
 
 <#macro body>
-        <form method="post" action="/labs/create">
+        <form method="post" action="/labs/create" enctype="multipart/form-data">
             <input name="name"/>
             <textarea name="description"></textarea>
 

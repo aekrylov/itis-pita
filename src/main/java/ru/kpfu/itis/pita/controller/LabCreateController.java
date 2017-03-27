@@ -26,16 +26,14 @@ import ru.kpfu.itis.pita.service.LabService;
 public class LabCreateController {
 
     private LabService labService;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    public LabCreateController(LabService labService) {
+    public LabCreateController(LabService labService, UserRepository ur) {
         this.labService = labService;
+        this.userRepository = ur;
     }
 
-    //TODO images
     //TODO teachers list
 
     @GetMapping
@@ -43,19 +41,13 @@ public class LabCreateController {
         return "lab_create";
     }
 
-    //@PostMapping(consumes = "multipart/form-data")
     @PostMapping
     public ModelAndView processForm(@ModelAttribute LabCreateForm form) {
-        /*LabCreateForm form = new LabCreateForm();
-        form.setName((String) values.get("name"));
-        form.setImage((MultipartFile) values.get("image"));
-        form.setDescription((String) values.get("description"));*/
-
-        //todo get current user
         Lab lab = new Lab();
         User currentUser = userRepository.findOne(1);
         lab.setGroup(new Group(form.getName(), form.getDescription(), currentUser, null));
         //todo check errors
+        //todo save image
         labService.create(lab);
 
         return new ModelAndView("redirect:lab_list");
