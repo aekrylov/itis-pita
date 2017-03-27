@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.kpfu.itis.pita.entity.User;
 
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -21,7 +20,9 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
+        Collection<GrantedAuthority> authorities = user.getRole().getAuthorities();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        return authorities;
     }
 
     @Override
