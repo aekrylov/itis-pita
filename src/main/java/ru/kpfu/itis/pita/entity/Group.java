@@ -45,7 +45,7 @@ public class Group {
     @JoinTable(name = "groups_admins")
     private Collection<User> admins;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "group")
     @SortNatural
     private SortedSet<WallPost> wall;
 

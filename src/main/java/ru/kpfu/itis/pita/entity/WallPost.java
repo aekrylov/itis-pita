@@ -16,9 +16,9 @@ import java.util.SortedSet;
 public class WallPost implements Comparable<WallPost> {
 
     @Id
-    @Column(name = "post_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int postId;
+    private int id;
 
     @ManyToOne(optional = false)
     private Group group;
@@ -37,7 +37,7 @@ public class WallPost implements Comparable<WallPost> {
     @Column(name = "video_link")
     private String videoLink;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "post")
     @SortNatural
     private SortedSet<WallComment> comments;
 
@@ -58,12 +58,12 @@ public class WallPost implements Comparable<WallPost> {
         this.videoLink = videoLink;
     }
 
-    public int getPostId() {
-        return postId;
+    public int getId() {
+        return id;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Group getGroup() {

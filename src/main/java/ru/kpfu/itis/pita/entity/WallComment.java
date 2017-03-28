@@ -14,7 +14,7 @@ public class WallComment implements Comparable<WallComment> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long comment_id;
+    private long id;
 
     @ManyToOne(optional = false)
     private WallPost post;
@@ -43,12 +43,12 @@ public class WallComment implements Comparable<WallComment> {
         this.timestamp = timestamp;
     }
 
-    public long getComment_id() {
-        return comment_id;
+    public long getId() {
+        return id;
     }
 
-    public void setComment_id(long comment_id) {
-        this.comment_id = comment_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public WallPost getPost() {
