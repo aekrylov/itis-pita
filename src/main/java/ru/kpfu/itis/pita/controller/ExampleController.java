@@ -1,9 +1,13 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kpfu.itis.pita.repository.UserRepository;
 
@@ -34,5 +38,11 @@ public class ExampleController {
     public String checkSession(ModelMap modelMap) {
         //user is a session attribute
         return modelMap.get("user").toString();
+    }
+
+    @RequestMapping(path = "/check_auth")
+    @ResponseBody
+    public String checkAuth() {
+        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
     }
 }
