@@ -6,6 +6,7 @@
 
     <import resource="classpath:spring-db-config.xml" />
 
-    <context:component-scan base-package="ru.kpfu.itis.pita" />
+    <context:component-scan base-package="ru.kpfu.itis.pita.serviceimpl" />
+    <context:component-scan base-package="ru.kpfu.itis.pita.config" />
 
 </beans>

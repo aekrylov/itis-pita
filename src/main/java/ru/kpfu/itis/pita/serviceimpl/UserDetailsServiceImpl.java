@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.User;
-import ru.kpfu.itis.pita.misc.UserDetails;
 import ru.kpfu.itis.pita.repository.UserRepository;
+import ru.kpfu.itis.pita.security.UserDetails;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)

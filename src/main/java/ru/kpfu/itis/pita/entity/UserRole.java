@@ -14,7 +14,7 @@ public enum UserRole {
     ROLE_STUDENT(""),
     ROLE_WORKER(""),
     ROLE_DEAN("CREATE_LAB"),
-    ROLE_SUPERUSER("");
+    ROLE_SUPERUSER("ROLE_STUDENT, ROLE_WORKER, ROLE_DEAN");
 
     private List<GrantedAuthority> authorities;
 
@@ -22,6 +22,10 @@ public enum UserRole {
         this.authorities = authorities;
     }
 
+    /**
+     * Construct a role by the list of implied roles and authorities
+     * @param authorities Comma separated list of implied roles and authorities
+     */
     UserRole(String authorities) {
         this(AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
     }
