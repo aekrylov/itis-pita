@@ -18,7 +18,7 @@
         <h1>Вход:</h1>
         <form method="post" class="login-form" action="/login">
             <input type="text" placeholder="E-mail" id="email" name="email"/>
-            <input type="password" placeholder="Пароль" id="password_hash" name="password_hash"/>
+            <input type="password" placeholder="Пароль" id="password" name="password"/>
             <div class="form-group">
                 <label class="login-checkbox">
                     <input type="checkbox" value="remember-me" id="checkbox"> Запомнить

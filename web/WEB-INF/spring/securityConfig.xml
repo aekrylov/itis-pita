@@ -15,7 +15,7 @@
         <!-- TODO remember me -->
         <!-- TODO secure urls -->
         <security:csrf disabled="true" />
-        <security:form-login login-page="/login" username-parameter="email" password-parameter="password_hash"/>
+        <security:form-login login-page="/login" username-parameter="email" password-parameter="password"/>
         <security:logout logout-url="/logout" logout-success-url="/login" />
     </security:http>
 
