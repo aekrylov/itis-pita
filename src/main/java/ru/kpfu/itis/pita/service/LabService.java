@@ -9,4 +9,6 @@ import ru.kpfu.itis.pita.entity.Lab;
 public interface LabService {
 
     Lab create(Lab lab);
+
+    boolean exists(String labName);
 }

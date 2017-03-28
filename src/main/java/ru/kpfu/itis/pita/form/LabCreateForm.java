@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.form;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -9,7 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class LabCreateForm {
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String description;
 
     private MultipartFile image;
