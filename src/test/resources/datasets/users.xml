@@ -1,5 +1,5 @@
 <dataset>
     <users
-        id="1" name="Admin" email="admin@adm.in" phone="None" password_hash="blah" role="superuser" active="true" />
+        id="1" name="Admin" email="admin@adm.in" phone="None" password_hash="blah" role="ROLE_SUPERUSER" active="true" />
     
 </dataset>
