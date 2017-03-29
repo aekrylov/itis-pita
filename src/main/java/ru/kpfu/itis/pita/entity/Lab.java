@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.Collection;
@@ -15,6 +16,9 @@ import java.util.Collection;
 @PrimaryKeyJoinColumn(name = "id")
 public class Lab extends Group {
 
+    @Id
+    private int id;
+
     //TODO
 
     public Lab() {
@@ -22,5 +26,13 @@ public class Lab extends Group {
 
     public Lab(String name, String description, User creator, Collection<Interest> interests) {
         super(name, description, creator, interests);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

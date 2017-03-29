@@ -27,5 +27,4 @@ public class LabServiceImpl extends GroupServiceImpl implements LabService {
     public Lab create(Lab lab) {
         return labRepository.save(lab);
     }
-
 }

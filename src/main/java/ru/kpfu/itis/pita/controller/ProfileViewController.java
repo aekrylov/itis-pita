@@ -23,7 +23,7 @@ public class ProfileViewController {
 
     @PreAuthorize("isFullyAuthenticated()")
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
-    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id") int id) {
+    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id", required = false) Integer id) {
         if (userRepository.findOne(id)!= null){
             User user = userRepository.findOne(id);
             modelMap.addAttribute("user", user);

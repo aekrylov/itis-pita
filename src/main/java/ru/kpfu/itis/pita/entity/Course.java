@@ -14,6 +14,9 @@ public class Course extends Group {
     @Column(nullable = false)
     private int capacity;
 
+    @Column
+    private String schedule;
+
     @ManyToMany
     @JoinTable(name= "courses_teachers",joinColumns = {
             @JoinColumn(name = "course_id")
@@ -57,4 +60,11 @@ public class Course extends Group {
         this.subject = subject;
     }
 
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
 }
