@@ -77,83 +77,46 @@
         </div>
         <!-- /.row -->
         <form role="form" class="" action="/groups/create" method="POST" enctype="multipart/form-data" onsubmit="return checkform([
-            'group_name', 'group_info', 'group_teacher_search', 'group_shedule'
+            'group_name', 'group_info', 'group_tags'
         ])">
             <div class="row">
-                <div class="col-xs-offset-1 col-md-7">
+                <div class="col-xs-offset-1 col-md-5">
 
                     <div class="form-group">
-                        <label class="control-label" for="group_name">Название курса</label>
+                        <label class="control-label" for="group_name">Название группы</label>
                         <input onfocus="removeHasError('group_name')" type="text" minlength="3" class="form-control"
                                name="group_name"
                                id="group_name"
-                               placeholder="..введите название курса"/>
+                               placeholder="..введите название группы"/>
 
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class=" control-label">Информация о курсе</label>
-                                <textarea class="form-control" style="resize: none"
-                                          onfocus="removeHasError('group_info')" rows="6" name="group_info"
-                                          id="group_info"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class=" control-label">Расписание</label>
-                                <textarea class="form-control" style="resize: none"
-                                          onfocus="removeHasError('group_shedule')" rows="6" name="group_info"
-                                          id="group_shedule"></textarea>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group" onclick="removeHasError('group_teacher_search')">
-                                <label class=" control-label"><span
-                                        class="glyphicon glyphicon-search"></span> Преподаватель </label>
-
-                                <input type="text" id="group_teacher_search" name="group_teacher_search"
-                                       class="" placeholder="...введите имя преподавателя">
-
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group" onclick="removeHasError('group_places_count')">
-                                <label class=" control-label">Количеcтво мест </label>
-                                <input type="text" class="form-control bfh-number" id="group_places_count"
-                                       min="1" value="1" data-min="1" data-max="1000">
-                            </div>
-                        </div>
+                    <div class="form-group" onclick="removeHasError('group_tags')">
+                        <label class=" control-label">Темы группы</label>
+                        <input type="text" id="group_tags" class="selectized"
+                                tabindex="-1" style="display: none;">
                     </div>
 
 
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class=" control-label">Информация о группе</label>
+                        <textarea class="form-control" style="resize: none"
+                                  onfocus="removeHasError('group_info')" rows="5" name="group_info"
+                                  id="group_info"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
                         <button class="btn-warning btn btn-block" type="submit">Создать</button>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class=" control-label">Изображение</label>
-                        <input id="group_image" name="group_image" type="file"
-                               onclick="removeHasError('group_image')" class="file-loading" accept="image/*">
-                        <script>
-                            $("#group_image").fileinput({
-                                theme: "fa",
-                                allowedFileExtensions: ["jpg", "png", "gif"],
-                                minImageWidth: 50,
-                                minImageHeight: 50,
-                                showUpload: false
-                            });
-                        </script>
-                    </div>
-                </div>
             </div>
-        </form>
 
+        </form>
 
     </div>
     <div class="push"></div>
@@ -163,5 +126,17 @@
 
 </footer>
 <script src="js/checkform.js"></script>
+<script src="js/removeHasError.js"></script>
+<script src="js/simpleTagsSelectizer.js"></script>
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    items = [
+        {value:'inf', text:'informatic'},
+        {value:'java', text:'java language'},
+        {value:'.net', text:'.net framework'},
+        {value:'itis-music', text:'itis-music'},
+    ];
+    $.onload = groupTagsSelectizer('group_tags',items);
+</script>
 </body>
 </html>
