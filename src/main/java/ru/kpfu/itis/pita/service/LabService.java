@@ -6,9 +6,7 @@ import ru.kpfu.itis.pita.entity.Lab;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/27/17 5:55 PM
  */
-public interface LabService {
+public interface LabService extends GroupService {
 
     Lab create(Lab lab);
-
-    boolean exists(String labName);
 }
