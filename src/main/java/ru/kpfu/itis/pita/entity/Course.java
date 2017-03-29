@@ -8,19 +8,12 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "courses")
-public class Course{
-
-    @Id
-    private int id;
-
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    private Group group;
+@PrimaryKeyJoinColumn(name = "id")
+public class Course extends Group {
 
     @Column(nullable = false)
     private int capacity;
 
-    //todo merge with group admins?
     @ManyToMany
     @JoinTable(name= "courses_teachers",joinColumns = {
             @JoinColumn(name = "course_id")
@@ -29,18 +22,15 @@ public class Course{
     })
     private Collection<User> teachers;
 
-    //todo implement timetable
-/*
-    @Column
-    private Map<Date, String> timetable;
-*/
+    @OneToOne(optional = false)
+    private Subject subject;
 
-    public int getId() {
-        return id;
+    public Course() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Course(String name, String description, User creator, Collection<Interest> interests, int capacity) {
+        super(name, description, creator, interests);
+        this.capacity = capacity;
     }
 
     public int getCapacity() {
@@ -59,21 +49,12 @@ public class Course{
         this.teachers = teachers;
     }
 
-/*
-    public Map<Date, String> getTimetable() {
-        return timetable;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setTimetable(Map<Date, String> timetable) {
-        this.timetable = timetable;
-    }
-*/
-
-    public Group getGroup() {
-        return group;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
 }
