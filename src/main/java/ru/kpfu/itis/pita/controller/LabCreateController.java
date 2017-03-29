@@ -17,6 +17,8 @@ import ru.kpfu.itis.pita.repository.UserRepository;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.LabService;
 
+import javax.validation.Valid;
+
 //import javax.validation.Valid;
 
 /**
@@ -46,7 +48,7 @@ public class LabCreateController {
     }
 
     @PostMapping
-    public String processForm(@ModelAttribute LabCreateForm form, BindingResult result, ModelMap modelMap) {
+    public String processForm(@ModelAttribute @Valid LabCreateForm form, BindingResult result, ModelMap modelMap) {
         if(result.hasErrors()) {
             return "lab_create";
         }
