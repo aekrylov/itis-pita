@@ -9,6 +9,8 @@
     <link href="bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
 
+    <link href="formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+
     <script src="js/jquery-3.1.1.js"></script>
     <script src="js/bootstrap.js"></script>
 
@@ -23,6 +25,7 @@
     <!-- the main fileinput plugin file -->
     <script src="bootstrap-fileinputs/js/fileinput.min.js"></script>
     <script src="selectize/js/standalone/selectize.js"></script>
+
 </head>
 <body>
 <div class="page">
@@ -95,7 +98,8 @@
 
                     <div class="form-group">
                         <label class="control-label" for="course_name">Название курса</label>
-                        <input onfocus="removeHasError('course_name')" type="text" minlength="3" class="form-control" name="course_name"
+                        <input onfocus="removeHasError('course_name')" type="text" minlength="3" class="form-control"
+                               name="course_name"
                                id="course_name"
                                placeholder="..введите название курса"/>
 
@@ -104,32 +108,41 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class=" control-label">Информация о курсе</label>
-                                <textarea class="form-control" style="resize: none" onfocus="removeHasError('course_info')" rows="6" name="course_info"
+                                <textarea class="form-control" style="resize: none"
+                                          onfocus="removeHasError('course_info')" rows="6" name="course_info"
                                           id="course_info"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class=" control-label">Расписание</label>
-                                <textarea class="form-control" style="resize: none" onfocus="removeHasError('course_shedule')" rows="6" name="course_info"
+                                <textarea class="form-control" style="resize: none"
+                                          onfocus="removeHasError('course_shedule')" rows="6" name="course_info"
                                           id="course_shedule"></textarea>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group" onclick="removeHasError('course_teacher_search')">
+                                <label class=" control-label"><span
+                                        class="glyphicon glyphicon-search"></span> Преподаватель </label>
 
-                    <div class="form-group" onclick="removeHasError('course_teacher_search')">
-                        <label class=" control-label"><span
-                                class="glyphicon glyphicon-search"></span> Преподаватель </label>
-
-                        <input type="text" id="course_teacher_search" name="course_teacher_search"
-                               class="" placeholder="...введите имя преподавателя" >
+                                <input type="text" id="course_teacher_search" name="course_teacher_search"
+                                       class="" placeholder="...введите имя преподавателя">
 
 
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"  onclick="removeHasError('course_places_count')">
+                                <label class=" control-label">Количетво мест </label>
+                                <input type="text" class="form-control bfh-number" id="course_places_count"
+                                       min="1" value="1" data-min="1" data-max="1000">
+                            </div>
+                        </div>
                     </div>
-
-
-
 
 
                     <div class="form-group">
@@ -139,7 +152,8 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class=" control-label">Изображение</label>
-                        <input id="course_image" name="course_image" type="file" onclick="removeHasError('course_image')" class="file-loading" accept="image/*">
+                        <input id="course_image" name="course_image" type="file"
+                               onclick="removeHasError('course_image')" class="file-loading" accept="image/*">
                         <script>
                             $("#course_image").fileinput({
                                 theme: "fa",
@@ -166,5 +180,6 @@
     $.onload = teacherSearchSelectizer('course_teacher_search');
 </script>
 <script src="js/removeHasError.js"></script>
+<script src="formhelper/js/bootstrap-formhelpers.js"></script>
 </body>
 </html>
