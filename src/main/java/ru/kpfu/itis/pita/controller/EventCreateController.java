@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Event;
 import ru.kpfu.itis.pita.form.EventCreateForm;
 import ru.kpfu.itis.pita.repository.UserRepository;
