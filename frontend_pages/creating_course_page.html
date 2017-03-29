@@ -174,9 +174,16 @@
 
 </footer>
 <script src="js/checkform.js"></script>
-<script src="js/teacherSearchSelectizer.js"></script>
+<script src="js/simpleTagsSelectizer.js"></script>
 <script type="application/javascript">
-    $.onload = teacherSearchSelectizer('course_teacher_search');
+    //see simpleTagsSelectizer for more information about items
+    items = [
+        {value:'inf', text:'informatic'},
+        {value:'java', text:'java language'},
+        {value:'.net', text:'.net framework'},
+        {value:'itis-music', text:'itis-music'},
+    ];
+    $.onload = simpleTagsSelectizer('group_tags',items);
 </script>
 <script src="js/removeHasError.js"></script>
 <script src="formhelper/js/bootstrap-formhelpers.js"></script>
