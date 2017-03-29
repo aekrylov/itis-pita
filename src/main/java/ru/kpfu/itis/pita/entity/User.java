@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     private int id;
@@ -21,10 +22,9 @@ public class User {
     private String secretQuestion;
     private String secretAnswer;
 
-    //TODO enum
-    private String role;
+    private UserRole role;
 
-    private boolean active;
+    private boolean active = true;
 
     private Collection<Group> groups;
 
@@ -35,7 +35,6 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.passwordHash = passwordHash;
-        this.role = role;
     }
 
     @Id
@@ -102,12 +101,13 @@ public class User {
         this.secretAnswer = secretAnswer;
     }
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

@@ -8,6 +8,7 @@ Spring based web app for ITIS administration
     - Spring Core
     - Spring MVC
     - Spring Data JPA
+    - Spring Security
 - Hibernate
 - Freemarker
 - PostgreSQL database

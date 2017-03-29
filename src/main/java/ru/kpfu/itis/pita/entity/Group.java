@@ -1,7 +1,10 @@
 package ru.kpfu.itis.pita.entity;
 
+import org.hibernate.annotations.SortNatural;
+
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.SortedSet;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -10,6 +13,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "groups")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Group {
     //TODO
 
@@ -17,13 +21,13 @@ public class Group {
     @GeneratedValue
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Lob
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User creator;
 
     @ManyToMany
@@ -41,6 +45,10 @@ public class Group {
     @ManyToMany
     @JoinTable(name = "groups_admins")
     private Collection<User> admins;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "group")
+    @SortNatural
+    private SortedSet<WallPost> wall;
 
     public Group() {}
 
