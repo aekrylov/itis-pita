@@ -23,7 +23,7 @@ public class User {
 
     private UserRole role;
 
-    private boolean active;
+    private boolean active = true;
 
     private Collection<Group> groups;
 

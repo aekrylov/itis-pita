@@ -26,6 +26,10 @@
         <property name="order" value="2" />
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2500000" />
+    </bean>
+
     <mvc:resources mapping="/static/**" location="/" order="3" />
     <mvc:annotation-driven />
 
