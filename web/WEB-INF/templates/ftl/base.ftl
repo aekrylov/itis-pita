@@ -1,4 +1,5 @@
 <#ftl encoding='utf-8'>
+<#-- TODO import Spring taglib -->
 <#macro display title="Название компании">
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@
     <script type="text/javascript" src="/static/js/jquery/rateyo/jquery.rateyo.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery/fotorama/fotorama.js"></script>
     <script type="text/javascript" src="/static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="static/js/bootstrap.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
 
 </head>
 
@@ -33,7 +34,7 @@
                 <div class="col-md-12">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">
-                            <img class="img-responsive header-logo"  alt="Brand" src="static/img/pita_logo_wide_light.png">
+                            <img class="img-responsive header-logo"  alt="Brand" src="/static/img/pita_logo_wide_light.png">
                         </a>
                     </div>
 
@@ -53,7 +54,7 @@
                             </li>
                             <li>
                                 <a id="avatar-link"  class="navbar-brand" href="/profile">
-                                    <img href="/profile"  class="img-responsive  avatar" height="40" width="40" src="static/img/avatar_example.png"/>
+                                    <img href="/profile"  class="img-responsive  avatar" height="40" width="40" src="/static/img/avatar_example.png"/>
                                 </a>
                             </li>
                             <li class="dropdown">
