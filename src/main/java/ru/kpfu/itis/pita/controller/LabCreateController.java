@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Lab;
 import ru.kpfu.itis.pita.form.LabCreateForm;
-import ru.kpfu.itis.pita.repository.UserRepository;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.LabService;
 
@@ -30,12 +28,10 @@ import javax.validation.Valid;
 public class LabCreateController {
 
     private LabService labService;
-    private UserRepository userRepository;
 
     @Autowired
-    public LabCreateController(LabService labService, UserRepository ur) {
+    public LabCreateController(LabService labService) {
         this.labService = labService;
-        this.userRepository = ur;
     }
 
     //TODO teachers list
@@ -50,10 +46,11 @@ public class LabCreateController {
         if(result.hasErrors()) {
             return "lab_create";
         }
-        
-        Lab lab = new Lab();
+
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        lab.setGroup(new Group(form.getName(), form.getDescription(), ud.getUser(), null));
+
+        Lab lab = new Lab(form.getName(), form.getDescription(), ud.getUser(), null);
+
         //todo save image
         if(labService.exists(form.getName())) {
             modelMap.put("error", "Lab exists");

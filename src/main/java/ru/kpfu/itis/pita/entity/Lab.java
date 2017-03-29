@@ -1,7 +1,9 @@
 package ru.kpfu.itis.pita.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import java.util.Collection;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -10,45 +12,15 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "labs")
-public class Lab implements Serializable {
-
-    @Id
-    private int id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Lab extends Group {
 
     //TODO
 
-    @MapsId
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    private Group group;
-
-    public Group getGroup() {
-        return group;
+    public Lab() {
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Lab)) return false;
-
-        Lab lab = (Lab) o;
-
-        return group.equals(lab.group);
-    }
-
-    @Override
-    public int hashCode() {
-        return group.hashCode();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Lab(String name, String description, User creator, Collection<Interest> interests) {
+        super(name, description, creator, interests);
     }
 }

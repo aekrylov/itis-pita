@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -11,66 +10,44 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "students")
-public class Student implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class Student extends User {
 
-    @Id
-    @OneToOne
-    private User user;
-
-    @ManyToOne(optional = true)
     private Lab lab;
-
-    @ManyToOne(optional = false)
     private AcademicGroup academicGroup;
-
-    @ManyToMany
-    @JoinTable(name = "students_interests")
     private Collection<Interest> interests;
 
-    public User getUser() {
-        return user;
+    public Student() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Student(String name, String email, String phone, String passwordHash, String role, AcademicGroup academicGroup) {
+        super(name, email, phone, passwordHash, role);
+        this.academicGroup = academicGroup;
     }
 
+    @ManyToOne(optional = true)
     public Lab getLab() {
         return lab;
     }
-
     public void setLab(Lab lab) {
         this.lab = lab;
     }
 
+    @ManyToOne(optional = false)
     public AcademicGroup getAcademicGroup() {
         return academicGroup;
     }
-
     public void setAcademicGroup(AcademicGroup academicGroup) {
         this.academicGroup = academicGroup;
     }
 
+    @ManyToMany
+    @JoinTable(name = "students_interests")
     public Collection<Interest> getInterests() {
         return interests;
     }
-
     public void setInterests(Collection<Interest> interests) {
         this.interests = interests;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Student)) return false;
-
-        Student student = (Student) o;
-
-        return user.equals(student.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return user.hashCode();
-    }
 }

@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     private int id;
