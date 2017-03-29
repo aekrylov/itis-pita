@@ -128,8 +128,10 @@
                                 <label class=" control-label"><span
                                         class="glyphicon glyphicon-search"></span> Преподаватель </label>
 
-                                <input type="text" id="course_teacher_search" name="course_teacher_search"
-                                       class="" placeholder="...введите имя преподавателя">
+                                <!--<input type="text" id="" name="course_teacher_search"-->
+                                       <!--class="" placeholder="...введите имя преподавателя">-->
+                                <input type="text" id="course_teacher_search" class="selectized"
+                                       tabindex="-1" style="display: none;">
 
 
                             </div>
@@ -138,7 +140,7 @@
                             <div class="form-group"  onclick="removeHasError('course_places_count')">
                                 <label class=" control-label">Количеcтво мест </label>
                                 <input type="text" class="form-control bfh-number" id="course_places_count"
-                                       min="1" value="1" data-min="1" data-max="1000">
+                                        data-min=1 data-max=1000>
                             </div>
                         </div>
                     </div>
@@ -178,12 +180,12 @@
 <script type="application/javascript">
     //see simpleTagsSelectizer for more information about items
     items = [
-        {value:'inf', text:'informatic'},
-        {value:'java', text:'java language'},
-        {value:'.net', text:'.net framework'},
-        {value:'itis-music', text:'itis-music'},
+        {value:'1', text:'Иванов Иван Иванович'},
+        {value:'2', text:'Петров Петр Петрович'},
+        {value:'3', text:'Иванов Захар Иванович'},
+        {value:'4', text:'Иванов Алексей Иванович'}
     ];
-    $.onload = simpleTagsSelectizer('group_tags',items);
+    $.onload = simpleTagsSelectizer('course_teacher_search',items);
 </script>
 <script src="js/removeHasError.js"></script>
 <script src="formhelper/js/bootstrap-formhelpers.js"></script>

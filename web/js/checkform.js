@@ -14,7 +14,7 @@ function checkform(fields) {
             }
             //add notification about empty login
             if ($("#" + fields[i]).val() === '' && !$("#" + fields[i]).parent().children().is($("#" + fields[i] + "_warning"))){
-                $("#" + fields[i]).parent().append('\<label class="control-label" id ="'+fields[i]+'\_warning" for="input_login">Обязательное поле</label>');
+                $('\<label class="control-label" id ="'+fields[i]+'\_warning" for="input_login"> - это обязательное поле</label>').insertBefore($("#" + fields[i]));
                 $("#" + fields[i]).parent().addClass("has-error");
             }
 

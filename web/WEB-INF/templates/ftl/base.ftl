@@ -14,10 +14,7 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/common.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/static/js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/static/js/rateyo/jquery.rateyo.min.js"></script>
-    <script type="text/javascript" src="/static/js/fotorama/fotorama.js"></script>
-    <script type="text/javascript" src="/static/js/slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <@header_custom_imports>...</@header_custom_imports>
 </head>
