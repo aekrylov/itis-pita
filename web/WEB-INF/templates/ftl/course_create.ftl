@@ -1,3 +1,4 @@
+<#ftl encoding='utf-8'>
 <#include 'base.ftl' >
 <#macro header_custom_imports>
 
