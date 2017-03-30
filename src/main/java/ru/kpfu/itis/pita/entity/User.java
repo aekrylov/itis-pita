@@ -1,8 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
-import org.springframework.context.annotation.Scope;
-
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -11,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     private int id;
@@ -22,10 +22,20 @@ public class User {
     private String secretQuestion;
     private String secretAnswer;
 
-    //TODO enum
-    private String role;
+    private UserRole role;
 
-    private boolean active;
+    private boolean active = true;
+
+    private Collection<Group> groups;
+
+    public User() {}
+
+    public User(String name, String email, String phone, String passwordHash, String role) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.passwordHash = passwordHash;
+    }
 
     @Id
     @GeneratedValue
@@ -37,7 +47,7 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -91,12 +101,13 @@ public class User {
         this.secretAnswer = secretAnswer;
     }
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
@@ -107,5 +118,40 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "groups_members", joinColumns = {
+            @JoinColumn(name = "user_id")
+    }, inverseJoinColumns = {@JoinColumn(name = "group_id")})
+    public Collection<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Collection<Group> groups) {
+        this.groups = groups;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        return email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + email.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("User[id=%d; name=%s; email=%s;]", id, name, email);
     }
 }
