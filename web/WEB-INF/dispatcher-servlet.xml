@@ -14,6 +14,7 @@
 
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8" />
         <property name="order" value="1" />
     </bean>
 
@@ -24,6 +25,10 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
         <property name="order" value="2" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2500000" />
     </bean>
 
     <mvc:resources mapping="/static/**" location="/" order="3" />

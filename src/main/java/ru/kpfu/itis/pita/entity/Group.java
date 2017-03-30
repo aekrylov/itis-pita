@@ -13,6 +13,7 @@ import java.util.SortedSet;
 
 @Entity
 @Table(name = "groups")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Group {
     //TODO
 

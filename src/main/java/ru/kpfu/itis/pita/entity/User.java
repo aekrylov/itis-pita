@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     private int id;
@@ -23,7 +24,7 @@ public class User {
 
     private UserRole role;
 
-    private boolean active;
+    private boolean active = true;
 
     private Collection<Group> groups;
 
