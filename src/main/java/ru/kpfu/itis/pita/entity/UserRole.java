@@ -21,7 +21,7 @@ public enum UserRole {
 
     ROLE_STUDENT(""),
     ROLE_WORKER(""),
-    ROLE_DEAN("CREATE_LAB"),
+    ROLE_DEAN("CREATE_LAB, CREATE_COURSE"),
     ROLE_SUPERUSER("ROLE_STUDENT, ROLE_WORKER, ROLE_DEAN");
 
     private List<GrantedAuthority> authorities;
