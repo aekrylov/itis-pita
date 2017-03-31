@@ -5,6 +5,8 @@ import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.repository.CourseRepository;
 import ru.kpfu.itis.pita.service.CourseService;
 
+import java.util.List;
+
 /**
  * Created by 1 on 29.03.2017.
  */
@@ -25,5 +27,10 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public boolean exists(String courseName) {
         return courseRepository.findByName(courseName) != null;
+    }
+
+    @Override
+    public List<Course> getAll() {
+        return courseRepository.findAll();
     }
 }
