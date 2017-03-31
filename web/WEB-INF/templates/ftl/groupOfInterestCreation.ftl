@@ -67,12 +67,11 @@
 <script src="/static/js/simpleTagsSelectizer.js"></script>
 <script type="application/javascript">
     //see groupTagsSelectizer for more information about items
-    items = [
-        {value: 'inf', text: 'informatic'},
-        {value: 'java', text: 'java language'},
-        {value: '.net', text: '.net framework'},
-        {value: 'itis-music', text: 'itis-music'},
-    ];
+    <#assign items = []>
+    <#list interests as i>
+        <#assign items = items + {value: '${i.getId()}', text: '${i.getName()}'}>
+    </#list>
+
     $.onload = simpleTagsSelectizer('group_tags', items);
 </script>
 </#macro>

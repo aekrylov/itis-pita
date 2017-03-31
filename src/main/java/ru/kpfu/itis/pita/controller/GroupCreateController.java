@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
 import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.InterestService;
+
 import javax.validation.Valid;
 
 /**
@@ -21,6 +23,7 @@ import javax.validation.Valid;
 @RequestMapping(path = "groups/create")
 public class GroupCreateController {
     private GroupService groupService;
+    private InterestService interestService;
 
     public GroupCreateController(GroupService groupService) {
         this.groupService = groupService;
@@ -34,6 +37,7 @@ public class GroupCreateController {
     @PostMapping
     public String doPost(@ModelAttribute @Valid GroupCreateForm form, BindingResult result, ModelMap map){
         if(result.hasErrors()){
+            map.addAttribute("interests", interestService.getAll());
             return "groupOfInterestCreation";
         }
 
@@ -43,6 +47,7 @@ public class GroupCreateController {
         group.setDescription(form.getDescription());
         group.setInterests(form.getInterests());
         groupService.create(group);
+
 
         return "redirect:groupOfInterestCreation";
     }
