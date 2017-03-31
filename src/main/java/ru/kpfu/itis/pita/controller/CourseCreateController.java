@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(path = "courses/create")
+@PreAuthorize("hasAuthority('CREATE_COURSE')")
 public class CourseCreateController {
     private CourseService courseService;
 
@@ -54,6 +56,6 @@ public class CourseCreateController {
         }
         courseService.create(course);
 
-        return "redirect:course_create";
+        return "redirect:/courses";
     }
 }

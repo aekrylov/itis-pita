@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by 1 on 29.03.2017.
  */
@@ -19,7 +21,7 @@ public class CourseCreateForm {
 
     private MultipartFile image;
 
-    @NotEmpty
+    @NotNull
     @NumberFormat
     private int capacity;
 

@@ -40,4 +40,4 @@ hs_err_pid*
 target
 
 ### Custom
-src/main/resources/db.properties
+db.properties

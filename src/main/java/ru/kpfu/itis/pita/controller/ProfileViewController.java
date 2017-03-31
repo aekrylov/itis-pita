@@ -2,7 +2,6 @@ package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ public class ProfileViewController {
 
     @PreAuthorize("isFullyAuthenticated()")
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
-    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id", required = false) Integer id) {
+    public ModelAndView doGet(ModelMap modelMap, @RequestParam(value = "id") int id) {
         if (userRepository.findOne(id)!= null){
             User user = userRepository.findOne(id);
             modelMap.addAttribute("user", user);
