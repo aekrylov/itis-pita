@@ -56,6 +56,6 @@ public class CourseCreateController {
         }
         courseService.create(course);
 
-        return "redirect:course_create";
+        return "redirect:/courses";
     }
 }

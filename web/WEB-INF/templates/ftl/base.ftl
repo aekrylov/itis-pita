@@ -16,7 +16,9 @@
 
     <script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
     <script src="/static/js/bootstrap.js"></script>
-    <@header_custom_imports>...</@header_custom_imports>
+    <@header_custom_imports>
+
+    </@header_custom_imports>
 </head>
 
 <body>
@@ -84,7 +86,13 @@
 <footer>
 <#-- include 'footer.ftl'??? -->
 </footer>
-    <@footer_custom_imports>...</@footer_custom_imports>
+    <@footer_custom_imports>
+
+    </@footer_custom_imports>
 </body>
 </html>
 </#macro>
+
+<#-- fix error ehn macros not defined -->
+<#macro header_custom_imports></#macro>
+<#macro footer_custom_imports></#macro>

@@ -1,9 +1,6 @@
 package ru.kpfu.itis.pita.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,6 +13,7 @@ import java.util.Date;
 public class Semester {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", nullable = false, unique = true)
@@ -23,6 +21,9 @@ public class Semester {
 
     @Column(name = "start_date", nullable = false)
     private Date startDate = new Date();
+
+    public Semester() {
+    }
 
     public Semester(String name, Date startDate) {
         this.name = name;

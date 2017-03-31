@@ -25,7 +25,7 @@ public class Course extends Group {
     })
     private Collection<User> teachers;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = {CascadeType.ALL})
     private Subject subject;
 
     public Course() {
