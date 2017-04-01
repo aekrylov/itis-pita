@@ -23,8 +23,12 @@ import ru.kpfu.itis.pita.repository.UserRepository;
 public class ExampleController {
 
     //todo use services
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public ExampleController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @RequestMapping(path = "/hi")
     public ModelAndView doGet(ModelMap modelMap,

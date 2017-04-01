@@ -13,18 +13,24 @@ import ru.kpfu.itis.pita.service.LabService;
  */
 
 @Service("labServiceImpl")
-public class LabServiceImpl extends GroupServiceImpl implements LabService {
+public class LabServiceImpl implements LabService {
 
     private LabRepository labRepository;
+    private GroupRepository groupRepository;
 
     @Autowired
     public LabServiceImpl(LabRepository labRepository, GroupRepository groupRepository) {
-        super(groupRepository);
         this.labRepository = labRepository;
+        this.groupRepository = groupRepository;
     }
 
     @Override
     public Lab create(Lab lab) {
         return labRepository.save(lab);
+    }
+
+    @Override
+    public boolean exists(String name) {
+        return groupRepository.findByName(name) != null;
     }
 }

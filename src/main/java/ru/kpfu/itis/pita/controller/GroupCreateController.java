@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
+import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
 
@@ -25,6 +26,7 @@ public class GroupCreateController {
     private GroupService groupService;
     private InterestService interestService;
 
+    @Autowired
     public GroupCreateController(GroupService groupService) {
         this.groupService = groupService;
     }
@@ -42,13 +44,13 @@ public class GroupCreateController {
         }
 
         Group group = new Group();
-        //UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        group.setCreator(ud.getUser());
         group.setName(form.getName());
         group.setDescription(form.getDescription());
         group.setInterests(form.getInterests());
         groupService.create(group);
 
-
-        return "redirect:groupOfInterestCreation";
+        return "redirect:/groups/create";
     }
 }
