@@ -31,7 +31,7 @@
         <property name="maxUploadSize" value="2500000" />
     </bean>
 
-    <mvc:resources mapping="/static/**" location="/" order="3" />
+    <mvc:resources mapping="/static/**" location="/static/" order="3" />
     <mvc:annotation-driven />
 
 </beans>
