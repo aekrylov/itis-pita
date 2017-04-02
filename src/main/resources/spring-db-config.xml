@@ -12,7 +12,8 @@
         <property name="systemPropertiesMode" value="1" /> <!-- fallback -->
     </bean>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+     depends-on="liquibase">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="ru.kpfu.itis.pita.entity"/>
 
@@ -22,8 +23,9 @@
 
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.globally_quoted_identifiers">true</prop>
             </props>
         </property>
     </bean>
@@ -39,4 +41,11 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource" />
+        <property name="changeLog" value="classpath:db-changelog.xml" />
+    </bean>
+
 </beans>
