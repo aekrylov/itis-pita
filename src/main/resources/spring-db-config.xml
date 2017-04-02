@@ -42,7 +42,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-
+    <!-- liquibase will apply all migrations automatically during launch -->
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
         <property name="dataSource" ref="dataSource" />
         <property name="changeLog" value="classpath:db-changelog.xml" />
