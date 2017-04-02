@@ -28,16 +28,14 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/events/create")
-@PreAuthorize("hasAuthority('DEAN')")
+@PreAuthorize("hasAuthority('CREATE_COURSE')")
 public class EventCreateController {
 
     private EventService eventService;
-    private UserRepository userRepository;
 
     @Autowired
-    public EventCreateController(EventService eventService, UserRepository ur) {
+    public EventCreateController(EventService eventService) {
         this.eventService = eventService;
-        this.userRepository = ur;
     }
 
 
@@ -49,19 +47,19 @@ public class EventCreateController {
     @PostMapping
     public String processForm(@ModelAttribute @Valid EventCreateForm form, BindingResult result, ModelMap modelMap) {
         if(result.hasErrors()) {
+            System.out.println(result);
             return "event_create";
         }
 
-        Event event = new Event();
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        //todo save all fields
+        Event event = new Event(form.getName(), form.getDescription(), ud.getUser(), null,form.getPlace(),form.getDate(),form.getMembers());
+        //todo save image
         if(eventService.exists(form.getName())) {
-            modelMap.put("error", "Lab exists");
+            modelMap.put("error", "Event exists");
             return "event_create";
         }
         eventService.create(event);
 
-        return "redirect:event_list";
+        return "redirect:/events";
     }
 }

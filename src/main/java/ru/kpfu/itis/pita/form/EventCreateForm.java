@@ -2,6 +2,8 @@ package ru.kpfu.itis.pita.form;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -19,7 +21,7 @@ public class EventCreateForm {
 
     private int members;
 
-    @NotEmpty
+    //@NotEmpty
     private Date date;
 
     private MultipartFile image;
@@ -69,7 +71,9 @@ public class EventCreateForm {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date pars = format.parse(date);
+        this.date = pars;
     }
 }

@@ -13,7 +13,8 @@
         });
     });
 </script>
-<form method="post" action="/events/create" enctype="multipart/form-data">
+<form method="post" action="/events/create" enctype="multipart/form-data" onsubmit="return checkform([
+            'name', 'place', 'date'])">
     <div class="form-group">
         <label for="name">Название</label>
         <input class="form-control" id="name" name="name" required/>
@@ -28,7 +29,7 @@
     </div>
     <div class="form-group">
         <label for="date">Дата проведения</label>
-        <input type="text" class="form-control" id="date" name="date" required/>
+        <input type="date" class="form-control" id="date" name="date" required/>
     </div>
     <div class="form-group">
         <label for="members">Количество участников</label>
