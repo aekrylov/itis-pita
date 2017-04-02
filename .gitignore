@@ -41,3 +41,4 @@ target
 
 ### Custom
 db.properties
+liquibase.properties

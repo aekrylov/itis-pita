@@ -7,6 +7,7 @@ import javax.persistence.*;
  * Date: 3/25/17 11:30 AM
  */
 
+
 @Entity
 @Table(name = "interests")
 public class Interest {

@@ -58,6 +58,7 @@ public class LabCreateController {
         }
         labService.create(lab);
 
-        return "redirect:lab_list";
+        //redirect: redirects to specified URL
+        return "redirect:/labs";
     }
 }

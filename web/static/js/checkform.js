@@ -2,7 +2,8 @@
  * Created by Олег on 31.10.2016.
  */
 //args: array of id's
-function checkform(fields) {
+function checkform(fields, label_is_underfield) {
+    label_is_underfield = label_is_underfield == null? true : label_is_underfield;
     var flag = true;
     for (var i = 0; i < fields.length; i++) {
         if ($("#" + fields[i]).val() === '') {
@@ -14,7 +15,11 @@ function checkform(fields) {
             }
             //add notification about empty login
             if ($("#" + fields[i]).val() === '' && !$("#" + fields[i]).parent().children().is($("#" + fields[i] + "_warning"))){
-                $("#" + fields[i]).parent().append('\<label class="control-label" id ="'+fields[i]+'\_warning" for="input_login">Обязательное поле</label>');
+                if (label_is_underfield){
+                    $("#" + fields[i]).parent().append('\<label class="control-label" id ="' + fields[i] + '\_warning" for="input_login">Обязательное поле</label>');
+                } else {
+                    $('\<label class="control-label" id ="' + fields[i] + '\_warning" for="input_login"> - обязательное поле</label>').insertBefore($("#" + fields[i]));
+                }
                 $("#" + fields[i]).parent().addClass("has-error");
             }
 

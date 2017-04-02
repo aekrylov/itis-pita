@@ -14,12 +14,11 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/common.css" rel="stylesheet">
 
-    <script type="text/javascript" src="/static/js/jquery/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery/rateyo/jquery.rateyo.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery/fotorama/fotorama.js"></script>
-    <script type="text/javascript" src="/static/js/jquery/slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
     <script src="/static/js/bootstrap.js"></script>
+    <@header_custom_imports>
 
+    </@header_custom_imports>
 </head>
 
 <body>
@@ -87,6 +86,13 @@
 <footer>
 <#-- include 'footer.ftl'??? -->
 </footer>
+    <@footer_custom_imports>
+
+    </@footer_custom_imports>
 </body>
 </html>
 </#macro>
+
+<#-- fix error ehn macros not defined -->
+<#macro header_custom_imports></#macro>
+<#macro footer_custom_imports></#macro>
