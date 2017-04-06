@@ -15,7 +15,7 @@ public class LoginPageController {
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String doGet() {
-        return "login.jsp";
+        return "login";
     }
 
 }
