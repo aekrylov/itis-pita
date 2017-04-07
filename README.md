@@ -31,7 +31,6 @@ Spring based web app for ITIS administration
 
 For each feature, create a separate branch.
 
-After a feature is fully implemented and tested, 
-create a pull request to `master` branch.
+After a feature is fully implemented, create a pull request to `dev` branch.
 
 The above process is subject to change.
