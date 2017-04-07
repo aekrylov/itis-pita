@@ -7,7 +7,7 @@ html, body {
     height: 100%;
 }
 body {
-    background: url('../img/kfu_backgroud.jpg') fixed; /* fixed stops background from scrolling */
+    background: url('../img/kfu_background.png') fixed; /* fixed stops background from scrolling */
     background-size: cover;
 
 }
@@ -27,7 +27,6 @@ footer {
 .page {
     min-height: 100%;
     height: auto !important;
-    height: 100%;
     margin: 0 auto -50px;
 }
 

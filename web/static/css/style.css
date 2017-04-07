@@ -6,9 +6,9 @@
 }
 
 .login-block {
-    width: 420px;
+    width: 340px;
     padding: 20px;
-    background: #38c97c;
+    background-color: rgba(29, 79, 80, 0.8);
     border-radius: 5px;
     border: 1px solid #000;
     margin: 90px auto;
@@ -16,14 +16,14 @@
 
 .login-block h1 {
     text-align: center;
-    color: #2b1707;
-    font-size: 30px;
+    color: rgb(249, 165, 39);
+    font-size: 20px;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 30px;
 }
 
-.login-form input[type="text"], .login-form input[type="password"] {
+.login-form input[type="email"], .login-form input[type="password"] {
     width: 100%;
     height: 42px;
     box-sizing: border-box;
@@ -31,50 +31,16 @@
     border: 1px solid #000;
     margin-bottom: 20px;
     font-size: 14px;
-    padding: 0 20px 0 50px;
     outline: none;
+    color: white;
+    background: rgba(37, 103, 104, 0.7);
 }
 
-.login-form input[type="text"] {
-    background: #a1e6c1 url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
-    background-size: 16px 80px;
-}
-
-.login-form input[type="text"]:focus {
-    background: #a1e6c1 url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
-    background-size: 16px 80px;
-}
-
-.login-form input[type="password"] {
-    background: #a1e6c1 url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
-    background-size: 16px 80px;
-}
-
-.login-form input[type="password"]:focus {
-    background: #a1e6c1 url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
-    background-size: 16px 80px;
-}
-
-.login-block ::-webkit-input-placeholder {
-    color: #636160;
-    font-weight: bold;
-}
-
-.login-block :-moz-placeholder {
-    color: #636160;
-    opacity: 1;
-    font-weight: bold;
-}
-
-.login-block ::-moz-placeholder {
-    color: #636160;
-    opacity: 1;
-    font-weight: bold;
-}
-
-.login-block :-ms-input-placeholder {
-    color: #636160;
-    font-weight: bold;
+.forms-label{
+    text-align: start;
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
 }
 
 .login-form input[type="checkbox"] {
@@ -86,15 +52,14 @@
 .login-checkbox {
     width: 48%;
     font-size: 18px;
-    color: #175132;
+    color: white;
 }
 
 .btn-login {
     font-size: 17px;
     font-weight: bold;
     width: 50%;
-    color: #a1e6c1;
-    background: #175132;
+    color: white;
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -109,9 +74,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
+    background: rgba(249, 165, 39, 0.7) none;
     border-radius: 4px;
+    border: 1px solid #a5590d;
 }
 
 .btn-login:active{
@@ -119,30 +84,32 @@
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     border: solid 1px #203E5F;
-    color: #63a883;
+    color: white;
     outline: transparent none;
 }
 
 .btn-login:hover{
-    color: #63a883;
+    color: white;
     outline: none;
 }
 
 .btn-login:focus {
-    color: #63a883;
+    color: white;
     outline: none;
 }
 
-.form-group {
+.form-group-helper {
     text-align: center;
 }
 
 .bottom-links-login {
-    margin: 30px auto 0;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: white;
 }
 
 .form-group #forgot-pass, .form-group #signup {
     font-size: 16px;
     font-weight: bold;
-    color: #175132;
+    color: white;
 }
