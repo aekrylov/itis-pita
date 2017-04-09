@@ -43,7 +43,7 @@ public class RegistrationController {
     public String registration(@ModelAttribute @Valid RegistrationForm form, BindingResult bindingResult, Model model) {
         User user = new User();
 //        userValidator.validate(userForm, bindingResult);
-        user.setName(form.getName());
+        user.setName(form.getSurname() + " " + form.getName());
         System.out.println("Name set");
         user.setEmail(form.getEmail());
         System.out.println("Email set");
