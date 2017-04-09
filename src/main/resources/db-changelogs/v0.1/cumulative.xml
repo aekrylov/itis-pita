@@ -1,0 +1,379 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="anth (generated)" id="1491136278260-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-2">
+        <createTable tableName="academic_groups">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="academic_groupsPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-3">
+        <createTable tableName="courses">
+            <column name="capacity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="schedule" type="VARCHAR(255)"/>
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-4">
+        <createTable tableName="courses_teachers">
+            <column name="course_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-5">
+        <createTable tableName="events">
+            <column name="date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_members" type="INT"/>
+            <column name="place" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-6">
+        <createTable tableName="group_wall">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="group_wallPK"/>
+            </column>
+            <column name="text" type="TEXT"/>
+            <column name="timestamp" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="video_link" type="VARCHAR(255)"/>
+            <column name="author_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-7">
+        <createTable tableName="groups">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="groupsPK"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-8">
+        <createTable tableName="groups_admins">
+            <column name="Group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="admins_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-9">
+        <createTable tableName="groups_interests">
+            <column name="Group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interests_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-10">
+        <createTable tableName="groups_members">
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-11">
+        <createTable tableName="interests">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="interestsPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-12">
+        <createTable tableName="labs">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-13">
+        <createTable tableName="semesters">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="semestersPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-14">
+        <createTable tableName="students">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="academicGroup_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lab_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-15">
+        <createTable tableName="students_interests">
+            <column name="Student_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interests_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-16">
+        <createTable tableName="subjects">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="subjectsPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="semester_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-17">
+        <createTable tableName="timetable_classes">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="teacher_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-18">
+        <createTable tableName="timetable_classes_groups">
+            <column name="TimetableClass_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="groups_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-19">
+        <createTable tableName="timetable_dates">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="place" type="VARCHAR(255)"/>
+            <column name="start_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timetableClass_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-20">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secret_answer" type="VARCHAR(255)"/>
+            <column name="secret_question" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-21">
+        <createTable tableName="wall_comments">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="wall_commentsPK"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-22">
+        <addPrimaryKey columnNames="id" constraintName="coursesPK" tableName="courses"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-23">
+        <addPrimaryKey columnNames="id" constraintName="eventsPK" tableName="events"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-24">
+        <addPrimaryKey columnNames="id" constraintName="labsPK" tableName="labs"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-25">
+        <addPrimaryKey columnNames="id" constraintName="studentsPK" tableName="students"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-26">
+        <addPrimaryKey columnNames="id" constraintName="timetable_classesPK" tableName="timetable_classes"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-27">
+        <addPrimaryKey columnNames="id" constraintName="timetable_datesPK" tableName="timetable_dates"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-28">
+        <addUniqueConstraint columnNames="name" constraintName="UC_ACADEMIC_GROUPSNAME_COL" tableName="academic_groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-29">
+        <addUniqueConstraint columnNames="name" constraintName="UC_GROUPSNAME_COL" tableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-30">
+        <addUniqueConstraint columnNames="name" constraintName="UC_INTERESTSNAME_COL" tableName="interests"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-31">
+        <addUniqueConstraint columnNames="name" constraintName="UC_SEMESTERSNAME_COL" tableName="semesters"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-32">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-33">
+        <addUniqueConstraint columnNames="subject_id" constraintName="UK_5qtcrngok1r89lkpq7d4hjc65" tableName="courses"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-34">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="groups_members" constraintName="FK1s7vpypr4cpoitcoryuphu47p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-35">
+        <addForeignKeyConstraint baseColumnNames="timetableClass_id" baseTableName="timetable_dates" constraintName="FK36huidhl7t5s53fm4sdmq42jx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="timetable_classes"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-36">
+        <addForeignKeyConstraint baseColumnNames="semester_id" baseTableName="subjects" constraintName="FK3hrxtqye5kwc2fx3q9ekjrqxm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="semesters"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-37">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="courses_teachers" constraintName="FK3ybs5tr1fbk6rtff74urc3hws" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="courses"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-38">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="wall_comments" constraintName="FK4ad746078nn79h8x55lu84r4m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="group_wall"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-39">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="groups_members" constraintName="FK4cc1uaype9m8649rrnlxrnqoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-40">
+        <addForeignKeyConstraint baseColumnNames="subject_id" baseTableName="timetable_classes" constraintName="FK53povr8axsushqmmmbvq181dv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="subjects"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-41">
+        <addForeignKeyConstraint baseColumnNames="academicGroup_id" baseTableName="students" constraintName="FK5k57ral5xu4jeljyt6q0x33rn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="academic_groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-42">
+        <addForeignKeyConstraint baseColumnNames="interests_id" baseTableName="groups_interests" constraintName="FK5lbu6vm9qxu9ltqphbgy2rlth" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="interests"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-43">
+        <addForeignKeyConstraint baseColumnNames="subject_id" baseTableName="courses" constraintName="FK5tckdihu5akp5nkxiacx1gfhi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="subjects"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-44">
+        <addForeignKeyConstraint baseColumnNames="interests_id" baseTableName="students_interests" constraintName="FK6uvd86x083oa3kk9yysa77ycl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="interests"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-45">
+        <addForeignKeyConstraint baseColumnNames="groups_id" baseTableName="timetable_classes_groups" constraintName="FK7du13ucq8jpvs6giumac9ry94" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="academic_groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-46">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="students" constraintName="FK7xqmtv7r2eb5axni3jm0a80su" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-47">
+        <addForeignKeyConstraint baseColumnNames="admins_id" baseTableName="groups_admins" constraintName="FKc7xmiueo6akm7ffkcd75dfwwh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-48">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="courses_teachers" constraintName="FKd2mkbxr3q1dtakqfkpbcbrs9x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-49">
+        <addForeignKeyConstraint baseColumnNames="TimetableClass_id" baseTableName="timetable_classes_groups" constraintName="FKf936fe67k5neypymw1sff7at0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="timetable_classes"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-50">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="timetable_classes" constraintName="FKfn7l8f7io3kn8y6pgtuty5fw0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-51">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_wall" constraintName="FKhde1qpuipv4ouvqw02gxruc2h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-52">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="group_wall" constraintName="FKi6j6jwhy3jtup2dxk28rx4gtl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-53">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="wall_comments" constraintName="FKi8xhml7b3y3s77a2vgh74jv36" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-54">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="events" constraintName="FKiy81ko3f9302xkkv0m4o5nv0v" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-55">
+        <addForeignKeyConstraint baseColumnNames="creator_id" baseTableName="groups" constraintName="FKjq37pdrj0mtih03a22mc7noun" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-56">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="courses" constraintName="FKjvnfqp2pkevl0xnn7w46m61yp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-57">
+        <addForeignKeyConstraint baseColumnNames="lab_id" baseTableName="students" constraintName="FKof7n8ai4p9vlnq3ga28mli8i3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="labs"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-58">
+        <addForeignKeyConstraint baseColumnNames="Group_id" baseTableName="groups_admins" constraintName="FKou0cr4rgg1k01fl30ar49n5wy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-59">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="labs" constraintName="FKs0fy1vucoq7k2glh97c9py3vo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-60">
+        <addForeignKeyConstraint baseColumnNames="Student_id" baseTableName="students_interests" constraintName="FKtbnbhd0e5j5hwi6w3pwwvx76o" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="students"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1491136278260-61">
+        <addForeignKeyConstraint baseColumnNames="Group_id" baseTableName="groups_interests" constraintName="FKy2p8w3oinrpmlug5nl6239m9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.repository;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.CrudRepository;
 import ru.kpfu.itis.pita.entity.User;
 

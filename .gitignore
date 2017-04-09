@@ -42,6 +42,5 @@ target
 ### Custom
 src/main/resources/db.properties
 
-db.properties
 liquibase.properties
 validation.properties
