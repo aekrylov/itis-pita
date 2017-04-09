@@ -1,13 +1,17 @@
 package ru.kpfu.itis.pita.form;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 /**
  * Created by 1 on 08.04.2017.
  */
+@ScriptAssert(lang = "javascript", script = "_this.password.equals(_this.password_confirmed)")
 public class RegistrationForm {
 
     @NotEmpty
+    @Length(min = 6, max = 32)
     private String email;
 
     @NotEmpty
@@ -17,6 +21,7 @@ public class RegistrationForm {
     private String phone;
 
     @NotEmpty
+    @Length(min = 8, max = 32)
     private String password;
 
     @NotEmpty

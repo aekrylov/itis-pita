@@ -11,8 +11,7 @@ import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.entity.UserRole;
 import ru.kpfu.itis.pita.form.RegistrationForm;
 import ru.kpfu.itis.pita.service.UserService;
-import ru.kpfu.itis.pita.serviceimpl.UserServiceImpl;
-import ru.kpfu.itis.pita.validator.UserValidator;
+import ru.kpfu.itis.pita.validator.RegistrationFormDbValidator;
 
 import javax.validation.Valid;
 
@@ -22,15 +21,14 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    private UserService userService = new UserServiceImpl();
-    @Autowired
-    private UserValidator userValidator;
+    private UserService userService;
+    private RegistrationFormDbValidator validator;
 
     @Autowired
-    public RegistrationController(UserService userService) {
+    public RegistrationController(UserService userService, RegistrationFormDbValidator validator) {
         this.userService = userService;
+        this.validator = validator;
     }
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -41,6 +39,13 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute @Valid RegistrationForm form, BindingResult bindingResult, Model model) {
+        validator.validate(form, bindingResult);
+
+        if(bindingResult.hasErrors()) {
+            //todo if not valid
+            return "registration";
+        }
+
         User user = new User();
 //        userValidator.validate(userForm, bindingResult);
         user.setName(form.getName());

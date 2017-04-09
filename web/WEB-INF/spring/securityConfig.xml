@@ -21,6 +21,7 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+            <security:password-encoder ref="encoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
@@ -28,10 +29,6 @@
 
     <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <constructor-arg name="strength" value="11"/>
-    </bean>
-
-    <bean id="validator" class="ru.kpfu.itis.pita.validator.UserValidator">
-
     </bean>
 
 </beans>

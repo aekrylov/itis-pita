@@ -43,4 +43,3 @@ target
 src/main/resources/db.properties
 
 liquibase.properties
-validation.properties
