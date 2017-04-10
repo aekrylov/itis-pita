@@ -18,6 +18,9 @@ public class RegistrationForm {
     private String name;
 
     @NotEmpty
+    private String surname;
+
+    @NotEmpty
     private String phone;
 
     @NotEmpty
@@ -26,6 +29,15 @@ public class RegistrationForm {
 
     @NotEmpty
     private String password_confirmed;
+
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     public String getPhone() {
         return phone;
