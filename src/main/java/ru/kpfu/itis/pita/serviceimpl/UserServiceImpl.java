@@ -6,8 +6,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.entity.UserRole;
 import ru.kpfu.itis.pita.repository.UserRepository;
 import ru.kpfu.itis.pita.service.UserService;
+
+import java.util.List;
 
 /**
  * Created by 1 on 08.04.2017.
@@ -33,6 +36,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<User> findAllWorkers() {
+        return userRepository.findAllByRole(UserRole.ROLE_WORKER);
     }
 
     @Override

@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Course;
+import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.CourseCreateForm;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.CourseService;
+import ru.kpfu.itis.pita.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by 1 on 29.03.2017.
@@ -25,14 +28,18 @@ import javax.validation.Valid;
 @PreAuthorize("hasAuthority('CREATE_COURSE')")
 public class CourseCreateController {
     private CourseService courseService;
+    private UserService userService;
 
     @Autowired
-    public CourseCreateController(CourseService courseService) {
+    public CourseCreateController(CourseService courseService, UserService userService) {
         this.courseService = courseService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String doGet(){
+    public String doGet(ModelMap map){
+        List<User> names = userService.findAllWorkers();
+        map.put("names", names);
         return "course_create";
     }
 
@@ -49,7 +56,6 @@ public class CourseCreateController {
         course.setSchedule(form.getSchedule());
         course.setCapacity(form.getCapacity());
         course.setCreator(ud.getUser());
-        //todo save image
         if(courseService.exists(form.getName())){
             map.put("error", "Course exists");
             return "course_create";

@@ -114,10 +114,13 @@
 <script type="application/javascript">
     //see simpleTagsSelectizer for more information about items
     items = [
-        {value:'1', text:'Иванов Иван Иванович'},
-        {value:'2', text:'Петров Петр Петрович'},
-        {value:'3', text:'Иванов Захар Иванович'},
-        {value:'4', text:'Иванов Алексей Иванович'}
+//        {value:'1', text:'Иванов Иван Иванович'},
+//        {value:'2', text:'Петров Петр Петрович'},
+//        {value:'3', text:'Иванов Захар Иванович'},
+//        {value:'4', text:'Иванов Алексей Иванович'}
+        <#list names as name>
+            {value:'${name.id}, text:${name.name}},
+        </#list>
     ];
     $.onload = simpleTagsSelectizer('course_teacher_search',items);
 </script>
