@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.ScriptAssert;
 /**
  * Created by 1 on 08.04.2017.
  */
-@ScriptAssert(lang = "javascript", script = "_this.password.equals(_this.password_confirmed)")
+@ScriptAssert(lang = "javascript", script = "_this.password.equals(_this.password_confirm)")
 public class RegistrationForm {
 
     @NotEmpty
@@ -30,7 +30,7 @@ public class RegistrationForm {
     private String password;
 
     @NotEmpty
-    private String password_confirmed;
+    private String password_confirm;
 
 
     public String getSurname() {
@@ -73,11 +73,11 @@ public class RegistrationForm {
         this.password = password;
     }
 
-    public String getPassword_confirmed() {
-        return password_confirmed;
+    public String getPassword_confirm() {
+        return password_confirm;
     }
 
-    public void setPassword_confirmed(String password_confirmed) {
-        this.password_confirmed = password_confirmed;
+    public void setPassword_confirm(String password_confirm) {
+        this.password_confirm = password_confirm;
     }
 }
