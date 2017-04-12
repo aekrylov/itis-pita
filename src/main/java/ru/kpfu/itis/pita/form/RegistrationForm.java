@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.form;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.ScriptAssert;
@@ -11,6 +12,7 @@ import org.hibernate.validator.constraints.ScriptAssert;
 public class RegistrationForm {
 
     @NotEmpty
+    @Email
     @Length(min = 6, max = 32)
     private String email;
 
