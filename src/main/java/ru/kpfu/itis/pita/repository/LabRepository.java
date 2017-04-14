@@ -2,6 +2,9 @@ package ru.kpfu.itis.pita.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.kpfu.itis.pita.entity.Lab;
+import ru.kpfu.itis.pita.entity.User;
+
+import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -9,4 +12,5 @@ import ru.kpfu.itis.pita.entity.Lab;
  */
 
 public interface LabRepository extends JpaRepository<Lab, Integer> {
+    List<Lab> findByMember(User user);
 }
