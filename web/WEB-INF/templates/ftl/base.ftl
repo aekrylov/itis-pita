@@ -1,4 +1,5 @@
 <#ftl encoding='utf-8'>
+<#setting boolean_format="yes,no">
 <#-- TODO import Spring taglib -->
 <#macro display title="Название компании">
 <!DOCTYPE html>
