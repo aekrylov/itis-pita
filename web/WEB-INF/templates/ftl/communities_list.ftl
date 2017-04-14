@@ -63,3 +63,45 @@ interests:[
 size:${ml.getMembers.size}},
 </#list>
 ];
+
+<#list all_groups as ag>
+    <p>${ag.name}, ${ag.image_link}, ${ag.size}</p>
+    <#list ag.interests as i>
+        <p>${i.name}</p>
+    </#list>
+</#list>
+
+<#list my_groups as mg>
+<p>${mg.name}, ${mg.image_link}, ${mg.size}</p>
+    <#list mg.interests as i>
+    <p>${i.name}</p>
+    </#list>
+</#list>
+
+<#list all_courses as ac>
+<p>${ac.name}, ${ac.image_link}, ${ac.size}</p>
+    <#list ac.interests as i>
+    <p>${i.name}</p>
+    </#list>
+</#list>
+
+<#list my_courses as mc>
+<p>${mc.name}, ${mc.image_link}, ${mc.size}</p>
+    <#list mc.interests as i>
+    <p>${i.name}</p>
+    </#list>
+</#list>
+
+<#list all_labs as al>
+<p>${al.name}, ${al.image_link}, ${al.size}</p>
+    <#list al.interests as i>
+    <p>${i.name}</p>
+    </#list>
+</#list>
+
+<#list my_labs as ml>
+<p>${ml.name}, ${ml.image_link}, ${ml.size}</p>
+    <#list ml.interests as i>
+    <p>${i.name}</p>
+    </#list>
+</#list>
