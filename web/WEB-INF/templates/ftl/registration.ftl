@@ -4,10 +4,10 @@
 
     <form method="POST" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
-        <input type="text" class="form-control" name="email" placeholder="Username" value="${email}" />
-        <input type="text" class="form-control" name="name" placeholder="Name" value="${name}" />
-        <input type="text" class="form-control" name="surname" placeholder="Surname" value="${surname}" />
-        <input type="text" class="form-control" name="phone" placeholder="Phone" value="${phone}" />
+        <input type="text" class="form-control" name="email" placeholder="Username" value="${form.email!""}" />
+        <input type="text" class="form-control" name="name" placeholder="Name" value="${form.name!""}" />
+        <input type="text" class="form-control" name="surname" placeholder="Surname" value="${form.surname!""}" />
+        <input type="text" class="form-control" name="phone" placeholder="Phone" value="${form.phone!""}" />
 
         <input type="password" class="form-control" name="password" placeholder="Password" />
 
