@@ -22,14 +22,19 @@
         <property name="templateLoaderPath" value="/WEB-INF/templates/ftl/" />
     </bean>
 
+    <!-- JSP view resolver, should be removed in future -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
         <property name="order" value="2" />
     </bean>
 
+    <!-- This class resolves multipart requests, allowing for handling them just like ordinary ones -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="2500000" />
     </bean>
+
+    <!-- Class containing request mappings registered by Spring -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
     <mvc:resources mapping="/static/**" location="/static/" order="3" />
     <mvc:annotation-driven />

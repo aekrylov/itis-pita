@@ -28,6 +28,7 @@ public class ListOfCoursesPageController {
     public String doGet(ModelMap modelMap){
         List<Course> courses = courseService.getAll();
         modelMap.addAllAttributes(courses);
+        modelMap.addAttribute("courses", courses);
         return "course_list";
     }
 }
