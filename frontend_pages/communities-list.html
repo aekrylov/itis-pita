@@ -14,6 +14,8 @@
     <script src="js/bootstrap.js"></script>
     <script src="selectize/js/standalone/selectize.js"></script>
 
+    <script src="search/jsrender.js"></script>
+
 </head>
 <body>
 <div class="page">
@@ -79,13 +81,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="row work-block">
                             <div class="col-md-12">
-                                <form method="get" action="/news" onsubmit="return checkField('search')">
+                                <form method="get" onsubmit="return searchAndRender($('#search_input'),
+                                                                                    $('#search_tags_input'),
+                                                                                     items, $('#courses_list'))">
+                                    <input hidden type="text" class="search" id="search_input">
                                     <div class="input-group stylish-input-group">
                                         <input type="text" id="search" name="search" class="form-control"
-                                               placeholder="Поиск групп" oninput="removeHasError('search')">
+                                               placeholder="Поиск групп" oninput="return searchAndRender($('#search_input'),
+                                                                                    $('#search_tags_input'),
+                                                                                     items, $('#courses_list'))">
                                         <span class="input-group-addon"><button type="submit"><span
                                                 class="glyphicon glyphicon-search"></span></button></span>
                                     </div>
@@ -99,7 +106,7 @@
 
                                         <div class="col-md-11">
                                             <div class="form-group">
-                                                <input type="text" id="group_tags" class="selectized"
+                                                <input type="text" id="search_tags_input" class="selectized"
                                                        tabindex="-1" style="display: none;">
                                             </div>
                                         </div>
@@ -110,36 +117,126 @@
 
                             </div>
                         </div>
-                        <div class="row work-block">
+                        <div class="row">
                             <div class="col-md-12">
 
-                                <form method="get" action="/news" onsubmit="return checkField('search')">
-                                    <div class="input-group stylish-input-group">
-                                        <input type="text" id="" name="search" class="form-control"
-                                               placeholder="Поиск по новостям" oninput="removeHasError('search')">
-                                        <span class="input-group-addon"><button type="submit"><span
-                                                class="glyphicon glyphicon-search"></span></button></span>
+
+                                <ul class="nav nav-tabs no-border-tabs" role="tablist">
+                                    <li role="presentation" class="active"
+                                        onmouseenter="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '0px')"
+                                        onmouseleave="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '5px')"
+                                    ><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Группы</a>
+                                    </li>
+                                    <li role="presentation"><a href="#courses" aria-controls="courses" role="tab"
+                                                               data-toggle="tab">Курсы</a></li>
+                                    <li role="presentation"><a href="#labs" aria-controls="labs" role="tab"
+                                                               data-toggle="tab">Лаборатории</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active work-block first-tab" id="groups">
+                                        <br/>
+                                        <ul class="media-list list">
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                                <hr class="list-grey-hr"/>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                                <hr class="list-grey-hr"/>
+                                            </li>
+
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </form>
-                                <hr/>
-                                <hr/>
-                                <hr/>
-                                <hr/>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="courses">
+                                        <br/>
+                                        <ul class="media-list" id="courses_list">
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="labs">
+                                        <br/>
+
+                                    </div>
+
+
+                                </div>
 
 
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-4">
-                        <div class="row work-block">
-                            <div class="col-md-12">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li role="presentation" class="active"><a href="#">Группы</a></li>
-                                    <li role="presentation"><a href="#">Лаборатории</a></li>
-                                    <li role="presentation"><a href="#">Курсы</a></li>
-                                </ul>
-                            </div>
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills switch-pills nav-stacked work-block" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Мои сообщества</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Глобальный
+                                    поиск</a>
+                            </li>
+                        </ul>
+                        <div class="btn-group-vertical" role="group">
+                            <button class="btn btn-block firm-btn">Создать группу</button>
+                            <button class="btn btn-block firm-btn">Создать лабораторию</button>
+                            <button class="btn btn-block firm-btn">Создать курс</button>
                         </div>
 
                     </div>
@@ -159,42 +256,178 @@
 <script src="js/checkform.js"></script>
 <script src="js/removeHasError.js"></script>
 <script src="js/simpleTagsSelectizer.js"></script>
-<script type="application/javascript">
+<script src="search/fuse.js"></script>
+<script src="search/jsrender.js"></script>
 
-</script>
+
 <script type="application/javascript">
     //see groupTagsSelectizer for more information about items
-    items = [
+    tags_items = [
         {value: 'inf', text: 'informatic'},
         {value: 'java', text: 'java language'},
         {value: '.net', text: '.net framework'},
         {value: 'itis-music', text: 'itis-music'},
+        {value: 'text_in_tag3', text: 'text_in_tag3'}
     ];
-    simpleTagsSelectizer('group_tags', items, false);
-//
-//        console.log("start");
-//        var input = $('#group_tags-selectized');
-//        console.log(input);
-//        var addTagButton = $('\<div class="item" id="addTagButton" data-value="">+</div>');
-//        console.log(addTagButton);
-//
-//        input.focusout(function () {
-//            console.log(input.parent());
-//            //input.insertBefore(addTagButton);
-//            input.parent().addClass('has-items');
-//            console.log($('#group_tags-selectized'));
-//            //$(".selectize-input").first().insertBefore(addTagButton,input)
-//        });
-//        input.focus(function (event) {
-//            if ($.contains(addTagButton)) {
-//                input.focusout();
-//            }
-//        });
-//        addTagButton.onclick = function () {
-//            addTagButton.detach();
-//            input.focus();
-//        };
-//        input.focusout();
+    simpleTagsSelectizer('search_tags_input', tags_items, false);
+    //
+    //        console.log("start");
+    //        var input = $('#search_tags_input-selectized');
+    //        console.log(input);
+    //        var addTagButton = $('\<div class="item" id="addTagButton" data-value="">+</div>');
+    //        console.log(addTagButton);
+    //
+    //        input.focusout(function () {
+    //            console.log(input.parent());
+    //            //input.insertBefore(addTagButton);
+    //            input.parent().addClass('has-items');
+    //            console.log($('#search_tags_input-selectized'));
+    //            //$(".selectize-input").first().insertBefore(addTagButton,input)
+    //        });
+    //        input.focus(function (event) {
+    //            if ($.contains(addTagButton)) {
+    //                input.focusout();
+    //            }
+    //        });
+    //        addTagButton.onclick = function () {
+    //            addTagButton.detach();
+    //            input.focus();
+    //        };
+    //        input.focusout();
+
+</script>
+<script id="groupTemplate" type="text/x-jsrender">
+    {{for items}}
+	<li class="media">
+        <div class="media-left media-middle">
+            <a href="#">
+                <div class="media-object thumb-round"
+                     style="background-image: url('{{:avatar}}');"></div>
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading community-title"><a class="link" href="#">{{:name}}</a></h4>
+
+            <div class="items">
+            {{for tags}}
+                <div class="custom-tag" data-value="inf">{{:text}}</div>
+            {{/for}}
+            </div>
+            <p class="small"><span class="glyphicon glyphicon-user"
+                                   aria-hidden="true"></span> {{:members}}</p>
+        </div>
+    </li>
+    {{/for}}
+</script>
+<script type="application/javascript">
+    var items =[
+        {
+            name: 'nameval',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members:139
+        },
+        {
+            name: 'nameval2',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members:139
+        },
+        {
+            name: 'nameval3',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members:139
+        }
+    ];
+    function renderGroups(items, target) {
+
+        var data = {items:items};
+        var tmpl = $.templates("#groupTemplate");
+        var html = tmpl.render(data);
+        target.html(html);
+    }
+    function tagsFilter(items, tags_source) {
+        if (typeof tags_source === 'undefined' || tags_source.value === null || typeof tags_source.value === 'undefined' || tags_source.value === ''){
+            return items;
+        }
+        console.log(tags_source);
+        var values = tags_source.value.split(',');
+        var options = {
+            shouldSort: true,
+            threshold: 0.1,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+                "tags.text"
+            ]
+        };
+        return tagsRecursive(items, values, options);
+
+    }
+    function tagsRecursive(items, tags, options) {
+
+        if (tags.length == 0){
+            return items;
+        }
+        var lastTag = tags.pop();
+        var fuse = new Fuse(tagsRecursive(items, tags, options), options);
+        var result = fuse.search(lastTag);
+        return result;
+    }
+    function searchGroups(items, source, tagsSource){
+        if (source.value === null || typeof source.value === 'undefined' || source.value.trim() == ''){
+            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+                return tagsFilter(items, tagsSource);
+            } else {
+                return items;
+            }
+        } else {
+            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+                var options = {
+                    shouldSort: true,
+                    threshold: 0.5,
+                    location: 0,
+                    distance: 100,
+                    maxPatternLength: 32,
+                    minMatchCharLength: 1,
+                    keys: [
+                        "name"
+                    ]
+                };
+                var fuse = new Fuse(tagsFilter(items,tagsSource), options);
+                var result = fuse.search(source.value);
+                return result;
+            } else {
+                var fuse = new Fuse(items, options);
+                var result = fuse.search(source.value);
+                return result;
+            }
+        }
+    }
+    function searchAndRender(querySource, tagsSource, items, container) {
+        var items = searchGroups(items,querySource,tagsSource);
+        renderGroups(items,container);
+        return false;
+    }
+    renderGroups(items,$('#courses_list'));
+
+
+    //$( "#courses_list" ).html(html);
+//    $( "#courses_list" ).html(
+//        $( "#groupTemplate" ).render( data )
+//    );
 
 </script>
 </body>
