@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
 
 import java.util.List;
 
@@ -14,5 +13,4 @@ public interface LabService {
     Lab create(Lab lab);
     boolean exists(String labName);
     List<Lab> getAll();
-    List<Lab> getByUser(User user);
 }

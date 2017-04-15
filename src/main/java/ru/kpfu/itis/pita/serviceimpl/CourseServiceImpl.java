@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.Semester;
 import ru.kpfu.itis.pita.entity.Subject;
-import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.repository.CourseRepository;
 import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.service.CourseService;
@@ -52,8 +51,4 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.findAll();
     }
 
-    @Override
-    public List<Course> getByUser(User user) {
-        return courseRepository.findByMember(user);
-    }
 }

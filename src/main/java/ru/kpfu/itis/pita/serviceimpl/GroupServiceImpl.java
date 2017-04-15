@@ -3,7 +3,6 @@ package ru.kpfu.itis.pita.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.service.GroupService;
 
@@ -39,8 +38,4 @@ public class GroupServiceImpl implements GroupService {
         return repository.findAll();
     }
 
-    @Override
-    public List<Group> getByUser(User user) {
-        return repository.findByMember(user);
-    }
 }

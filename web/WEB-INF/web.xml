@@ -8,18 +8,14 @@
         <param-value>/WEB-INF/spring/*.xml</param-value>
     </context-param>
 
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <servlet-name>dispatcher</servlet-name>
-    </filter-mapping>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -68,6 +64,10 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>OpenEntityManagerInViewFilter</filter-name>
+        <servlet-name>dispatcher</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
         <servlet-name>dispatcher</servlet-name>
     </filter-mapping>
 

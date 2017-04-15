@@ -3,7 +3,6 @@ package ru.kpfu.itis.pita.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.repository.LabRepository;
 import ru.kpfu.itis.pita.service.LabService;
@@ -42,8 +41,4 @@ public class LabServiceImpl implements LabService {
         return labRepository.findAll();
     }
 
-    @Override
-    public List<Lab> getByUser(User user) {
-        return labRepository.findByMember(user);
-    }
 }
