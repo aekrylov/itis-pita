@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -84,36 +85,31 @@
                     <div class="col-md-9">
                         <div class="row work-block">
                             <div class="col-md-12">
-                                <form method="get" onsubmit="return searchAndRender($('#search_input'),
-                                                                                    $('#search_tags_input'),
-                                                                                     items, $('#courses_list'))">
-                                    <input hidden type="text" class="search" id="search_input">
-                                    <div class="input-group stylish-input-group">
-                                        <input type="text" id="search" name="search" class="form-control"
-                                               placeholder="Поиск групп" oninput="return searchAndRender($('#search_input'),
-                                                                                    $('#search_tags_input'),
-                                                                                     items, $('#courses_list'))">
-                                        <span class="input-group-addon"><button type="submit"><span
-                                                class="glyphicon glyphicon-search"></span></button></span>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            <div class="tags-label-container">
-                                                <label>Теги:</label>
-                                            </div>
-                                        </div>
 
 
-                                        <div class="col-md-11">
-                                            <div class="form-group">
-                                                <input type="text" id="search_tags_input" class="selectized"
-                                                       tabindex="-1" style="display: none;">
-                                            </div>
+                                <div class="input-group stylish-input-group">
+                                    <input type="text" name="search" class="form-control"
+                                           placeholder="Поиск групп" id="search_input"
+                                           oninput="standartSearch()">
+                                    <span class="input-group-addon"><button type="submit"><span
+                                            class="glyphicon glyphicon-search"></span></button></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="tags-label-container">
+                                            <label>Теги:</label>
                                         </div>
                                     </div>
 
 
-                                </form>
+                                    <div class="col-md-11">
+                                        <div class="form-group">
+                                            <input type="text" id="search_tags_input" class="selectized"
+                                                   tabindex="-1" style="display: none;" onchange="standartSearch()">
+                                        </div>
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>
@@ -125,79 +121,20 @@
                                     <li role="presentation" class="active"
                                         onmouseenter="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '0px')"
                                         onmouseleave="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '5px')"
-                                    ><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Группы</a>
+                                    ><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.groups)">Группы</a>
                                     </li>
                                     <li role="presentation"><a href="#courses" aria-controls="courses" role="tab"
-                                                               data-toggle="tab">Курсы</a></li>
+                                                               data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.courses)">Курсы</a></li>
                                     <li role="presentation"><a href="#labs" aria-controls="labs" role="tab"
-                                                               data-toggle="tab">Лаборатории</a></li>
+                                                               data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.labs)">Лаборатории</a></li>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active work-block first-tab" id="groups">
                                         <br/>
-                                        <ul class="media-list list">
-                                            <li class="media">
-                                                <div class="media-left media-middle">
-                                                    <a href="#">
-                                                        <div class="media-object thumb-round"
-                                                             style="background-image: url('img/avatar_example.png');"></div>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
-                                                        группы</a></h4>
+                                        <ul class="media-list list" id="groups_list">
 
-                                                    <div class="items">
-                                                        <div class="custom-tag" data-value="inf">informatic</div>
-                                                        <div class="custom-tag" data-value="inf">java</div>
-                                                    </div>
-                                                    <p class="small"><span class="glyphicon glyphicon-user"
-                                                                           aria-hidden="true"></span> 200</p>
-                                                </div>
-                                                <hr class="list-grey-hr"/>
-                                            </li>
-                                            <li class="media">
-                                                <div class="media-left media-middle">
-                                                    <a href="#">
-                                                        <div class="media-object thumb-round"
-                                                             style="background-image: url('img/avatar_example.png');"></div>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
-                                                        группы</a></h4>
-
-                                                    <div class="items">
-                                                        <div class="custom-tag" data-value="inf">informatic</div>
-                                                        <div class="custom-tag" data-value="inf">java</div>
-                                                    </div>
-                                                    <p class="small"><span class="glyphicon glyphicon-user"
-                                                                           aria-hidden="true"></span> 200</p>
-                                                </div>
-                                                <hr class="list-grey-hr"/>
-                                            </li>
-
-                                            <li class="media">
-                                                <div class="media-left media-middle">
-                                                    <a href="#">
-                                                        <div class="media-object thumb-round"
-                                                             style="background-image: url('img/avatar_example.png');"></div>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
-                                                        группы</a></h4>
-
-                                                    <div class="items">
-                                                        <div class="custom-tag" data-value="inf">informatic</div>
-                                                        <div class="custom-tag" data-value="inf">java</div>
-                                                    </div>
-                                                    <p class="small"><span class="glyphicon glyphicon-user"
-                                                                           aria-hidden="true"></span> 200</p>
-                                                </div>
-                                            </li>
                                         </ul>
                                     </div>
 
@@ -212,7 +149,9 @@
 
                                     <div role="tabpanel" class="tab-pane work-block" id="labs">
                                         <br/>
+                                        <ul class="media-list" id="labs_list">
 
+                                        </ul>
                                     </div>
 
 
@@ -226,10 +165,10 @@
                     <div class="col-md-3">
                         <ul class="nav nav-pills switch-pills nav-stacked work-block" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Мои сообщества</a>
+                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab" onclick="changeSearchConfig(types.my, undefined)">Мои сообщества</a>
                             </li>
                             <li role="presentation">
-                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Глобальный
+                                <a href="#profile" aria-controls="profile" onclick="changeSearchConfig(types.all, undefined)" role="tab" data-toggle="tab">Глобальный
                                     поиск</a>
                             </li>
                         </ul>
@@ -269,31 +208,7 @@
         {value: 'itis-music', text: 'itis-music'},
         {value: 'text_in_tag3', text: 'text_in_tag3'}
     ];
-    simpleTagsSelectizer('search_tags_input', tags_items, false);
-    //
-    //        console.log("start");
-    //        var input = $('#search_tags_input-selectized');
-    //        console.log(input);
-    //        var addTagButton = $('\<div class="item" id="addTagButton" data-value="">+</div>');
-    //        console.log(addTagButton);
-    //
-    //        input.focusout(function () {
-    //            console.log(input.parent());
-    //            //input.insertBefore(addTagButton);
-    //            input.parent().addClass('has-items');
-    //            console.log($('#search_tags_input-selectized'));
-    //            //$(".selectize-input").first().insertBefore(addTagButton,input)
-    //        });
-    //        input.focus(function (event) {
-    //            if ($.contains(addTagButton)) {
-    //                input.focusout();
-    //            }
-    //        });
-    //        addTagButton.onclick = function () {
-    //            addTagButton.detach();
-    //            input.focus();
-    //        };
-    //        input.focusout();
+    var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false)[0].selectize;
 
 </script>
 <script id="groupTemplate" type="text/x-jsrender">
@@ -310,7 +225,7 @@
 
             <div class="items">
             {{for tags}}
-                <div class="custom-tag" data-value="inf">{{:text}}</div>
+                <div class="custom-tag" data-value="inf" onclick = (addTag(this))>{{:text}}</div>
             {{/for}}
             </div>
             <p class="small"><span class="glyphicon glyphicon-user"
@@ -318,53 +233,232 @@
         </div>
     </li>
     {{/for}}
+
 </script>
 <script type="application/javascript">
-    var items =[
+    var my_courses_items = [
         {
-            name: 'nameval',
-            avatar:'img/avatar_example.png',
-            tags:[
-                {text:'text_in_tag'},
+            name: 'my_course',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
                 {text: 'another_tag'}
             ],
-            members:139
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
         },
         {
             name: 'nameval2',
-            avatar:'img/avatar_example.png',
-            tags:[
-                {text:'text_in_tag3'},
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
                 {text: 'another_tag3'}
             ],
-            members:139
+            members: 139
         },
         {
             name: 'nameval3',
-            avatar:'img/avatar_example.png',
-            tags:[
-                {text:'text_in_tag3'},
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
                 {text: 'another_tag3'}
             ],
-            members:139
+            members: 139
+        }
+    ];
+    var my_groups_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var my_labs_items = [
+        {
+            name: 'MyLab',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_courses_items = [
+        {
+            name: 'ExtraCourse',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_groups_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_labs_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
         }
     ];
     function renderGroups(items, target) {
 
-        var data = {items:items};
+        var data = {items: items};
         var tmpl = $.templates("#groupTemplate");
         var html = tmpl.render(data);
+        target.innerHTML = "";
         target.html(html);
     }
     function tagsFilter(items, tags_source) {
-        if (typeof tags_source === 'undefined' || tags_source.value === null || typeof tags_source.value === 'undefined' || tags_source.value === ''){
+        console.log('tags_filter_on');
+        console.log(tags_source.val());
+        if (typeof tags_source === 'undefined' || tags_source.val() === null || typeof tags_source.val() === 'undefined' || tags_source.val() === '') {
             return items;
         }
         console.log(tags_source);
-        var values = tags_source.value.split(',');
+        var values = tags_source.val().split(',');
+
         var options = {
             shouldSort: true,
-            threshold: 0.1,
+            threshold: 0,
             location: 0,
             distance: 100,
             maxPatternLength: 32,
@@ -378,7 +472,7 @@
     }
     function tagsRecursive(items, tags, options) {
 
-        if (tags.length == 0){
+        if (tags.length == 0) {
             return items;
         }
         var lastTag = tags.pop();
@@ -386,18 +480,18 @@
         var result = fuse.search(lastTag);
         return result;
     }
-    function searchGroups(items, source, tagsSource){
-        if (source.value === null || typeof source.value === 'undefined' || source.value.trim() == ''){
-            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+    function searchGroups(items, source, tagsSource) {
+        if (source.val() === null || typeof source.val() === 'undefined' || source.val().trim() == '') {
+            if (tagsSource !== null && typeof tagsSource !== 'undefined') {
                 return tagsFilter(items, tagsSource);
             } else {
                 return items;
             }
         } else {
-            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+            if (tagsSource !== null && typeof tagsSource !== 'undefined') {
                 var options = {
                     shouldSort: true,
-                    threshold: 0.5,
+                    threshold: 0.8,
                     location: 0,
                     distance: 100,
                     maxPatternLength: 32,
@@ -406,28 +500,126 @@
                         "name"
                     ]
                 };
-                var fuse = new Fuse(tagsFilter(items,tagsSource), options);
-                var result = fuse.search(source.value);
+                var fuse = new Fuse(tagsFilter(items, tagsSource), options);
+                var result = fuse.search(source.val());
                 return result;
             } else {
                 var fuse = new Fuse(items, options);
-                var result = fuse.search(source.value);
+                var result = fuse.search(source.val());
                 return result;
             }
         }
     }
     function searchAndRender(querySource, tagsSource, items, container) {
-        var items = searchGroups(items,querySource,tagsSource);
-        renderGroups(items,container);
+        var items = searchGroups(items, querySource, tagsSource);
+        renderGroups(items, container);
         return false;
     }
-    renderGroups(items,$('#courses_list'));
+    var currentSearchConfig;
+    var types = {
+        my: new Object(), all: new Object()
+    }
+    var scopes = {
+        courses: new Object(), labs: new Object(), groups: new Object()
+    }
+    var currentSearchConfig = {
+        type: types.my,
+        input: $('#search_input'),
+        tags_input : $('#search_tags_input'),
+        scope : scopes.groups,
+        out : $('#courses_list')
+    };
+    
+    var configs = {
+        my_courses : {
+            scope_items : my_courses_items,
+            out:$('#courses_list')
+        },
+        my_labs : {
+            scope_items : my_labs_items,
+            out:$('#labs_list')
+        },
+        my_groups : {
+            scope_items : my_groups_items,
+            out:$('#groups_list')
+        },
+        all_courses : {
+            scope_items : all_courses_items,
+            out:$('#courses_list')
+        },
+        all_labs : {
+            scope_items : all_labs_items,
+            out:$('#labs_list')
+        },
+        all_groups : {
+            scope_items : all_groups_items,
+            out:$('#groups_list')
+        }
+        
+        
+    }
+    function changeSearchConfig(type,scope) {
+        console.log(type);
+        console.log(scope);
+        if (typeof type !== 'undefined'){
+            currentSearchConfig.type = type;
+        }
+        if (typeof scope !== 'undefined'){
+            currentSearchConfig.scope = scope;
+        }        
+        standartSearch();
+    }
+    function standartSearch() {
+        var currentCollectionConfig = configs.all_courses;
+        if (currentSearchConfig.type === types.my){
+            if (currentSearchConfig.scope === scopes.courses){
+                currentCollectionConfig = configs.my_courses;
+                console.log('selected my_courses');
+            } else {
+                if (currentSearchConfig.scope === scopes.groups){
+                    currentCollectionConfig = configs.my_groups;
+                    console.log('selected my_groups');
+                } else {
+                    currentCollectionConfig = configs.my_labs;
+                    console.log('selected my_labs');
+                }
+            }
+        } else {
+            if (currentSearchConfig.scope === scopes.courses){
+                currentCollectionConfig = configs.all_courses;
+                console.log('selected all_courses');
+            } else {
+                if (currentSearchConfig.scope === scopes.groups){
+                    currentCollectionConfig = configs.all_groups;
+                    console.log('selected all_groups');
+                } else {
+                    currentCollectionConfig = configs.all_labs;
+                    console.log('selected all_labs');
+                }
+            }
+        }
+        searchAndRender(currentSearchConfig.input,currentSearchConfig.tags_input, currentCollectionConfig.scope_items, currentCollectionConfig.out);
+    }
+    standartSearch();
 
+    function addTag(tagObj) {
+        var tagText = tagObj.innerHTML;
+        selectizable.addItem(tagText, false);
+    }
+
+//    $('#search_input').on('input', '[data-action="text"]', function () {
+//        var item = $(this),
+//            value = $item.val();
+//        searchAndRender(item,
+//            $('#search_tags_input'),
+//            items, $('#courses_list'))
+//
+//    });
 
     //$( "#courses_list" ).html(html);
-//    $( "#courses_list" ).html(
-//        $( "#groupTemplate" ).render( data )
-//    );
+    //    $( "#courses_list" ).html(
+    //        $( "#groupTemplate" ).render( data )
+    //    );
 
 </script>
 </body>

@@ -16,7 +16,7 @@ items: array of objects like
 function simpleTagsSelectizer(inputId, items, addingFlag) {
     var allowAdding = typeof addingFlag !== 'undefined' ? addingFlag : true;
     console.log(allowAdding);
-    $('#'+inputId).selectize({
+    return $('#'+inputId).selectize({
         create: allowAdding,
         options: items,
         plugins: ['remove_button'],
