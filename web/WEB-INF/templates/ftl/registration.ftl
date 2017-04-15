@@ -11,7 +11,7 @@
 
         <input type="password" class="form-control" name="password" placeholder="Password" />
 
-        <input type="password" class="form-control" name="password_confirm"
+        <input type="password" class="form-control" name="password_confirmed"
                placeholder="Confirm your password" />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>

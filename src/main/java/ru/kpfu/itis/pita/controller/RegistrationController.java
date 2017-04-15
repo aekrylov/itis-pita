@@ -31,9 +31,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-
+    public String registration() {
         return "registration";
     }
 
@@ -47,25 +45,15 @@ public class RegistrationController {
         }
 
         User user = new User();
-//        userValidator.validate(userForm, bindingResult);
         user.setName(form.getSurname() + " " + form.getName());
-        System.out.println("Name set");
         user.setEmail(form.getEmail());
-        System.out.println("Email set");
         user.setPasswordHash(form.getPassword());
-        System.out.println("Pas set");
         user.setPhone(form.getPhone());
-        System.out.println("Phone set");
         user.setRole(UserRole.ROLE_STUDENT);
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-        System.out.println("Blabla");
+        //todo set inactive
         userService.save(user);
-        System.out.println("User registered");
 
 //        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/login";
     }
 }
