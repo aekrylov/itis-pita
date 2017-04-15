@@ -36,7 +36,10 @@
     <!-- Class containing request mappings registered by Spring -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
+    <!-- Static files resolver -->
     <mvc:resources mapping="/static/**" location="/static/" order="3" />
-    <mvc:annotation-driven />
+
+    <!-- use MVC annotations, don't pass model attributes on redirect -->
+    <mvc:annotation-driven ignore-default-model-on-redirect="true"/>
 
 </beans>

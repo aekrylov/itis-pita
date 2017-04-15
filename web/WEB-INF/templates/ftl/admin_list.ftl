@@ -8,8 +8,8 @@
             <#list fields as field>
             <th>${field}</th>
             </#list>
-            <th></th>
-            <th></th>
+            <th>Edit</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             <#list entries as entry>

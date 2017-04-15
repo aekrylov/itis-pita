@@ -18,12 +18,16 @@ public class UserController extends BaseAdminController<User> {
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserController(UserRepository repository) {
+    public UserController(UserRepository repository, BCryptPasswordEncoder encoder) {
         super(repository);
+        this.encoder = encoder;
     }
 
     @Override
     protected void preSave(User entry) {
-        //todo encoding
+        //if password changed, encrypt it
+        if(entry.getId() > 0 && !repository.findOne(entry.getId()).getPasswordHash().equals(entry.getPasswordHash())) {
+            entry.setPasswordHash(encoder.encode(entry.getPasswordHash()));
+        }
     }
 }
