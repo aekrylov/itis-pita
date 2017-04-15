@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/registration.css" rel="stylesheet" type="text/css"/>
+    <link href="../bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="../js/jquery-3.1.1.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../selectize/js/standalone/selectize.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="../img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="../img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-block">
+                    <h1>Вход на сайт:</h1>
+                    <form method="post" class="login-form" action="/login">
+                        <div class="form-group">
+                            <label class="forms-label" for="email">E-mail</label>
+                            <input class="form-control" type="email" id="email" name="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="forms-label" for="password">Пароль</label>
+                            <input class="form-control" type="password" id="password" name="password"/>
+                        </div>
+                        <div class="form-group form-group-helper">
+                            <label class="login-checkbox">
+                                <input type="checkbox" value="remember-me" id="checkbox"> Запомнить
+                            </label>
+                            <button type="submit" class="btn-login">Войти</button>
+                        </div>
+                    </form>
+                    <div class="form-group form-group-helper bottom-links-login">
+                        <a href="#" id="forgot-pass">Забыли пароль?</a> | <a href="#" id="signup"> Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="../js/checkform.js"></script>
+<script src="../js/removeHasError.js"></script>
+<script src="../js/simpleTagsSelectizer.js"></script>
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    items = [
+        {value:'inf', text:'informatic'},
+        {value:'java', text:'java language'},
+        {value:'.net', text:'.net framework'},
+        {value:'itis-music', text:'itis-music'},
+    ];
+    $.onload = simpleTagsSelectizer('group_tags',items);
+</script>
+</body>
+</html>

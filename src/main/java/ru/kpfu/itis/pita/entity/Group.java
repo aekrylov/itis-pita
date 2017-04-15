@@ -24,6 +24,9 @@ public class Group {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private String imageLink;
+
     @Lob
     private String description;
 
@@ -114,6 +117,14 @@ public class Group {
 
     public void setMembers(Collection<User> members) {
         this.members = members;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
     }
 
     @Override

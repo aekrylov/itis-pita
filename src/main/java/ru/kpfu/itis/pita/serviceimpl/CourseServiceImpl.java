@@ -50,4 +50,5 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> getAll() {
         return courseRepository.findAll();
     }
+
 }

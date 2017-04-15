@@ -7,6 +7,8 @@ import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.repository.LabRepository;
 import ru.kpfu.itis.pita.service.LabService;
 
+import java.util.List;
+
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/27/17 5:56 PM
@@ -33,4 +35,10 @@ public class LabServiceImpl implements LabService {
     public boolean exists(String name) {
         return groupRepository.findByName(name) != null;
     }
+
+    @Override
+    public List<Lab> getAll() {
+        return labRepository.findAll();
+    }
+
 }

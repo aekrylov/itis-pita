@@ -2,6 +2,8 @@ package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Lab;
 
+import java.util.List;
+
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/27/17 5:55 PM
@@ -9,6 +11,6 @@ import ru.kpfu.itis.pita.entity.Lab;
 public interface LabService {
 
     Lab create(Lab lab);
-
     boolean exists(String labName);
+    List<Lab> getAll();
 }

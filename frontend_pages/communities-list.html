@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/communities-list.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="selectize/js/standalone/selectize.js"></script>
+
+    <script src="search/jsrender.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-offset-1 col-md-10 undercover">
+                <div class="row">
+                    <div class="col-md-12 green-header">
+                        <h1>СООБЩЕСТВА</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row work-block">
+                            <div class="col-md-12">
+                                <form method="get" onsubmit="return searchAndRender($('#search_input'),
+                                                                                    $('#search_tags_input'),
+                                                                                     items, $('#courses_list'))">
+                                    <input hidden type="text" class="search" id="search_input">
+                                    <div class="input-group stylish-input-group">
+                                        <input type="text" id="search" name="search" class="form-control"
+                                               placeholder="Поиск групп" oninput="return searchAndRender($('#search_input'),
+                                                                                    $('#search_tags_input'),
+                                                                                     items, $('#courses_list'))">
+                                        <span class="input-group-addon"><button type="submit"><span
+                                                class="glyphicon glyphicon-search"></span></button></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="tags-label-container">
+                                                <label>Теги:</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-11">
+                                            <div class="form-group">
+                                                <input type="text" id="search_tags_input" class="selectized"
+                                                       tabindex="-1" style="display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+                                <ul class="nav nav-tabs no-border-tabs" role="tablist">
+                                    <li role="presentation" class="active"
+                                        onmouseenter="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '0px')"
+                                        onmouseleave="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '5px')"
+                                    ><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Группы</a>
+                                    </li>
+                                    <li role="presentation"><a href="#courses" aria-controls="courses" role="tab"
+                                                               data-toggle="tab">Курсы</a></li>
+                                    <li role="presentation"><a href="#labs" aria-controls="labs" role="tab"
+                                                               data-toggle="tab">Лаборатории</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active work-block first-tab" id="groups">
+                                        <br/>
+                                        <ul class="media-list list">
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                                <hr class="list-grey-hr"/>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                                <hr class="list-grey-hr"/>
+                                            </li>
+
+                                            <li class="media">
+                                                <div class="media-left media-middle">
+                                                    <a href="#">
+                                                        <div class="media-object thumb-round"
+                                                             style="background-image: url('img/avatar_example.png');"></div>
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading community-title"><a class="link" href="#">Название
+                                                        группы</a></h4>
+
+                                                    <div class="items">
+                                                        <div class="custom-tag" data-value="inf">informatic</div>
+                                                        <div class="custom-tag" data-value="inf">java</div>
+                                                    </div>
+                                                    <p class="small"><span class="glyphicon glyphicon-user"
+                                                                           aria-hidden="true"></span> 200</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="courses">
+                                        <br/>
+                                        <ul class="media-list" id="courses_list">
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="labs">
+                                        <br/>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills switch-pills nav-stacked work-block" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Мои сообщества</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Глобальный
+                                    поиск</a>
+                            </li>
+                        </ul>
+                        <div class="btn-group-vertical" role="group">
+                            <button class="btn btn-block firm-btn">Создать группу</button>
+                            <button class="btn btn-block firm-btn">Создать лабораторию</button>
+                            <button class="btn btn-block firm-btn">Создать курс</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="js/checkform.js"></script>
+<script src="js/removeHasError.js"></script>
+<script src="js/simpleTagsSelectizer.js"></script>
+<script src="search/fuse.js"></script>
+<script src="search/jsrender.js"></script>
+
+
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    tags_items = [
+        {value: 'inf', text: 'informatic'},
+        {value: 'java', text: 'java language'},
+        {value: '.net', text: '.net framework'},
+        {value: 'itis-music', text: 'itis-music'},
+        {value: 'text_in_tag3', text: 'text_in_tag3'}
+    ];
+    simpleTagsSelectizer('search_tags_input', tags_items, false);
+    //
+    //        console.log("start");
+    //        var input = $('#search_tags_input-selectized');
+    //        console.log(input);
+    //        var addTagButton = $('\<div class="item" id="addTagButton" data-value="">+</div>');
+    //        console.log(addTagButton);
+    //
+    //        input.focusout(function () {
+    //            console.log(input.parent());
+    //            //input.insertBefore(addTagButton);
+    //            input.parent().addClass('has-items');
+    //            console.log($('#search_tags_input-selectized'));
+    //            //$(".selectize-input").first().insertBefore(addTagButton,input)
+    //        });
+    //        input.focus(function (event) {
+    //            if ($.contains(addTagButton)) {
+    //                input.focusout();
+    //            }
+    //        });
+    //        addTagButton.onclick = function () {
+    //            addTagButton.detach();
+    //            input.focus();
+    //        };
+    //        input.focusout();
+
+</script>
+<script id="groupTemplate" type="text/x-jsrender">
+    {{for items}}
+	<li class="media">
+        <div class="media-left media-middle">
+            <a href="#">
+                <div class="media-object thumb-round"
+                     style="background-image: url('{{:avatar}}');"></div>
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading community-title"><a class="link" href="#">{{:name}}</a></h4>
+
+            <div class="items">
+            {{for tags}}
+                <div class="custom-tag" data-value="inf">{{:text}}</div>
+            {{/for}}
+            </div>
+            <p class="small"><span class="glyphicon glyphicon-user"
+                                   aria-hidden="true"></span> {{:members}}</p>
+        </div>
+    </li>
+    {{/for}}
+</script>
+<script type="application/javascript">
+    var items =[
+        {
+            name: 'nameval',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members:139
+        },
+        {
+            name: 'nameval2',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members:139
+        },
+        {
+            name: 'nameval3',
+            avatar:'img/avatar_example.png',
+            tags:[
+                {text:'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members:139
+        }
+    ];
+    function renderGroups(items, target) {
+
+        var data = {items:items};
+        var tmpl = $.templates("#groupTemplate");
+        var html = tmpl.render(data);
+        target.html(html);
+    }
+    function tagsFilter(items, tags_source) {
+        if (typeof tags_source === 'undefined' || tags_source.value === null || typeof tags_source.value === 'undefined' || tags_source.value === ''){
+            return items;
+        }
+        console.log(tags_source);
+        var values = tags_source.value.split(',');
+        var options = {
+            shouldSort: true,
+            threshold: 0.1,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+                "tags.text"
+            ]
+        };
+        return tagsRecursive(items, values, options);
+
+    }
+    function tagsRecursive(items, tags, options) {
+
+        if (tags.length == 0){
+            return items;
+        }
+        var lastTag = tags.pop();
+        var fuse = new Fuse(tagsRecursive(items, tags, options), options);
+        var result = fuse.search(lastTag);
+        return result;
+    }
+    function searchGroups(items, source, tagsSource){
+        if (source.value === null || typeof source.value === 'undefined' || source.value.trim() == ''){
+            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+                return tagsFilter(items, tagsSource);
+            } else {
+                return items;
+            }
+        } else {
+            if (tagsSource !== null && typeof tagsSource !== 'undefined'){
+                var options = {
+                    shouldSort: true,
+                    threshold: 0.5,
+                    location: 0,
+                    distance: 100,
+                    maxPatternLength: 32,
+                    minMatchCharLength: 1,
+                    keys: [
+                        "name"
+                    ]
+                };
+                var fuse = new Fuse(tagsFilter(items,tagsSource), options);
+                var result = fuse.search(source.value);
+                return result;
+            } else {
+                var fuse = new Fuse(items, options);
+                var result = fuse.search(source.value);
+                return result;
+            }
+        }
+    }
+    function searchAndRender(querySource, tagsSource, items, container) {
+        var items = searchGroups(items,querySource,tagsSource);
+        renderGroups(items,container);
+        return false;
+    }
+    renderGroups(items,$('#courses_list'));
+
+
+    //$( "#courses_list" ).html(html);
+//    $( "#courses_list" ).html(
+//        $( "#groupTemplate" ).render( data )
+//    );
+
+</script>
+</body>
+</html>

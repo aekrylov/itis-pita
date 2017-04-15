@@ -9,4 +9,5 @@ import ru.kpfu.itis.pita.entity.Course;
 public interface CourseRepository  extends JpaRepository<Course, Integer>{
 
     Course findByName(String name);
+
 }

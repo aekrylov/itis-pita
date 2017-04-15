@@ -10,8 +10,6 @@ import java.util.List;
 public interface CourseService {
 
     Course create(Course course);
-
     boolean exists(String courseName);
-
     List<Course> getAll();
 }
