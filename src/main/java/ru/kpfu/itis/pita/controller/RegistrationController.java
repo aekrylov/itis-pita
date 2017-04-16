@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.entity.UserRole;
 import ru.kpfu.itis.pita.form.RegistrationForm;
@@ -51,12 +52,16 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registration(@ModelAttribute("form") @Valid RegistrationForm form, BindingResult bindingResult, ModelMap map) {
+    public String registration(@ModelAttribute("form") @Valid RegistrationForm form,
+                               BindingResult bindingResult,
+                               ModelMap map,
+                               RedirectAttributes redirectAttributes) {
         validator.validate(form, bindingResult);
 
         if(bindingResult.hasErrors()) {
-            //todo if not valid
             map.put("error", bindingResult.getModel());
+            //todo why it is so
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.form", bindingResult);
             return "redirect:/registration";
         }
 

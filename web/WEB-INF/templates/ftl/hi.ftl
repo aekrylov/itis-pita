@@ -13,6 +13,17 @@
     </tbody>
 </table>
 
+<ul>
+    <#list .data_model?keys as key>
+    <li>${key}</li>
+    </#list>
+</ul>
+
+<@security.authorize access="isAnonymous()">
+        anonymous
+</@security.authorize>
+
+
 </#macro>
 
 <@display "Hello"></@display>

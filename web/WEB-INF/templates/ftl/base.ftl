@@ -1,6 +1,9 @@
 <#ftl encoding='utf-8'>
+<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
+<#assign formTags=JspTaglibs["http://www.springframework.org/tags/form"] />
+
 <#setting boolean_format="yes,no">
-<#-- TODO import Spring taglib -->
+
 <#macro display title="Название компании">
 <!DOCTYPE html>
 <html lang="en">
@@ -38,38 +41,42 @@
                         </a>
                     </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
-                                                          aria-hidden="true"></span>
-                                Сообщения</a></li>
-                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-                                Лента новостей</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
-                                                                               class="glyphicon glyphicon-bell"
-                                                                               aria-hidden="true"></span></a>
-                            </li>
-                            <li>
-                                <a id="avatar-link"  class="navbar-brand" href="/profile">
-                                    <img href="/profile"  class="img-responsive  avatar" height="40" width="40" src="/static/img/avatar_example.png"/>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
+                    <@security.authorize access="isFullyAuthenticated()">
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                              aria-hidden="true"></span>
+                                    Сообщения</a></li>
+                                <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                    Лента новостей</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                                   class="glyphicon glyphicon-bell"
+                                                                                   aria-hidden="true"></span></a>
+                                </li>
+                                <li>
+                                    <a id="avatar-link"  class="navbar-brand" href="/profile">
+                                        <img href="/profile"  class="img-responsive  avatar" height="40" width="40" src="/static/img/avatar_example.png"/>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <@security.authentication property="principal.user.name" /> <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
 
-                            </li>
-                        </ul>
-                    </div><!-- /.navbar-collapse -->
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </@security.authorize>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
