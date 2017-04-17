@@ -12,10 +12,10 @@ import ru.kpfu.itis.pita.repository.GroupRepository;
  */
 @Controller
 @RequestMapping(path = "/admin/groups/")
-public class GroupController extends BaseAdminController<Group> {
+public class GroupAdminController extends BaseAdminController<Group> {
 
     @Autowired
-    public GroupController(GroupRepository repository) {
+    public GroupAdminController(GroupRepository repository) {
         super(repository);
     }
 

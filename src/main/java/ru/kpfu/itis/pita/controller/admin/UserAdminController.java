@@ -13,12 +13,12 @@ import ru.kpfu.itis.pita.repository.UserRepository;
  */
 @Controller
 @RequestMapping(path = "/admin/users")
-public class UserController extends BaseAdminController<User> {
+public class UserAdminController extends BaseAdminController<User> {
 
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserController(UserRepository repository, BCryptPasswordEncoder encoder) {
+    public UserAdminController(UserRepository repository, BCryptPasswordEncoder encoder) {
         super(repository);
         this.encoder = encoder;
     }
