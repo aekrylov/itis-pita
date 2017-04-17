@@ -1,5 +1,5 @@
 <#ftl encoding='utf-8'>
-<#include 'base_anon.ftl' >
+<#include 'base.ftl' >
 <#macro header_custom_imports>
     <link rel="stylesheet" href="/static/css/style.css">
 </#macro>

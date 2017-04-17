@@ -1,23 +1,27 @@
-<body xmlns="http://www.w3.org/1999/html">
+<#include 'base.ftl'>
 
-<div class="container">
+<#macro body>
 
-    <form method="POST" class="form-signin">
+    <@formTags.form method="POST" class="form-signin" modelAttribute="form">
         <h2 class="form-signin-heading">Create your account</h2>
-        <input type="text" class="form-control" name="email" placeholder="Username" value="${email}" />
-        <input type="text" class="form-control" name="name" placeholder="Name" value="${name}" />
-        <input type="text" class="form-control" name="surname" placeholder="Surname" value="${surname}" />
-        <input type="text" class="form-control" name="phone" placeholder="Phone" value="${phone}" />
+        <@formTags.input path="email" cssClass="form-control" placeholder="Username" />
+        <@formTags.errors path="email" />
+        <input type="text" class="form-control" name="name" placeholder="Name" value="${form.name!""}" />
+        <input type="text" class="form-control" name="surname" placeholder="Surname" value="${form.surname!""}" />
+        <input type="text" class="form-control" name="phone" placeholder="Phone" value="${form.phone!""}" />
 
-        <input type="password" class="form-control" name="password" placeholder="Password" />
+        <@formTags.password path="password" cssClass="form-control" placeholder="Password" />
 
         <input type="password" class="form-control" name="password_confirmed"
                placeholder="Confirm your password" />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form>
+    <#-- TODO how errors are retrieved -->
+        <@formTags.errors path="*"/>
+    </@formTags.form>
     <#if error?has_content>
-        ${error}
+        Form has errors
     </#if>
-</div>
-</body>
+</#macro>
+
+<@display "Регистрация" />

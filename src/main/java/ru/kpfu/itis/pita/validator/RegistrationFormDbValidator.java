@@ -38,7 +38,7 @@ public class RegistrationFormDbValidator implements Validator {
 
         //check email unique constraint
         if(userService.findByEmail(form.getEmail()) != null) {
-            errors.rejectValue("email", "Duplicate.userForm.username");
+            errors.rejectValue("email", "Duplicate");
         }
     }
 }
