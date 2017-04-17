@@ -1,11 +1,13 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.service.GroupService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -36,6 +38,15 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Group> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Group findOne(int id) {
+        Group group = repository.findOne(id);
+        //since lazy collections will be needed, init them now
+        Hibernate.initialize(group);
+        return group;
     }
 
 }

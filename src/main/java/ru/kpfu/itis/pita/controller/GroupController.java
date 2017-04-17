@@ -6,16 +6,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Lab;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
-import ru.kpfu.itis.pita.service.CourseService;
 import ru.kpfu.itis.pita.service.GroupService;
-import ru.kpfu.itis.pita.service.LabService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import javax.transaction.Transactional;
@@ -26,29 +25,33 @@ import java.util.List;
  * Created by 1 on 30.03.2017.
  */
 @Controller
-@RequestMapping(path = "/communities")
 @PreAuthorize("isFullyAuthenticated()")
-public class ListOfCommunitiesPageController {
+public class GroupController {
 
-    private CourseService courseService;
-    private LabService labService;
     private GroupService groupService;
     private UserService userService;
 
     @Autowired
-    public ListOfCommunitiesPageController(CourseService courseService,
-                                           LabService labService,
-                                           GroupService groupService,
-                                           UserService userService){
-        this.courseService = courseService;
-        this.labService = labService;
+    public GroupController(GroupService groupService,
+                           UserService userService){
         this.groupService = groupService;
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/group")
+    public String findOne(@RequestParam Integer id, ModelMap map) {
+        Group group = groupService.findOne(id);
+        if(group == null) {
+            throw new EntityNotFoundException(id);
+        }
+
+        map.put("group", group);
+        return "communities_one";
+    }
+
+    @GetMapping(path = "/groups")
     @Transactional
-    public String doGet(ModelMap map){
+    public String listAll(ModelMap map) {
         List<Group> allGroups = groupService.getAll(); //returns all groups and child entities as well
         List<Course> allCourses = Helpers.filterByType(allGroups, Course.class);
         List<Lab> allLabs = Helpers.filterByType(allGroups, Lab.class);

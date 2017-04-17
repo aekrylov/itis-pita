@@ -13,4 +13,5 @@ public interface GroupService {
     boolean exists(String name);
     Group create(Group group);
     List<Group> getAll();
+    Group findOne(int id);
 }
