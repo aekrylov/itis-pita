@@ -40,7 +40,7 @@ public class GroupController {
 
     @GetMapping(path = "/group")
     public String findOne(@RequestParam Integer id, ModelMap map) {
-        Group group = groupService.findOne(id);
+        Group group = groupService.getOne(id);
         if(group == null) {
             throw new EntityNotFoundException(id);
         }

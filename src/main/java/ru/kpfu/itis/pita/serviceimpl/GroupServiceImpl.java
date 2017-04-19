@@ -42,10 +42,12 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public Group findOne(int id) {
+    public Group getOne(int id) {
         Group group = repository.findOne(id);
         //since lazy collections will be needed, init them now
-        Hibernate.initialize(group);
+        Hibernate.initialize(group.getAdmins());
+        Hibernate.initialize(group.getWall());
+        Hibernate.initialize(group.getInterests());
         return group;
     }
 

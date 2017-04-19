@@ -67,7 +67,7 @@ size:${ml.members?size}},
 <#list all_groups as ag>
     <p>${ag.name}, ${ag.imageLink!""}, ${ag?size}</p>
     <#list ag.interests as i>
-        <p>${i.name}</p>
+        <a href="/group?id=${i.id}">${i.name}</a>
     </#list>
 </#list>
 

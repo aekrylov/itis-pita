@@ -144,4 +144,12 @@ public class Group {
         result = 31 * result + name.hashCode();
         return result;
     }
+
+    public SortedSet<WallPost> getWall() {
+        return wall;
+    }
+
+    public void setWall(SortedSet<WallPost> wall) {
+        this.wall = wall;
+    }
 }
