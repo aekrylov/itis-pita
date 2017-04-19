@@ -2,19 +2,19 @@ package ru.kpfu.itis.pita.controller.ajax_controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kpfu.itis.pita.dto.CourseDto;
 import ru.kpfu.itis.pita.dto.GroupDto;
+import ru.kpfu.itis.pita.dto.InterestDto;
 import ru.kpfu.itis.pita.dto.LabDto;
-import ru.kpfu.itis.pita.entity.Course;
-import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import java.util.Collection;
@@ -29,17 +29,19 @@ import java.util.stream.Collectors;
  * Date: 4/18/17 11:02 AM
  */
 
-@RestController
+@Controller
 @RequestMapping(path = "/ajax/groups")
 public class CommunityAjaxController {
 
     private GroupService groupService;
     private UserService userService;
+    private InterestService interestService;
 
     @Autowired
-    public CommunityAjaxController(GroupService groupService, UserService userService) {
+    public CommunityAjaxController(GroupService groupService, UserService userService, InterestService interestService) {
         this.groupService = groupService;
         this.userService = userService;
+        this.interestService = interestService;
     }
 
     @GetMapping(path = "/")
@@ -61,12 +63,23 @@ public class CommunityAjaxController {
         returnMap.put("my_groups", toDtoList(myGroups, Group.class, GroupDto::new));
         returnMap.put("my_courses", toDtoList(myGroups, Course.class, CourseDto::new));
         returnMap.put("my_labs", toDtoList(myGroups, Lab.class, LabDto::new));
+
+        List<Interest> tags = interestService.getAll();
+        returnMap.put("tags", toInterestDtoList(tags, Interest.class, InterestDto::new));
+        returnMap.put("user_role", user.getRole());
         return returnMap;
     }
 
     private <T extends Group, D extends GroupDto> List<D> toDtoList(Collection<Group> allGroups, Class<T> clazz,
                                                                     Function<T, D> dtoMapper) {
         return Helpers.filterByType(allGroups, clazz).stream()
+                .map(dtoMapper)
+                .collect(Collectors.toList());
+    }
+
+    private <T extends Interest, D extends InterestDto> List<D> toInterestDtoList(Collection<Interest> interests, Class<T> clazz,
+                                                                    Function<T, D> dtoMapper) {
+        return Helpers.filterByType(interests, clazz).stream()
                 .map(dtoMapper)
                 .collect(Collectors.toList());
     }
