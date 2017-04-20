@@ -1,0 +1,167 @@
+
+.green-header{
+    color: white;
+    background-color: rgba(0, 82, 71, 0.86);
+    font-family: Helvetica, Helvetica Neue,sans-serif;
+}
+.work-block {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin:15px 0px;
+
+}
+.work-block .media{
+    margin-left: 10px;
+}
+
+.first-tab.work-block {
+     border-top-left-radius: 0px;
+
+}
+.tab-content>.work-block {
+    margin-top: 0px;
+}
+.tab-content>.work-block + .work-block {
+    border-top-left-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0;
+}
+
+
+.no-border-tabs, .no-border-tabs:active, .no-border-tabs:hover {
+    border-bottom: 0px;
+}
+.no-border-tabs > li, .no-border-tabs:active > li, .no-border-tabs:hover > li {
+    border-bottom: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+
+
+.test{
+    background-color: red;
+}
+.selectize-input,.selectize-input.focus,.selectize-input.has-items {
+
+    padding-right: 30px;
+    margin-top:8px;
+    background-color: rgb(225, 225, 225);
+    border-color: transparent;
+    box-shadow: none;
+}
+.tags-container {
+
+    background-color: transparent; !important;
+}
+.custom-tag{
+
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 18px;
+    -webkit-font-smoothing: inherit;
+    cursor: pointer;
+    margin: 0px;
+    margin-bottom: 5px;
+    padding: 0px 6px;
+    color: #ffffff;
+    border: 1px solid #0073bb;
+    border-radius: 3px;
+    vertical-align: baseline;
+    display: inline-block;
+    zoom: 1;
+    background: #1b9dec linear-gradient(to bottom, #1da7ee, #178ee9) repeat-x;
+    text-shadow: 0 1px 0 rgba(0, 51, 83, 0.3);
+}
+
+.tags-label-container{
+    text-align: right;
+    padding-top: 12px;
+
+}
+.tags-label-container label{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: block;
+    color: #818183;
+    width: 30px;
+    font-size:16px;
+}
+
+.undercover {
+    background-color: rgba(210, 206, 210, 0.6);
+}
+
+.stylish-input-group .input-group-addon {
+    background: white !important;
+}
+
+.stylish-input-group .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: #ccc;
+}
+
+.stylish-input-group button {
+    border: 0;
+    background: transparent;
+}
+
+.thumb-round {
+    border-radius: 100%;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: 5px;
+    background-position: center center;
+    background-size: cover;
+}
+.community-title{
+    margin-top: 8px;
+    font-weight: bold;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
+}
+.list-grey-hr {
+    border-color: #d0d0d0;
+    margin: 0px 15px;
+}
+a.link {
+    color: #2b542c;
+}
+
+
+/*
+ right tabs
+*/
+
+.switch-pills{
+    padding: 0px;
+
+}
+.switch-pills > li > a {
+    color: #222222;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.switch-pills > li.active > a, .switch-pills > li.active > a:hover, .switch-pills > li.active > a:focus {
+    color: #222222;
+    background-color: white;
+    border-left: solid 5px rgba(0, 82, 71, 0.86);
+}
+
+.firm-btn {
+    text-align: left;
+    color: black;
+    background-color: rgba(255, 255, 255, 1);
+}
+.firm-btn:hover, .firm-btn:focus, .firm-btn:active, .firm-btn.active, .open>.dropdown-toggle.firm-btn {
+    text-align: left;
+    color: black;
+    background-color: white;
+
+    border-color: transparent; /*set the color you want here*/
+    border-left: solid 5px rgba(0, 82, 71, 0.86);
+}
