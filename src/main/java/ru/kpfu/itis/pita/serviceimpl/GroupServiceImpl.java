@@ -6,6 +6,8 @@ import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.service.GroupService;
 
+import java.util.List;
+
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/29/17 4:47 PM
@@ -30,4 +32,10 @@ public class GroupServiceImpl implements GroupService {
     public Group create(Group group) {
         return repository.save(group);
     }
+
+    @Override
+    public List<Group> getAll() {
+        return repository.findAll();
+    }
+
 }

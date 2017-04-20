@@ -40,5 +40,6 @@ hs_err_pid*
 target
 
 ### Custom
-db.properties
+src/main/resources/db.properties
+
 liquibase.properties

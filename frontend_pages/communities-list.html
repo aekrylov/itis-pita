@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/communities-list.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="selectize/js/standalone/selectize.js"></script>
+
+    <script src="search/jsrender.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-offset-1 col-md-10 undercover">
+                <div class="row">
+                    <div class="col-md-12 green-header">
+                        <h1>СООБЩЕСТВА</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="row work-block">
+                            <div class="col-md-12">
+
+
+                                <div class="input-group stylish-input-group">
+                                    <input type="text" name="search" class="form-control"
+                                           placeholder="Поиск групп" id="search_input"
+                                           oninput="standartSearch()">
+                                    <span class="input-group-addon"><button type="submit"><span
+                                            class="glyphicon glyphicon-search"></span></button></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="tags-label-container">
+                                            <label>Теги:</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-11">
+                                        <div class="form-group">
+                                            <input type="text" id="search_tags_input" class="selectized"
+                                                   tabindex="-1" style="display: none;" onchange="standartSearch()">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+                                <ul class="nav nav-tabs no-border-tabs" role="tablist">
+                                    <li role="presentation" class="active"
+                                        onmouseenter="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '0px')"
+                                        onmouseleave="$('.tab-content>.work-block + .work-block').css('border-top-left-radius', '5px')"
+                                    ><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.groups)">Группы</a>
+                                    </li>
+                                    <li role="presentation"><a href="#courses" aria-controls="courses" role="tab"
+                                                               data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.courses)">Курсы</a></li>
+                                    <li role="presentation"><a href="#labs" aria-controls="labs" role="tab"
+                                                               data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.labs)">Лаборатории</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active work-block first-tab" id="groups">
+                                        <br/>
+                                        <ul class="media-list list" id="groups_list">
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="courses">
+                                        <br/>
+                                        <ul class="media-list" id="courses_list">
+
+                                        </ul>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane work-block" id="labs">
+                                        <br/>
+                                        <ul class="media-list" id="labs_list">
+
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills switch-pills nav-stacked work-block" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab" onclick="changeSearchConfig(types.my, undefined)">Мои сообщества</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#profile" aria-controls="profile" onclick="changeSearchConfig(types.all, undefined)" role="tab" data-toggle="tab">Глобальный
+                                    поиск</a>
+                            </li>
+                        </ul>
+                        <div class="btn-group-vertical" role="group">
+                            <button class="btn btn-block firm-btn">Создать группу</button>
+                            <button class="btn btn-block firm-btn">Создать лабораторию</button>
+                            <button class="btn btn-block firm-btn">Создать курс</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="js/checkform.js"></script>
+<script src="js/removeHasError.js"></script>
+<script src="js/simpleTagsSelectizer.js"></script>
+<script src="search/fuse.js"></script>
+<script src="search/jsrender.js"></script>
+
+
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    tags_items = [
+        {value: 'inf', text: 'informatic'},
+        {value: 'java', text: 'java language'},
+        {value: '.net', text: '.net framework'},
+        {value: 'itis-music', text: 'itis-music'},
+        {value: 'text_in_tag3', text: 'text_in_tag3'}
+    ];
+    var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false)[0].selectize;
+
+</script>
+<script id="groupTemplate" type="text/x-jsrender">
+    {{for items}}
+	<li class="media">
+        <div class="media-left media-middle">
+            <a href="#">
+                <div class="media-object thumb-round"
+                     style="background-image: url('{{:avatar}}');"></div>
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading community-title"><a class="link" href="#">{{:name}}</a></h4>
+
+            <div class="items">
+            {{for tags}}
+                <div class="custom-tag" data-value="inf" onclick = (addTag(this))>{{:text}}</div>
+            {{/for}}
+            </div>
+            <p class="small"><span class="glyphicon glyphicon-user"
+                                   aria-hidden="true"></span> {{:members}}</p>
+        </div>
+    </li>
+    {{/for}}
+
+</script>
+<script type="application/javascript">
+    var my_courses_items = [
+        {
+            name: 'my_course',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var my_groups_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var my_labs_items = [
+        {
+            name: 'MyLab',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_courses_items = [
+        {
+            name: 'ExtraCourse',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_groups_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    var all_labs_items = [
+        {
+            name: 'nameval',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag'},
+                {text: 'another_tag'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval2',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        },
+        {
+            name: 'nameval3',
+            avatar: 'img/avatar_example.png',
+            tags: [
+                {text: 'text_in_tag3'},
+                {text: 'another_tag3'}
+            ],
+            members: 139
+        }
+    ];
+    function renderGroups(items, target) {
+
+        var data = {items: items};
+        var tmpl = $.templates("#groupTemplate");
+        var html = tmpl.render(data);
+        target.innerHTML = "";
+        target.html(html);
+    }
+    function tagsFilter(items, tags_source) {
+        console.log('tags_filter_on');
+        console.log(tags_source.val());
+        if (typeof tags_source === 'undefined' || tags_source.val() === null || typeof tags_source.val() === 'undefined' || tags_source.val() === '') {
+            return items;
+        }
+        console.log(tags_source);
+        var values = tags_source.val().split(',');
+
+        var options = {
+            shouldSort: true,
+            threshold: 0,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+                "tags.text"
+            ]
+        };
+        return tagsRecursive(items, values, options);
+
+    }
+    function tagsRecursive(items, tags, options) {
+
+        if (tags.length == 0) {
+            return items;
+        }
+        var lastTag = tags.pop();
+        var fuse = new Fuse(tagsRecursive(items, tags, options), options);
+        var result = fuse.search(lastTag);
+        return result;
+    }
+    function searchGroups(items, source, tagsSource) {
+        if (source.val() === null || typeof source.val() === 'undefined' || source.val().trim() == '') {
+            if (tagsSource !== null && typeof tagsSource !== 'undefined') {
+                return tagsFilter(items, tagsSource);
+            } else {
+                return items;
+            }
+        } else {
+            if (tagsSource !== null && typeof tagsSource !== 'undefined') {
+                var options = {
+                    shouldSort: true,
+                    threshold: 0.8,
+                    location: 0,
+                    distance: 100,
+                    maxPatternLength: 32,
+                    minMatchCharLength: 1,
+                    keys: [
+                        "name"
+                    ]
+                };
+                var fuse = new Fuse(tagsFilter(items, tagsSource), options);
+                var result = fuse.search(source.val());
+                return result;
+            } else {
+                var fuse = new Fuse(items, options);
+                var result = fuse.search(source.val());
+                return result;
+            }
+        }
+    }
+    function searchAndRender(querySource, tagsSource, items, container) {
+        var items = searchGroups(items, querySource, tagsSource);
+        renderGroups(items, container);
+        return false;
+    }
+    var currentSearchConfig;
+    var types = {
+        my: new Object(), all: new Object()
+    }
+    var scopes = {
+        courses: new Object(), labs: new Object(), groups: new Object()
+    }
+    var currentSearchConfig = {
+        type: types.my,
+        input: $('#search_input'),
+        tags_input : $('#search_tags_input'),
+        scope : scopes.groups,
+        out : $('#courses_list')
+    };
+    
+    var configs = {
+        my_courses : {
+            scope_items : my_courses_items,
+            out:$('#courses_list')
+        },
+        my_labs : {
+            scope_items : my_labs_items,
+            out:$('#labs_list')
+        },
+        my_groups : {
+            scope_items : my_groups_items,
+            out:$('#groups_list')
+        },
+        all_courses : {
+            scope_items : all_courses_items,
+            out:$('#courses_list')
+        },
+        all_labs : {
+            scope_items : all_labs_items,
+            out:$('#labs_list')
+        },
+        all_groups : {
+            scope_items : all_groups_items,
+            out:$('#groups_list')
+        }
+        
+        
+    }
+    function changeSearchConfig(type,scope) {
+        console.log(type);
+        console.log(scope);
+        if (typeof type !== 'undefined'){
+            currentSearchConfig.type = type;
+        }
+        if (typeof scope !== 'undefined'){
+            currentSearchConfig.scope = scope;
+        }        
+        standartSearch();
+    }
+    function standartSearch() {
+        var currentCollectionConfig = configs.all_courses;
+        if (currentSearchConfig.type === types.my){
+            if (currentSearchConfig.scope === scopes.courses){
+                currentCollectionConfig = configs.my_courses;
+                console.log('selected my_courses');
+            } else {
+                if (currentSearchConfig.scope === scopes.groups){
+                    currentCollectionConfig = configs.my_groups;
+                    console.log('selected my_groups');
+                } else {
+                    currentCollectionConfig = configs.my_labs;
+                    console.log('selected my_labs');
+                }
+            }
+        } else {
+            if (currentSearchConfig.scope === scopes.courses){
+                currentCollectionConfig = configs.all_courses;
+                console.log('selected all_courses');
+            } else {
+                if (currentSearchConfig.scope === scopes.groups){
+                    currentCollectionConfig = configs.all_groups;
+                    console.log('selected all_groups');
+                } else {
+                    currentCollectionConfig = configs.all_labs;
+                    console.log('selected all_labs');
+                }
+            }
+        }
+        searchAndRender(currentSearchConfig.input,currentSearchConfig.tags_input, currentCollectionConfig.scope_items, currentCollectionConfig.out);
+    }
+    standartSearch();
+
+    function addTag(tagObj) {
+        var tagText = tagObj.innerHTML;
+        selectizable.addItem(tagText, false);
+    }
+
+//    $('#search_input').on('input', '[data-action="text"]', function () {
+//        var item = $(this),
+//            value = $item.val();
+//        searchAndRender(item,
+//            $('#search_tags_input'),
+//            items, $('#courses_list'))
+//
+//    });
+
+    //$( "#courses_list" ).html(html);
+    //    $( "#courses_list" ).html(
+    //        $( "#groupTemplate" ).render( data )
+    //    );
+
+</script>
+</body>
+</html>

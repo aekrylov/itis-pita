@@ -13,17 +13,22 @@
     <security:http>
         <!-- TODO enable CSRF -->
         <!-- TODO remember me -->
-        <!-- TODO secure urls -->
         <security:csrf disabled="true" />
         <security:form-login login-page="/login" username-parameter="email" password-parameter="password"/>
         <security:logout logout-url="/logout" logout-success-url="/login" />
+        <security:intercept-url pattern="/admin/**" access="hasRole('SUPERUSER')" />
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="userDetailsServiceImpl">
+        <security:authentication-provider user-service-ref="userServiceImpl">
+            <security:password-encoder ref="encoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
     <context:component-scan base-package="ru.kpfu.itis.pita.security" />
+
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="11"/>
+    </bean>
 
 </beans>

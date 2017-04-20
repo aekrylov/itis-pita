@@ -53,23 +53,5 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.findAll();
     }
 
-    @Override
-    public Course getById(int id) {
-        return courseRepository.findOne(id);
-    }
 
-    @Override
-    public   Course initializeAndUnproxy(Course course) {
-        if (course == null) {
-            throw new
-                    NullPointerException("Entity passed for initialization is null");
-        }
-
-        Hibernate.initialize(course);
-        if (course instanceof HibernateProxy) {
-            course = (Course) ((HibernateProxy) course).getHibernateLazyInitializer()
-                    .getImplementation();
-        }
-        return course;
-    }
 }

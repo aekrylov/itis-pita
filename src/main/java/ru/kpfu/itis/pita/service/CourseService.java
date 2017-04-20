@@ -9,13 +9,9 @@ import java.util.List;
  */
 public interface CourseService {
 
-     Course initializeAndUnproxy(Course course);
-
     Course create(Course course);
-
     boolean exists(String courseName);
-
     List<Course> getAll();
 
-    Course getById(int id);
+
 }

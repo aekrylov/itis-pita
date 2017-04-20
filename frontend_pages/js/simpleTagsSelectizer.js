@@ -13,13 +13,16 @@ items: array of objects like
  but showed selected tags will be like set of tags with TEXT: itis-music|x ,  java language|x, informatic|x ...
  value and text can match, this script allow create new tags with  matching value and text.
 * */
-function simpleTagsSelectizer(inputId, items) {
-    $('#'+inputId).selectize({
+function simpleTagsSelectizer(inputId, items, addingFlag) {
+    var allowAdding = typeof addingFlag !== 'undefined' ? addingFlag : true;
+    console.log(allowAdding);
+    return $('#'+inputId).selectize({
+        create: allowAdding,
         options: items,
         plugins: ['remove_button'],
         delimiter: ',',
-        persist: false,
-        create: function(input) {
+        persist: !allowAdding,
+        createFilter: function(input) {
             return {
                 value: input,
                 text: input
