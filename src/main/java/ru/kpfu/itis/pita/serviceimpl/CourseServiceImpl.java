@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Course;
@@ -49,5 +51,25 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public List<Course> getAll() {
         return courseRepository.findAll();
+    }
+
+    @Override
+    public Course getById(int id) {
+        return courseRepository.findOne(id);
+    }
+
+    @Override
+    public   Course initializeAndUnproxy(Course course) {
+        if (course == null) {
+            throw new
+                    NullPointerException("Entity passed for initialization is null");
+        }
+
+        Hibernate.initialize(course);
+        if (course instanceof HibernateProxy) {
+            course = (Course) ((HibernateProxy) course).getHibernateLazyInitializer()
+                    .getImplementation();
+        }
+        return course;
     }
 }
