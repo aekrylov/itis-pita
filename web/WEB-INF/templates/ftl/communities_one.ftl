@@ -27,7 +27,14 @@
                 <div class="group-image">
                     <img src="${group.imageLink}">
                 </div>
-                <button class="button-enter-group">Вступить в группу</button>
+                <#if group.members?seq_contains(current_user)>
+                    <button class="button-enter-group">Покинуть группу</button>
+                <#elseif group.admins?seq_contains(current_user)>
+                <button class="button-enter-group" style="display:inline; margin: 230px 0 0 87px">Покинуть группу</button>
+                <a href="#"><span class="glyphicon glyphicon-edit group-modify-icon"></span></a>
+                <#else>
+                    <button class="button-enter-group">Вступить в группу</button>
+                </#if>
                 <div class="col-lg-12 group-admins">
                     <#list group.admins as admin>
                         <a class="" href="/profile?id=${admin.id}">

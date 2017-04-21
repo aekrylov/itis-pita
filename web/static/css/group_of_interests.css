@@ -54,6 +54,7 @@
     font-weight: bold;
     margin-left: 25px;
     line-height: 25px;
+    margin-top: 25px;
     font-family: HelveticaBold;
 }
 
@@ -116,7 +117,7 @@
     color: #306262
 }
 
-.group-admins a:hover, .group-teacher a:hover, .group-post a:hover, .group-comment a:hover, .group-members a:hover{
+.group-admins a:hover, .group-block a:hover, .group-teacher a:hover, .group-post a:hover, .group-comment a:hover, .group-members a:hover{
     text-decoration: none;
 }
 
@@ -202,6 +203,12 @@
     margin-bottom: 20px;
 }
 
+.group-modify-icon {
+    font-size: 30px;
+    margin-top: 230px;
+    color: #306262;
+}
+
 .group-post, .group-comment{
     border-color: #333333;
     border-bottom: 1px solid;
@@ -224,7 +231,7 @@
 
 .group-image{
     top: -70px;
-    left: 57px;
+    left: 50px;
     position: absolute;
 }
 
@@ -237,8 +244,9 @@
 
 .group-info{
     margin-top: 40px;
+    padding-top: 10px;
     font-size: medium;
-    background-color: rgba(189, 219, 199, 1);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 9px;
     color: #306262;
 }
@@ -253,12 +261,12 @@
 
 .group-admins{
     margin-top: 40px;
-    background-color: rgba(189, 219, 199, 1);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 9px;
 }
 
 .group-members{
-    background-color: rgba(189, 219, 199, 1);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 9px;
     padding-bottom: 10px;
 }
@@ -275,9 +283,11 @@
 
 .button-enter-group {
     display: block;
+    text-transform: uppercase;
+    font-weight: 600;
     padding: 12px 25px;
-    margin: 250px auto 0;
-    font-size: 14px;
+    margin: 230px auto 0;
+    font-size: 12px;
     zoom: 1;
     cursor: pointer;
     white-space: nowrap;
@@ -297,8 +307,10 @@
 .group-create-post-submit, .group-create-comment-submit{
     margin-top: 10px;
     display: block;
+    text-transform: uppercase;
+    font-weight: 600;
     padding: 10px 25px;
-    font-size: 14px;
+    font-size: 12px;
     zoom: 1;
     cursor: pointer;
     white-space: nowrap;
