@@ -62,10 +62,11 @@ public class GroupCreateController {
         group.setName(form.getName());
         group.setDescription(form.getDescription());
         //temp?
+        //todo move to view?
         group.setImageLink("/static/img/avatar_example.png");
 
         groupService.create(group);
         
-        return "redirect:/groups";
+        return "redirect:/communities/";
     }
 }

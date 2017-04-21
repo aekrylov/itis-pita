@@ -25,7 +25,7 @@
             </div>
             <div class="col-lg-4 group-block">
                 <div class="group-image">
-                    <img src="${group.imageLink}">
+                    <img src="${group.imageLink!"/static/img/avatar_example.png"}">
                 </div>
                 <#if group.members?seq_contains(current_user)>
                     <button class="button-enter-group">Покинуть группу</button>

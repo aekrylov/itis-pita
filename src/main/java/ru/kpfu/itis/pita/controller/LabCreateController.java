@@ -2,17 +2,14 @@ package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.Lab;
+import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.LabCreateForm;
-import ru.kpfu.itis.pita.security.UserDetails;
+import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.LabService;
 
 import javax.validation.Valid;
@@ -24,6 +21,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/labs/create")
+@SessionAttributes("form")
 @PreAuthorize("hasAuthority('CREATE_LAB')")
 public class LabCreateController {
 
@@ -32,6 +30,11 @@ public class LabCreateController {
     @Autowired
     public LabCreateController(LabService labService) {
         this.labService = labService;
+    }
+    
+    @ModelAttribute("form")
+    public LabCreateForm form() {
+        return new LabCreateForm();
     }
 
     //TODO teachers list
@@ -42,14 +45,13 @@ public class LabCreateController {
     }
 
     @PostMapping
-    public String processForm(@ModelAttribute @Valid LabCreateForm form, BindingResult result, ModelMap modelMap) {
+    public String processForm(@ModelAttribute("form") @Valid LabCreateForm form, BindingResult result, ModelMap modelMap) {
         if(result.hasErrors()) {
             return "lab_create";
         }
 
-        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Lab lab = new Lab(form.getName(), form.getDescription(), ud.getUser(), null);
+        User user = Helpers.getCurrentUser();
+        Lab lab = new Lab(form.getName(), form.getDescription(), user, null);
 
         //todo save image
         if(labService.exists(form.getName())) {
@@ -59,6 +61,6 @@ public class LabCreateController {
         labService.create(lab);
 
         //redirect: redirects to specified URL
-        return "redirect:/labs";
+        return "redirect:/communities/";
     }
 }
