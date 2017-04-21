@@ -19,6 +19,12 @@ public class Interest {
     @Column(unique = true)
     private String name;
 
+    public Interest() {
+    }
+
+    public Interest(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -34,5 +40,25 @@ public class Interest {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Interest)) return false;
+
+        Interest interest = (Interest) o;
+
+        return name.equals(interest.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
