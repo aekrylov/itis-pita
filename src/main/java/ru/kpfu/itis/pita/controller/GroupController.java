@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * Created by 1 on 30.03.2017.
  */
 @Controller
-@PreAuthorize("isFullyAuthenticated()")
+//@PreAuthorize("isFullyAuthenticated()")
 public class GroupController {
 
     private GroupService groupService;
