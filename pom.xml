@@ -107,7 +107,7 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -218,6 +218,9 @@
                 <configuration>
                     <path>/</path>
                     <warSourceDirectory>web</warSourceDirectory>
+                    <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
+                    <contextReloadable>true</contextReloadable>
+                    <update>true</update>
                 </configuration>
             </plugin>
 
