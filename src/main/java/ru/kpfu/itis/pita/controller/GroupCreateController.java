@@ -13,6 +13,7 @@ import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Interest;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
+import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
@@ -57,8 +58,7 @@ public class GroupCreateController {
         }
 
         Group group = new Group();
-        //UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //group.setCreator(ud.getUser());
+        group.setCreator(Helpers.getCurrentUser());
         String tags = form.getInterests();
         String[] separated_tags = tags.split(",");
         ArrayList<Interest> interests = new ArrayList<Interest>();
@@ -69,6 +69,8 @@ public class GroupCreateController {
         group.setInterests(interests);
         group.setName(form.getName());
         group.setDescription(form.getDescription());
+        //temp?
+        group.setImageLink("/static/img/avatar_example.png");
 
         groupService.create(group);
 
