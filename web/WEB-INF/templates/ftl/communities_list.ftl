@@ -128,6 +128,7 @@
 
 
 <#macro footer_custom_imports>
+<script src="/static/js/simpleTagsSelectizer.js"></script>
 <script type="application/javascript">
     //see simpleTagsSelectizer for more information about items
     tags_items = [
@@ -163,9 +164,11 @@
 
 
 <script type="application/javascript">
+
+
     all_groups_items = [
         <#list all_groups as ag>
-            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
+            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink}',
                 tags:[
                     <#list ag.interests as i>
                         {text:'${i.name}'},
@@ -176,7 +179,7 @@
 
     my_groups_items = [
         <#list my_groups as ag>
-            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
+            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink}',
                 tags:[
                     <#list ag.interests as i>
                         {text:'${i.name}'},
@@ -187,7 +190,7 @@
 
     all_courses_items = [
         <#list all_courses as ag>
-            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
+            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink}',
                 tags:[
                     <#list ag.interests as i>
                         {text:'${i.name}'},
@@ -198,7 +201,7 @@
 
     my_courses_items = [
         <#list my_courses as ag>
-            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
+            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink}',
                 tags:[
                     <#list ag.interests as i>
                         {text:'${i.name}'},
@@ -209,7 +212,7 @@
 
     all_labs_items = [
         <#list all_labs as ag>
-            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
+            {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink}',
                 tags:[
                     <#list ag.interests as i>
                         {text:'${i.name}'},
@@ -230,6 +233,8 @@
     ];
 
 </script>
+<script src="/static/search/fuse.js"></script>
+<script src="/static/search/jsrender.js"></script>
 <script src="/static/search/communitiesSearchAndRender.js"></script>
 </#macro>
 <#--
