@@ -139,8 +139,9 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        return email.equals(user.email);
+        //todo
+        if (id != user.getId()) return false;
+        return email.equals(user.getEmail());
     }
 
     @Override
