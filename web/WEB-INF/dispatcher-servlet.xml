@@ -30,23 +30,21 @@
         <property name="order" value="2" />
     </bean>
 
-    <!-- Server static HTML if no controller found -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="htmlResolver">
-        <property name="prefix" value="/WEB-INF/templates/html/" />
-        <property name="suffix" value="" />
-        <property name="order" value="5" />
-    </bean>
-
     <!-- This class resolves multipart requests, allowing for handling them just like ordinary ones -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="2500000" />
     </bean>
 
     <!-- Class containing request mappings registered by Spring -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="useSuffixPatternMatch" value="false" />
+    </bean>
 
     <!-- Static files resolver -->
     <mvc:resources mapping="/static/**" location="/static/" order="3" />
+
+    <!-- Serve static HTML -->
+    <mvc:resources mapping="/**/*.html" location="/WEB-INF/templates/html/" order="4" />
 
     <!-- use MVC annotations, don't pass model attributes on redirect -->
     <mvc:annotation-driven ignore-default-model-on-redirect="true"/>

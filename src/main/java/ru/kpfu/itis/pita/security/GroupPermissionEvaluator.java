@@ -6,8 +6,6 @@ import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.service.GroupService;
 
-import java.util.Collection;
-
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/21/17 5:24 PM
@@ -27,13 +25,7 @@ public class GroupPermissionEvaluator extends AbstractPermissionEvaluator<Group>
         switch (permission) {
             case "view_wall":
             case "post":
-                //todo
-                Collection<User> members = group.getMembers();
-/*                System.out.println("members.contains(user) = " + members.contains(user));
-                User user1 = members.iterator().next();
-                System.out.println("user1.equals(user) = " + user1.equals(user));*/
-
-                return members.contains(user);
+                return group.getMembers().contains(user);
 
             case "admin":
                 return group.getAdmins().contains(user);
