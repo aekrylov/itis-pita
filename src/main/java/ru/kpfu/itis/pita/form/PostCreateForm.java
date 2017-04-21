@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.form;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -11,7 +12,7 @@ public class PostCreateForm {
     @NotEmpty
     private String text;
 
-    //todo images;
+    private MultipartFile image;
 
     private String videoLink;
 
@@ -29,5 +30,13 @@ public class PostCreateForm {
 
     public void setVideoLink(String videoLink) {
         this.videoLink = videoLink;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }

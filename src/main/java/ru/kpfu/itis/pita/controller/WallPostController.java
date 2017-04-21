@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/group/{id}/wall")
+@SessionAttributes("form")
 public class WallPostController {
 
     private GroupService service;
@@ -34,15 +36,28 @@ public class WallPostController {
         return id;
     }
 
+    @ModelAttribute("form")
+    public PostCreateForm form() {
+        return new PostCreateForm();
+    }
+
     @GetMapping(path = "/new")
-    public String newPostGet() {
+    @PreAuthorize("hasPermission(#group_id, 'Group', 'post')")
+    public String newPostGet(@ModelAttribute("group_id") int group_id) {
         return "communities_newpost";
     }
 
     @PostMapping(path = "/new")
-    public String newPostPost(@ModelAttribute @Valid PostCreateForm form, BindingResult result, ModelMap map) {
+    @PreAuthorize("hasPermission(#group_id, 'Group', 'post')")
+    public String newPostPost(@ModelAttribute("form") @Valid PostCreateForm form, BindingResult result,
+                              /* Parameter group_id is needed here for security expression evaluation */
+                              @ModelAttribute("group_id") int group_id,
+                              ModelMap map) {
         User currentUser = Helpers.getCurrentUser();
-        //todo check errors
+        if(result.hasErrors()) {
+            return "communities_newpost";
+        }
+        
         WallPost post = new WallPost(currentUser, form.getText(), form.getVideoLink());
         service.addPost((Integer) map.get("group_id"), post);
         return "redirect:/group?id=" + map.get("group_id");
