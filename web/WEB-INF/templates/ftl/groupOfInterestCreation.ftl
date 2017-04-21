@@ -73,9 +73,6 @@
                     { value: '${i.name}', text: '${i.name}' },
                 </#list>
             </#if>
-
-
-
     ];
 
 
