@@ -101,14 +101,14 @@
             <div class="col-md-3">
                 <ul class="nav nav-pills switch-pills nav-stacked work-block" role="tablist">
                     <li role="presentation" class="active">
-                        <a aria-controls="home" role="tab" data-toggle="tab" onclick="changeSearchConfig(types.my, undefined)">Мои сообщества</a>
+                        <a href="#z" aria-controls="home" role="tab" data-toggle="tab" onclick="changeSearchConfig(types.my, undefined)">Мои сообщества</a>
                     </li>
                     <li role="presentation">
-                        <a aria-controls="profile" onclick="changeSearchConfig(types.all, undefined)" role="tab" data-toggle="tab">Глобальный
+                        <a href="#z" aria-controls="profile" onclick="changeSearchConfig(types.all, undefined)" role="tab" data-toggle="tab">Глобальный
                             поиск</a>
                     </li>
                 </ul>
-                <div class="btn-group-vertical" role="group">
+                <div class="btn-group-vertical btn-block" role="group">
                     <a class="btn btn-block firm-btn" href="/groups/create">Создать группу</a>
                     <#switch current_user.role>
                         <#case "ROLE_DEAN">
