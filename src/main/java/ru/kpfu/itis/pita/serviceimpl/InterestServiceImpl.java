@@ -24,4 +24,12 @@ public class InterestServiceImpl implements InterestService {
     public List<Interest> getAll() {
         return interestRepository.findAll();
     }
+
+    @Override
+    public Interest save(Interest interest) {
+        Interest duplicate = interestRepository.findByName(interest.getName());
+        if(duplicate == null)
+            return interestRepository.save(interest);
+        return duplicate;
+    }
 }

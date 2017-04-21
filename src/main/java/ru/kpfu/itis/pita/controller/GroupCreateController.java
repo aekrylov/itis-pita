@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,18 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Interest;
-import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
 import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
 
 import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by taa on 30.03.2017.
@@ -39,11 +35,6 @@ public class GroupCreateController {
         this.interestService = interestService;
     }
 
-    /*@Autowired
-    public GroupCreateController(GroupService groupService) {
-        this.groupService = groupService;
-    }*/
-
     @GetMapping
     public String doGet(ModelMap map){
         map.addAttribute("interests", interestService.getAll());
@@ -59,13 +50,14 @@ public class GroupCreateController {
 
         Group group = new Group();
         group.setCreator(Helpers.getCurrentUser());
+
         String tags = form.getInterests();
         String[] separated_tags = tags.split(",");
-        ArrayList<Interest> interests = new ArrayList<Interest>();
-        for (String tag : separated_tags){
-            Interest interest = new Interest();
-            interest.setName(tag);
-        }
+        List<Interest> interests = Arrays.stream(separated_tags)
+                .map(Interest::new)
+                .map(interest -> interestService.save(interest))
+                .collect(Collectors.toList());
+
         group.setInterests(interests);
         group.setName(form.getName());
         group.setDescription(form.getDescription());
@@ -73,8 +65,7 @@ public class GroupCreateController {
         group.setImageLink("/static/img/avatar_example.png");
 
         groupService.create(group);
-
-
-        return "redirect:/groups/create";
+        
+        return "redirect:/groups";
     }
 }

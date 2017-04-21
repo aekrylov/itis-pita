@@ -4,6 +4,7 @@ import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.SortedSet;
 
 /**
@@ -43,11 +44,11 @@ public class Group {
     }, inverseJoinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id")
     })
-    private Collection<User> members;
+    private Collection<User> members= new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "groups_admins")
-    private Collection<User> admins;
+    private Collection<User> admins = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "group")
     @SortNatural
@@ -60,7 +61,6 @@ public class Group {
         this.description = description;
         this.creator = creator;
         this.interests = interests;
-        //todo add creator to members?
     }
 
     public int getId() {
