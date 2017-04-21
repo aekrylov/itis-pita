@@ -28,6 +28,13 @@
         <property name="order" value="2" />
     </bean>
 
+    <!-- Server static HTML if no controller found -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="htmlResolver">
+        <property name="prefix" value="/WEB-INF/templates/html/" />
+        <property name="suffix" value="" />
+        <property name="order" value="5" />
+    </bean>
+
     <!-- This class resolves multipart requests, allowing for handling them just like ordinary ones -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="2500000" />
