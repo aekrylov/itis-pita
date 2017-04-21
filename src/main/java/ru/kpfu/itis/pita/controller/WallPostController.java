@@ -59,7 +59,7 @@ public class WallPostController {
         }
         
         WallPost post = new WallPost(currentUser, form.getText(), form.getVideoLink());
-        service.addPost((Integer) map.get("group_id"), post);
-        return "redirect:/group?id=" + map.get("group_id");
+        service.addPost(group_id, post);
+        return "redirect:/group/" + group_id + "/";
     }
 }

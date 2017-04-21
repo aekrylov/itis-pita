@@ -57,17 +57,18 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="col-lg-12 group-create-post">
+                        <form method="post" action="./wall/new" enctype="multipart/form-data">
                         <div class="col-lg-12 group-create-post-label">
                             Добавить запись
                         </div>
                         <div class="col-lg-12">
                         <textarea class="group-create-post-text" type="text" id="create-post"
-                                  name="create-post"></textarea>
+                                  name="text"></textarea>
                         </div>
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <button class="group-create-post-submit">ОТПРАВИТЬ</button>
+                                    <button type="submit" class="group-create-post-submit">ОТПРАВИТЬ</button>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="group-create-post-image-upload">
@@ -75,11 +76,12 @@
                                         <label for="file-input">
                                             <span class="glyphicon glyphicon-camera group-create-post-image-upload-icon"></span>
                                         </label>
-                                        <input id="file-input" type="file">
+                                        <input id="file-input" name="image" type="file">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                     <#if group.wall?has_content>
                         <#list group.wall as post>
