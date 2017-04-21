@@ -233,6 +233,8 @@
     ];
 
 </script>
+<script src="/static/search/fuse.js"></script>
+<script src="/static/search/jsrender.js"></script>
 <script src="/static/search/communitiesSearchAndRender.js"></script>
 </#macro>
 <#--
