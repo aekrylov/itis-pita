@@ -109,12 +109,12 @@
                     </li>
                 </ul>
                 <div class="btn-group-vertical" role="group">
-                    <button class="btn btn-block firm-btn" href="/groups/create">Создать группу</button>
-                    <#switch user_role>
+                    <a class="btn btn-block firm-btn" href="/groups/create">Создать группу</a>
+                    <#switch current_user.role>
                         <#case "ROLE_DEAN">
                         <#case "ROLE_SUPERUSER">
-                            <button class="btn btn-block firm-btn" href="/labs/create">Создать лабораторию</button>
-                            <button class="btn btn-block firm-btn" href="/courses/create">Создать курс</button>
+                            <a class="btn btn-block firm-btn" href="/labs/create">Создать лабораторию</a>
+                            <a class="btn btn-block firm-btn" href="/courses/create">Создать курс</a>
                             <#break>
                     </#switch>
 
@@ -293,3 +293,5 @@ tags_items = [
         <#break>
 </#switch>
 -->
+
+<@display "Группы" />

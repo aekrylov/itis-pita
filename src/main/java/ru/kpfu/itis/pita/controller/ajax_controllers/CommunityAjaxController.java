@@ -2,7 +2,6 @@ package ru.kpfu.itis.pita.controller.ajax_controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
  * Date: 4/18/17 11:02 AM
  */
 
-@Controller
+@RestController
 @RequestMapping(path = "/ajax/groups")
 public class CommunityAjaxController {
 

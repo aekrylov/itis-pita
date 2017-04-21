@@ -7,19 +7,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.kpfu.itis.pita.entity.Course;
-import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.dto.InterestDto;
+import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by 1 on 30.03.2017.
@@ -30,12 +31,13 @@ public class GroupController {
 
     private GroupService groupService;
     private UserService userService;
+    private InterestService interestService;
 
     @Autowired
-    public GroupController(GroupService groupService,
-                           UserService userService){
+    public GroupController(GroupService groupService, UserService userService, InterestService interestService) {
         this.groupService = groupService;
         this.userService = userService;
+        this.interestService = interestService;
     }
 
     @GetMapping(path = "/group")
@@ -71,6 +73,18 @@ public class GroupController {
         map.put("my_courses", myCourses);
         map.put("my_labs", myLabs);
         map.put("my_groups", myGroups);
+
+        List<Interest> tags = interestService.getAll();
+        map.put("tags", toInterestDtoList(tags, Interest.class, InterestDto::new));
+
         return "communities_list";
     }
+
+    private <T extends Interest, D extends InterestDto> List<D> toInterestDtoList(Collection<Interest> interests, Class<T> clazz,
+                                                                                  Function<T, D> dtoMapper) {
+        return Helpers.filterByType(interests, clazz).stream()
+                .map(dtoMapper)
+                .collect(Collectors.toList());
+    }
+
 }
