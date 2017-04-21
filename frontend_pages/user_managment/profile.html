@@ -74,19 +74,67 @@
             <div class="col-md-offset-1 col-md-10 undercover">
                 <div class="row">
                     <div class="col-md-12 green-header">
-                        <h2>ПИМЕНОВА АЛЕКСАНДРА</h2>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2 style="text-align: right">ПИМЕНОВА АЛЕКСАНДРА</h2>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row work-block">
                             <div class="col-md-12">
-
+                                <h4>Инфо</h4>
+                                <hr class="full-grey-hr"/>
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Телефон:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">+7954645235</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Email:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">email@example.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Группа:</label>
+                                        <div class="col-sm-9">
+                                            <p class="form-control-static">11-501</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Лаборатория:</label>
+                                        <div class="col-sm-9">
+                                            <a style="display: block" href="#" class="form-control-static">Лаборатория flatstack</a>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row work-block">
                             <div class="col-md-12">
+                                <h4>Интересы</h4>
+                                <hr class="full-grey-hr"/>
+                                <div class="items">
+
+                                    <div class="custom-tag" data-value="inf" >tag</div>
+                                    <div class="custom-tag" data-value="inf" >tag</div>
+                                    <div class="custom-tag" data-value="inf" >tag</div>
+                                    <div class="custom-tag" data-value="inf" >tag</div>
+                                    <div class="custom-tag" data-value="inf" >tag</div>
+                                    <div class="custom-tag" data-value="inf" >tagwithverylonglonglongname</div>
+                                    <div class="custom-tag" data-value="inf" >tagwithverylonglonglongname</div>
+                                    <div class="custom-tag" data-value="inf" >tagwithverylonglonglongname</div>
+                                    <div class="custom-tag" data-value="inf" >tagwithverylonglonglongname</div>
+
+
+                                </div>
 
 
                             </div>
@@ -103,6 +151,48 @@
                         <div class="row">
                             <div class="col-xs-offset-1 col-md-10 ">
                                 <button class="btn btn-block firm-btn">Написать сообщение</button>
+
+                                    <div class="panel panel-default work-block">
+                                        <div class="panel-heading" style="text-align: center">Контакты</div>
+                                        <div class="panel-body chart-panel">
+                                            <div class="row">
+                                                <div class="col-md-4"  align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                                <div class="col-md-4 " align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                                <div class="col-md-4" align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4" align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                                <div class="col-md-4 " align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                                <div class="col-md-4" align="center">
+                                                    <div class="thumb-round" id="main-avatar"
+                                                         style="background-image: url('../img/avatar_example.png')"></div>
+                                                    <a  href="#" class="underlabel"><p>Пони Понев</p></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                             </div>
                         </div>
 
@@ -134,8 +224,12 @@
         {value: 'text_in_tag3', text: 'text_in_tag3'}
     ];
     var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false);
-    var cw = $('#main-avatar').width() + 10;
+    var cw = $('#main-avatar').width();
     $('#main-avatar').css({'height':cw+'px'});
+    var cs = $('.thumb-round').width();
+    $('.thumb-round').css({'height':cs+'px'});
+
+
 </script>
 
 

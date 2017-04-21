@@ -10,9 +10,23 @@
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-top: 10px;
     margin:15px 0px;
 
+}
+.chart-panel > * > * {
+    padding: 4px 4px;
+}
+.panel.work-block {
+    padding: 0px;
+}
+.panel.work-block .panel-body  {
+    padding:0px 20px;
+}
+.underlabel {
+    font-size: 10px;
+    color: #1d4f50;
+    width: 100% ;
+    line-height: 12px;
 }
 .work-block .media{
     margin-left: 10px;
@@ -100,10 +114,9 @@
 
 .thumb-round {
     border-radius: 100%;
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    margin: 5px;
+    display: block;
+    width: 100%;
+    height: 60px;
     background-position: center center;
     background-size: cover;
 }
@@ -119,8 +132,12 @@
 }
 
 .list-grey-hr {
+     border-color: #d0d0d0;
+     margin: 0px 15px;
+ }
+.full-grey-hr {
     border-color: #d0d0d0;
-    margin: 0px 15px;
+    margin: 0px 0px;
 }
 a.link {
     color: #2b542c;
@@ -142,4 +159,7 @@ a.link {
     background-color: #F0BB29;
 
     border-color: transparent; /*set the color you want here*/
+}
+.items {
+    margin-top: 10px;
 }
