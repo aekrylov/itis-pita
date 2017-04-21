@@ -43,6 +43,12 @@ public class WallPost implements Comparable<WallPost> {
 
     public WallPost() {}
 
+    public WallPost(User author, String text, String videoLink) {
+        this.author = author;
+        this.text = text;
+        this.videoLink = videoLink;
+    }
+
     public WallPost(Group group, User author, String text, String videoLink) {
         this.group = group;
         this.author = author;
