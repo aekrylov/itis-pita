@@ -166,7 +166,9 @@
                     <div class="col-lg-12 group-members">
                         <div class="group-members-label">Участники</div>
                         <#list 1..2 as i>
-                            <div class="row">
+                            <div class="row" <#if i == 1>
+                                style="margin-bottom: 7px"
+                            </#if>>
                             <#--TODO list of members generation-->
                                 <a class="col-lg-4 group-member" href="#">
                                     <div class="col-lg-12 group-user-image-member">
