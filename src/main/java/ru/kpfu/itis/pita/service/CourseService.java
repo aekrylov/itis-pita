@@ -12,6 +12,7 @@ public interface CourseService {
     Course create(Course course);
     boolean exists(String courseName);
     List<Course> getAll();
+    Course getOne(int id);
 
 
 }

@@ -7,13 +7,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.CourseService;
+import ru.kpfu.itis.pita.service.UserService;
 
 import java.util.List;
 
@@ -21,36 +20,39 @@ import java.util.List;
  * Created by volkov on 09.04.2017.
  */
 @Controller
-@RequestMapping(path = "/course")
-//@PreAuthorize("hasAuthority('USER')")  to do
+@RequestMapping(path = "/courses/{id}")
+@PreAuthorize("isFullyAuthenticated()")
 public class CoursePageController {
 
     @Autowired
     private CourseService courseService;
+    private UserService userService;
     @Autowired
-    public CoursePageController(CourseService courseService) {
+    public CoursePageController(CourseService courseService,UserService userService) {
+
         this.courseService = courseService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String doGet(ModelMap modelMap, @RequestParam(value = "id") int id){
-        Course course = courseService.getById(id);
-        course = courseService.initializeAndUnproxy(course);
+    public String doGet(ModelMap modelMap, @PathVariable Integer id){
+        Course course = courseService.getOne(id);
         if (course!= null) {
             modelMap.addAttribute("course", course);
-            UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            User u =course.getCreator();
-            System.out.println(u.getName());
-            Boolean participant = false;
-            if (course.getMembers()!=null ){
-                participant = course.getMembers().contains(ud.getUser());
-            }
-            modelMap.addAttribute("participant",participant);
         }
         else{
             modelMap.addAttribute("error","Course not found");
         }
+
+        return "course_page";
+    }
+
+
+    @PostMapping
+    public String doPost(ModelMap map,@PathVariable Integer id){
+
+        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 
         return "course_page";
     }
