@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-lg-12 group-tags">
                         <#list group.interests as interest>
-                            <div class="group-tag">${interest}</div>
+                            <div class="group-tag">${interest.name}</div>
                         </#list>
                     </div>
                 </div>
