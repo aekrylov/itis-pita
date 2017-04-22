@@ -5,7 +5,7 @@
     <groupId>ru.kpfu.itis</groupId>
     <artifactId>itis-pita</artifactId>
     <packaging>war</packaging>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.4.0-SNAPSHOT</version>
 
     <properties>
         <spring.version>4.3.7.RELEASE</spring.version>
@@ -14,6 +14,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -107,6 +113,18 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
 
         <!-- DB migrations -->
         <dependency>
@@ -206,6 +224,9 @@
                 <configuration>
                     <path>/</path>
                     <warSourceDirectory>web</warSourceDirectory>
+                    <addWarDependenciesInClassloader>true</addWarDependenciesInClassloader>
+                    <contextReloadable>true</contextReloadable>
+                    <update>true</update>
                 </configuration>
             </plugin>
 

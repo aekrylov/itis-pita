@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Group;
+import ru.kpfu.itis.pita.entity.WallPost;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface GroupService {
     boolean exists(String name);
     Group create(Group group);
     List<Group> getAll();
+    Group getOne(int id);
+    WallPost addPost(WallPost post);
+    WallPost addPost(int groupId, WallPost post);
 }

@@ -15,4 +15,8 @@
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
 
+    <bean id="securityExpressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <property name="permissionEvaluator" ref="globalPermissionEvaluator" />
+    </bean>
+
 </beans>

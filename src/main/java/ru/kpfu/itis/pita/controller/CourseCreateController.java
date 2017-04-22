@@ -62,6 +62,6 @@ public class CourseCreateController {
         }
         courseService.create(course);
 
-        return "redirect:/courses";
+        return "redirect:/communities/";
     }
 }

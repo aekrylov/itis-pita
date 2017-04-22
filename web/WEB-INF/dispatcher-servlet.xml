@@ -10,7 +10,9 @@
        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:component-scan base-package="ru.kpfu.itis.pita.controller" />
-    <security:global-method-security pre-post-annotations="enabled" proxy-target-class="true"/>
+    <security:global-method-security pre-post-annotations="enabled" proxy-target-class="true" >
+        <security:expression-handler ref="securityExpressionHandler" />
+    </security:global-method-security>
 
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="suffix" value=".ftl" />
@@ -34,10 +36,15 @@
     </bean>
 
     <!-- Class containing request mappings registered by Spring -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="useSuffixPatternMatch" value="false" />
+    </bean>
 
     <!-- Static files resolver -->
     <mvc:resources mapping="/static/**" location="/static/" order="3" />
+
+    <!-- Serve static HTML -->
+    <mvc:resources mapping="/**/*.html" location="/WEB-INF/templates/html/" order="4" />
 
     <!-- use MVC annotations, don't pass model attributes on redirect -->
     <mvc:annotation-driven ignore-default-model-on-redirect="true"/>

@@ -9,5 +9,6 @@
     <include file="db-changelogs/v0.1/cumulative.xml" />
     <include file="db-changelogs/v0.2/cumulative.xml" />
     <include file="db-changelogs/v0.3/cumulative.xml" />
+    <include file="db-changelogs/v0.4/cumulative.xml" />
 
 </databaseChangeLog>

@@ -10,4 +10,5 @@ import java.util.List;
 public interface InterestService {
 
     List<Interest> getAll();
+    Interest save(Interest interest);
 }

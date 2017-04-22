@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/profile.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/selectize/js/standalone/selectize.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="/static/img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="/static/img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-offset-1 col-md-10 undercover">
+                <div class="row">
+                    <div class="col-md-12 green-header">
+                        <h2>ПИМЕНОВА АЛЕКСАНДРА</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row work-block">
+                            <div class="col-md-12">
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 pull-left">
+
+
+                                <div class="main-avatar-round" id="main-avatar"
+                                     style="background-image: url('../img/avatar_example.png')"></div>
+
+
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-md-10 ">
+                                <button class="btn btn-block firm-btn">Написать сообщение</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="/static/js/checkform.js"></script>
+<script src="/static/js/removeHasError.js"></script>
+<script src="/static/js/simpleTagsSelectizer.js"></script>
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    tags_items = [
+        {value: 'inf', text: 'informatic'},
+        {value: 'java', text: 'java language'},
+        {value: '.net', text: '.net framework'},
+        {value: 'itis-music', text: 'itis-music'},
+        {value: 'text_in_tag3', text: 'text_in_tag3'}
+    ];
+    var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false);
+    var cw = $('#main-avatar').width() + 10;
+    $('#main-avatar').css({'height':cw+'px'});
+</script>
+
+
+</body>
+</html>
