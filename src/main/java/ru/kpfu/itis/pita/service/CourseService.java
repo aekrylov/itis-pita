@@ -13,6 +13,6 @@ public interface CourseService {
     boolean exists(String courseName);
     List<Course> getAll();
     Course getOne(int id);
-
+    Course saveAndFlush(Course course);
 
 }

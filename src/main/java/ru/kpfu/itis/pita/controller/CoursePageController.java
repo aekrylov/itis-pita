@@ -8,12 +8,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ru.kpfu.itis.pita.entity.Course;
-import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.entity.*;
+import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.CourseService;
 import ru.kpfu.itis.pita.service.UserService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,11 +51,24 @@ public class CoursePageController {
 
 
     @PostMapping
-    public String doPost(ModelMap map,@PathVariable Integer id){
+    public String doPost(ModelMap modelMap,@PathVariable Integer id,
+                         @RequestParam(value = "form")String form){
+        Course course = courseService.getOne(id);
+        User currentUser = Helpers.getCurrentUser();
+        if(form.equals("join")){
+            course.getMembers().add(currentUser);
+            courseService.saveAndFlush(course);
+        }
+        else{
+            if(form.equals("leave")){
+                course.getMembers().remove(currentUser);
+                course.getAdmins().remove(currentUser);
+                courseService.saveAndFlush(course);
+                course.getMembers().size();
+            }
 
-        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
+        }
+        modelMap.addAttribute("course", course);
         return "course_page";
     }
 }

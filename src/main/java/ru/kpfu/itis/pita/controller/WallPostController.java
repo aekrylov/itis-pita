@@ -60,6 +60,7 @@ public class WallPostController {
         
         WallPost post = new WallPost(currentUser, form.getText(), form.getVideoLink());
         service.addPost(group_id, post);
+        // to do that redirect work  also with courses,events,labs
         return "redirect:/group/" + group_id + "/";
     }
 }

@@ -112,6 +112,14 @@ public class WallPost implements Comparable<WallPost> {
         this.videoLink = videoLink;
     }
 
+    public SortedSet<WallComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(SortedSet<WallComment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,3 +1,4 @@
+<#ftl encoding='utf-8'>
 <#include 'base.ftl' >
 <#macro header_custom_imports>
 <script type="text/javascript" src="/static/js/moment-with-locales.min.js"></script>
@@ -37,15 +38,19 @@
                 <div class="group-image">
                     <img src="http://placehold.it/275x280">
                 </div>
+                <form method="post" id="joinOrLeave">
                 <#if course.members?seq_contains(current_user)>
-                    <button class="button-enter-group">Покинуть группу</button>
+                    <input type="hidden"  name="form" value="leave" form="joinOrLeave">
+                    <button type="submit" type="submit" class="button-enter-group" form="joinOrLeave">Покинуть группу</button>
                 <#elseif course.admins?seq_contains(current_user)>
-                    <button class="button-enter-group" style="display:inline; margin: 230px 0 0 87px">Покинуть группу
+                    <input type="hidden"  name="form" value="leave" form="joinOrLeave">
+                    <button type="submit" class="button-enter-group"  style="display:inline; margin: 230px 0 0 87px">Покинуть группу
                     </button>
-                    <a href="#"><span class="glyphicon glyphicon-edit group-modify-icon"></span></a>
                 <#else>
-                    <button class="button-enter-group">Вступить в группу</button>
+                    <input type="hidden"  name="form" value="join" form="joinOrLeave">
+                    <button type="submit" class="button-enter-group">Вступить в группу</button>
                 </#if>
+                </form>
                 <div class="col-lg-12 group-admins">
                     <#list course.admins as admin>
                         <a class="" href="/profile?id=${admin.id}">
@@ -54,8 +59,13 @@
                                 <img class="col-lg-5 group-admin-image" src="http://placehold.it/50x50"/>
                                 <div class="col-lg-7 group-admin-info">
                                     <b class="group-admin-profile-name">${admin.name}</b>
-                                <#--TODO admin's role in this group-->
-                                    <b class="group-admin-role">создатель</b>
+                                    <b class="group-admin-role">
+                                        <#if course.creator.id==admin.id>
+                                            создатель
+                                        <#else>
+                                            администратор
+                                        </#if>
+                                    </b>
                                 </div>
                             </div>
                         </a>
@@ -68,7 +78,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="col-lg-12 group-create-post">
-                        <form method="post" action="./wall/new" enctype="multipart/form-data">
+                        <form method="post" action="../group/${course.id}/wall/new" enctype="multipart/form-data">
                             <div class="col-lg-12 group-create-post-label">
                                 Добавить запись
                             </div>
@@ -158,9 +168,10 @@
                                 </#list>
                             </#if>
                             <div class="col-lg-12 group-comment-create">
-                    <textarea class="group-create-comment-text" type="text" id="create-comment"
-                              placeholder="Введите свой комментарий&hellip;"
-                              name="create-comment"></textarea>
+                                <textarea class="group-create-comment-text" type="text" id="create-comment"
+                                placeholder="Введите свой комментарий&hellip;"
+                                name="create-comment">
+                                </textarea>
                                 <button class="group-create-comment-submit" type="submit">ОТПРАВИТЬ</button>
                                 <div class="group-create-post-image-upload">
                                 <#--TODO input image button with preview of image-->
@@ -176,12 +187,13 @@
                 <div class="col-lg-4">
                     <div class="col-lg-12 group-members">
                         <div class="group-members-label">Участники</div>
-                        <#list 1..2 as i>
+                        <#list 0..(course.members?size/3) as i>
                             <div class="row" <#if i == 1>
                                  style="margin-bottom: 7px"
                                  </#if>>
                                 <#list 1..3 as j>
-                                    <#assign user = course.members[i*j]>
+                                    <#if (course.members?size>=(i+1)*j)>
+                                    <#assign user = course.members[(i+1)*j-1]>
                                     <#if user?has_content>
                                         <a class="col-lg-4 group-member" href="#">
                                             <div class="col-lg-12 group-user-image-member">
@@ -190,6 +202,7 @@
                                             </div>
                                             <b class="col-lg-12 group-user-profile-name-member">${user.name}</b>
                                         </a>
+                                    </#if>
                                     </#if>
                                 </#list>
                             </div>

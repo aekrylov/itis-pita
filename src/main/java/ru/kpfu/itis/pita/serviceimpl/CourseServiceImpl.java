@@ -64,5 +64,10 @@ public class CourseServiceImpl implements CourseService{
         return course;
     }
 
+    public Course saveAndFlush(Course course){
+        courseRepository.saveAndFlush(course);
+        return course;
+    }
+
 
 }
