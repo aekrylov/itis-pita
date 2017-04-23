@@ -147,17 +147,20 @@
                                 </#list>
                             </#if>
                             <div class="col-lg-12 group-comment-create">
-                    <textarea class="group-create-comment-text" type="text" id="create-comment"
-                              placeholder="Введите свой комментарий&hellip;"
-                              name="create-comment"></textarea>
-                                <button class="group-create-comment-submit" type="submit">ОТПРАВИТЬ</button>
-                                <div class="group-create-post-image-upload">
-                                <#--TODO input image button with preview of image-->
-                                    <label for="file-input2">
-                                        <span class="glyphicon glyphicon-camera group-create-post-image-upload-icon"></span>
-                                    </label>
-                                    <input id="file-input2" type="file">
-                                </div>
+                                <form method="post" action="/group/${group.id}/wall/${post.id}/comments/new">
+                                    <textarea class="group-create-comment-text" id="create-comment"
+                                              placeholder="Введите свой комментарий&hellip;"
+                                              name="text"></textarea>
+                                    <button class="group-create-comment-submit" type="submit">ОТПРАВИТЬ</button>
+                                    <div class="group-create-post-image-upload">
+                                    <#--TODO input image button with preview of image-->
+                                        <label for="file-input2">
+                                            <span class="glyphicon glyphicon-camera group-create-post-image-upload-icon"></span>
+                                        </label>
+                                        <input id="file-input2" type="file" name="image">
+                                    </div>
+
+                                </form>
                             </div>
                         </#list>
                     </#if>

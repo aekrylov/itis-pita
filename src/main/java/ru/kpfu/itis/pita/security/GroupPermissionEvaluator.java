@@ -25,6 +25,7 @@ public class GroupPermissionEvaluator extends AbstractPermissionEvaluator<Group>
         switch (permission) {
             case "view_wall":
             case "post":
+            case "comment":
                 return group.getMembers().contains(user);
 
             case "admin":

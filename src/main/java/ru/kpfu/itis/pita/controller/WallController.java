@@ -7,10 +7,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.entity.WallComment;
 import ru.kpfu.itis.pita.entity.WallPost;
 import ru.kpfu.itis.pita.form.PostCreateForm;
+import ru.kpfu.itis.pita.form.WallCommentForm;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.WallService;
 
 import javax.validation.Valid;
 
@@ -22,13 +25,15 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(path = "/group/{id}/wall")
 @SessionAttributes("form")
-public class WallPostController {
+public class WallController {
 
-    private GroupService service;
+    private GroupService groupService;
+    private WallService wallService;
 
     @Autowired
-    public WallPostController(GroupService service) {
-        this.service = service;
+    public WallController(GroupService groupService, WallService wallService) {
+        this.groupService = groupService;
+        this.wallService = wallService;
     }
 
     @ModelAttribute("group_id")
@@ -62,7 +67,21 @@ public class WallPostController {
         if(form.getImage() != null)
             post.setImageLink(Helpers.uploadFile(form.getImage()));
 
-        service.addPost(group_id, post);
+        groupService.addPost(group_id, post);
         return "redirect:/group/" + group_id + "/";
+    }
+
+    @PostMapping(path = "/{post_id}/comments/new")
+    @PreAuthorize("hasPermission(#group_id, 'Group', 'comment')")
+    public String newCommentPost(@ModelAttribute @Valid WallCommentForm form, BindingResult result,
+                                 @ModelAttribute("group_id") int group_id,
+                                 @PathVariable int post_id) {
+        if(result.hasErrors()) {
+            //todo redirect to group page
+            return "redirect:../../../";
+        }
+        User author = Helpers.getCurrentUser();
+        wallService.addComment(group_id, post_id, new WallComment(author, form.getText()));
+        return "redirect:../../../";
     }
 }
