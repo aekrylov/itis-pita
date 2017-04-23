@@ -18,9 +18,11 @@ public class Lab extends Group {
     //TODO
 
     public Lab() {
+        setType(CommunityType.LAB);
     }
 
     public Lab(String name, String description, User creator, Collection<Interest> interests) {
         super(name, description, creator, interests);
+        setType(CommunityType.LAB);
     }
 }

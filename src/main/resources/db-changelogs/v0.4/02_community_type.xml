@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="anth (generated)" id="1492966670586-1">
+        <addColumn tableName="groups">
+            <column name="type" type="varchar(16)"/>
+        </addColumn>
+        <addNotNullConstraint tableName="groups" columnName="type" defaultNullValue="GROUP" />
+    </changeSet>
+
+    <changeSet id="1492966670586-3" author="anth">
+        <update tableName="groups">
+            <column name="type" value="COURSE" />
+            <where>EXISTS (select * from courses where courses.id = id)</where>
+        </update>
+        <update tableName="groups">
+            <column name="type" value="LAB" />
+            <where>EXISTS (select * from labs where labs.id = id)</where>
+        </update>
+        <update tableName="groups">
+            <column name="type" value="EVENT" />
+            <where>EXISTS (select * from events where events.id = id)</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="1492966670586-4" author="anth">
+        <dropDefaultValue tableName="groups" columnName="type" />
+    </changeSet>
+</databaseChangeLog>

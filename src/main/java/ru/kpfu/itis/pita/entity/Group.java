@@ -16,7 +16,6 @@ import java.util.SortedSet;
 @Table(name = "groups")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Group {
-    //TODO
 
     @Id
     @GeneratedValue
@@ -25,7 +24,11 @@ public class Group {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    protected CommunityType type = CommunityType.GROUP;
+
+    @Column
     private String imageLink;
 
     @Lob
@@ -152,4 +155,15 @@ public class Group {
     public void setWall(SortedSet<WallPost> wall) {
         this.wall = wall;
     }
+
+    public CommunityType getType() {
+        return type;
+    }
+
+    public void setType(CommunityType type) {
+        this.type = type;
+    }
+
+    public enum CommunityType {GROUP, LAB, EVENT, COURSE}
+
 }

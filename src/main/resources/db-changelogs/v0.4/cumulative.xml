@@ -7,5 +7,6 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="01_wallpost_image.xml" relativeToChangelogFile="true" />
+    <include file="02_community_type.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>
