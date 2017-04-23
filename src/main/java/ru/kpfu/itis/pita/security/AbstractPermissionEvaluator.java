@@ -9,6 +9,13 @@ import java.io.Serializable;
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/21/17 6:13 PM
+ *
+ * Abstract class for custom Spring Security permission evaluators. Evaluates requests for specific domain object class
+ * Each class that can be possibly evaluated should be handled by only one evaluator
+ *
+ * see also:
+ * {@link GroupPermissionEvaluator}
+ * {@link GlobalPermissionEvaluator}
  */
 public abstract class AbstractPermissionEvaluator<D> implements PermissionEvaluator {
 

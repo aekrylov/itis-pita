@@ -12,7 +12,9 @@ import java.util.List;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/21/17 6:42 PM
  *
- * Handles all permission evaluators
+ * Handles all custom permission evaluators
+ * Methods of this class return true if at least one PermissionEvaluator works with domain object class
+ * and evaluates this request to true
  */
 @Component
 public class GlobalPermissionEvaluator implements PermissionEvaluator {
