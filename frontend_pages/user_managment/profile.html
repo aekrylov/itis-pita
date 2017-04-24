@@ -11,7 +11,6 @@
 
     <script src="../js/jquery-3.1.1.js"></script>
     <script src="../js/bootstrap.js"></script>
-    <script src="../selectize/js/standalone/selectize.js"></script>
 
 </head>
 <body>
@@ -211,19 +210,9 @@
 <footer>
 
 </footer>
-<script src="../js/checkform.js"></script>
-<script src="../js/removeHasError.js"></script>
-<script src="../js/simpleTagsSelectizer.js"></script>
+
 <script type="application/javascript">
-    //see groupTagsSelectizer for more information about items
-    tags_items = [
-        {value: 'inf', text: 'informatic'},
-        {value: 'java', text: 'java language'},
-        {value: '.net', text: '.net framework'},
-        {value: 'itis-music', text: 'itis-music'},
-        {value: 'text_in_tag3', text: 'text_in_tag3'}
-    ];
-    var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false);
+
     var cw = $('#main-avatar').width();
     $('#main-avatar').css({'height':cw+'px'});
     var cs = $('.thumb-round').width();
