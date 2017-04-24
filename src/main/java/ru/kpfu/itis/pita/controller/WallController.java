@@ -23,7 +23,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping(path = "/group/{id}/wall")
+@RequestMapping(path = {"/group/{id}/wall", "/community/{id}/wall"}) //todo
 @SessionAttributes("form")
 public class WallController {
 

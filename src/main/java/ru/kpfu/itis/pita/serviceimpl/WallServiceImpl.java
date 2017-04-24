@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.WallComment;
 import ru.kpfu.itis.pita.entity.WallPost;
 import ru.kpfu.itis.pita.repository.GroupRepository;
-import ru.kpfu.itis.pita.repository.GroupWallRepository;
 import ru.kpfu.itis.pita.repository.WallCommentRepository;
+import ru.kpfu.itis.pita.repository.WallRepository;
 import ru.kpfu.itis.pita.service.WallService;
 
 /**
@@ -17,12 +17,12 @@ import ru.kpfu.itis.pita.service.WallService;
 public class WallServiceImpl implements WallService {
     private GroupRepository groupRepository;
     private WallCommentRepository commentRepository;
-    private GroupWallRepository wallRepository;
+    private WallRepository wallRepository;
 
     @Autowired
     public WallServiceImpl(GroupRepository groupRepository,
                            WallCommentRepository commentRepository,
-                           GroupWallRepository wallRepository) {
+                           WallRepository wallRepository) {
         this.groupRepository = groupRepository;
         this.commentRepository = commentRepository;
         this.wallRepository = wallRepository;

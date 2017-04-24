@@ -7,5 +7,5 @@ import ru.kpfu.itis.pita.entity.Lab;
  * Date: 3/27/17 6:14 PM
  */
 
-public interface LabRepository extends CommunityRepository<Lab> {
+public interface LabRepository extends BaseCommunityRepository<Lab> {
 }

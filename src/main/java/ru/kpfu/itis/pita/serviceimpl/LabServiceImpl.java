@@ -12,7 +12,7 @@ import ru.kpfu.itis.pita.service.LabService;
  */
 
 @Service("labServiceImpl")
-public class LabServiceImpl extends CommunityServiceImpl<Lab> implements LabService {
+public class LabServiceImpl extends BaseCommunityServiceImpl<Lab> implements LabService {
 
     @Autowired
     public LabServiceImpl(LabRepository labRepository) {

@@ -30,7 +30,6 @@ public abstract class Community {
     @Column(nullable = false, unique = true)
     private String name;
 
-
     @Column
     private String imageLink;
 
@@ -60,6 +59,9 @@ public abstract class Community {
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "community")
     @SortNatural
     private SortedSet<WallPost> wall;
+
+    public Community() {
+    }
 
     public Community(CommunityType type) {
         this.type = type;

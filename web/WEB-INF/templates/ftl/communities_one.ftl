@@ -7,36 +7,39 @@
 <#macro body>
 <div class="undercover">
     <div class="col-lg-12 group-main-block">
-        <h2 class="group-label-text">${entity.name}</h2>
+        <h2 class="group-label-text">${community.name}</h2>
     </div>
     <div class="group_container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="col-lg-12 group-info">
-                    <p>${entity.description}</p>
+                    <p>${community.description}</p>
                 </div>
                 <div class="row">
+                    <#-- TODO -->
+<#--
                     <div class="col-lg-12 group-tags">
-                        <#list entity.interests as interest>
+                        <#list community.interests as interest>
                             <div class="group-tag">${interest}</div>
                         </#list>
                     </div>
+-->
                 </div>
             </div>
             <div class="col-lg-4 group-block">
                 <div class="group-image">
-                    <img src="${entity.imageLink!"/static/img/avatar_example.png"}">
+                    <img src="${community.imageLink!"/static/img/avatar_example.png"}">
                 </div>
-                <#if entity.members?seq_contains(current_user)>
+                <#if community.members?seq_contains(current_user)>
                     <button class="button-enter-group">Покинуть группу</button>
-                <#elseif entity.admins?seq_contains(current_user)>
+                <#elseif community.admins?seq_contains(current_user)>
                 <button class="button-enter-group" style="display:inline; margin: 230px 0 0 87px">Покинуть группу</button>
                 <a href="#"><span class="glyphicon glyphicon-edit group-modify-icon"></span></a>
                 <#else>
                     <button class="button-enter-group">Вступить в группу</button>
                 </#if>
                 <div class="col-lg-12 group-admins">
-                    <#list entity.admins as admin>
+                    <#list community.admins as admin>
                         <a class="" href="/profile?id=${admin.id}">
                             <div class="row group-admin-profile">
                             <#--TODO admin's avatar-->
@@ -53,7 +56,7 @@
             </div>
         </div>
         <hr class="group-line"/>
-        <#if entity.members?seq_contains(current_user)>
+        <#if community.members?seq_contains(current_user)>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="col-lg-12 group-create-post">
@@ -83,8 +86,8 @@
                         </div>
                         </form>
                     </div>
-                    <#if entity.wall?has_content>
-                        <#list entity.wall as post>
+                    <#if community.wall?has_content>
+                        <#list community.wall as post>
                             <div class="col-lg-12 group-post">
                                 <a class="" href="/profile?id=${post.author.id}">
                                     <div class="row group-user-profile">
@@ -147,7 +150,7 @@
                                 </#list>
                             </#if>
                             <div class="col-lg-12 group-comment-create">
-                                <form method="post" action="/group/${entity.id}/wall/${post.id}/comments/new">
+                                <form method="post" action="/group/${community.id}/wall/${post.id}/comments/new">
                                     <textarea class="group-create-comment-text" id="create-comment"
                                               placeholder="Введите свой комментарий&hellip;"
                                               name="text"></textarea>
@@ -201,4 +204,4 @@
 </div>
 </#macro>
 
-<@display entity.name/>
+<@display community.name/>

@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by 1 on 29.03.2017.
  */
 @Service("courseService")
-public class CourseServiceImpl extends CommunityServiceImpl<Course> implements CourseService{
+public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implements CourseService{
 
     private final CourseRepository courseRepository;
     private final SemesterRepository semesterRepository;
