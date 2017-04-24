@@ -35,16 +35,18 @@ public class Helpers {
     }
 
     /**
-     * Upload multipart file to Cloudinary
+     * Upload multipart image to Cloudinary
      *
      * Note that CLOUDINARY_URL system variable or property must exists for Cloudinary to work correctly
-     * @param file file to upload
-     * @return URL of uploaded file, or null if IO error is thrown by MultipartImage
+     * @param image image to upload
+     * @return URL of uploaded image, or null if IO error is thrown by MultipartImage
      */
-    public static String uploadFile(MultipartFile file) {
+    public static String uploadImage(MultipartFile image) {
+        if(image == null || image.getSize() <= 0)
+            return null;
         Cloudinary cloudinary = new Cloudinary();
         try {
-            Map result = cloudinary.uploader().upload(file.getBytes(), null);
+            Map result = cloudinary.uploader().upload(image.getBytes(), null);
             return (String) result.get("url");
         } catch (IOException e) {
             e.printStackTrace();

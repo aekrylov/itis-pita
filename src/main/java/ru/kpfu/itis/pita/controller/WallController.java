@@ -64,8 +64,8 @@ public class WallController {
         }
         
         WallPost post = new WallPost(currentUser, form.getText(), form.getVideoLink());
-        if(form.getImage() != null)
-            post.setImageLink(Helpers.uploadFile(form.getImage()));
+        if(form.getImage() != null || form.getImage().getSize() > 0)
+            post.setImageLink(Helpers.uploadImage(form.getImage()));
 
         groupService.addPost(group_id, post);
         return "redirect:/group/" + group_id + "/";
