@@ -17,7 +17,7 @@ public class GroupCreateForm {
     private String description;
 
     @NotEmpty
-    Collection<Interest> interests;
+    String interests;
 
     public String getName() {
         return name;
@@ -35,11 +35,11 @@ public class GroupCreateForm {
         this.description = description;
     }
 
-    public Collection<Interest> getInterests() {
+    public String getInterests() {
         return interests;
     }
 
-    public void setInterests(Collection<Interest> interests) {
+    public void setInterests(String interests) {
         this.interests = interests;
     }
 }

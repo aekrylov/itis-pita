@@ -7,15 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kpfu.itis.pita.entity.Course;
-import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
-import ru.kpfu.itis.pita.service.CourseService;
 import ru.kpfu.itis.pita.service.GroupService;
-import ru.kpfu.itis.pita.service.LabService;
+import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import javax.transaction.Transactional;
@@ -23,32 +19,28 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by 1 on 30.03.2017.
+ * By Anton Krylov (anthony.kryloff@gmail.com)
+ * Date: 4/21/17 10:42 PM
  */
 @Controller
 @RequestMapping(path = "/communities")
 @PreAuthorize("isFullyAuthenticated()")
-public class ListOfCommunitiesPageController {
+public class CommunitiesController {
 
-    private CourseService courseService;
-    private LabService labService;
     private GroupService groupService;
     private UserService userService;
+    private InterestService interestService;
 
     @Autowired
-    public ListOfCommunitiesPageController(CourseService courseService,
-                                           LabService labService,
-                                           GroupService groupService,
-                                           UserService userService){
-        this.courseService = courseService;
-        this.labService = labService;
+    public CommunitiesController(GroupService groupService, UserService userService, InterestService interestService) {
         this.groupService = groupService;
         this.userService = userService;
+        this.interestService = interestService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/")
     @Transactional
-    public String doGet(ModelMap map){
+    public String listAll(ModelMap map) {
         List<Group> allGroups = groupService.getAll(); //returns all groups and child entities as well
         List<Course> allCourses = Helpers.filterByType(allGroups, Course.class);
         List<Lab> allLabs = Helpers.filterByType(allGroups, Lab.class);
@@ -68,6 +60,10 @@ public class ListOfCommunitiesPageController {
         map.put("my_courses", myCourses);
         map.put("my_labs", myLabs);
         map.put("my_groups", myGroups);
+
+        List<Interest> tags = interestService.getAll();
+        map.put("tags", tags);
+
         return "communities_list";
     }
 }

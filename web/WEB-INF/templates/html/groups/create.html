@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/static/selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/static/formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="/static/js/jquery-3.1.1.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/selectize/js/standalone/selectize.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="/static/img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="/static/img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+    <div class="undercover container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-9">
+                <h1 class="page-header"> Создание группы по интересам</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        <form role="form" class="" action="/groups/create" method="POST" enctype="multipart/form-data" onsubmit="return checkform([
+            'group_name', 'group_info', 'group_tags'
+        ], false)">
+            <div class="row">
+                <div class="col-xs-offset-1 col-md-5">
+
+                    <div class="form-group">
+                        <label class="control-label" for="group_name">Название группы</label>
+                        <input onfocus="removeHasError('group_name')" type="text" minlength="3" class="form-control"
+                               name="group_name"
+                               id="group_name"
+                               placeholder="..введите название группы"/>
+
+                    </div>
+
+                    <div class="form-group" onclick="removeHasError('group_tags')">
+                        <label class=" control-label">Темы группы</label>
+                        <input type="text" id="group_tags" class="selectized"
+                                tabindex="-1" style="display: none;">
+                    </div>
+
+
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class=" control-label">Информация о группе</label>
+                        <textarea class="form-control" style="resize: none"
+                                  onfocus="removeHasError('group_info')" rows="5" name="group_info"
+                                  id="group_info"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <button class="btn-warning btn btn-block" type="submit">Создать</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="/static/js/checkform.js"></script>
+<script src="/static/js/removeHasError.js"></script>
+<script src="/static/js/simpleTagsSelectizer.js"></script>
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    items = [
+        {value:'inf', text:'informatic'},
+        {value:'java', text:'java language'},
+        {value:'.net', text:'.net framework'},
+        {value:'itis-music', text:'itis-music'},
+    ];
+    $.onload = simpleTagsSelectizer('group_tags',items);
+</script>
+</body>
+</html>

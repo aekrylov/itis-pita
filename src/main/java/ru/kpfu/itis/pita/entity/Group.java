@@ -4,6 +4,7 @@ import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.SortedSet;
 
 /**
@@ -15,7 +16,6 @@ import java.util.SortedSet;
 @Table(name = "groups")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Group {
-    //TODO
 
     @Id
     @GeneratedValue
@@ -24,7 +24,11 @@ public class Group {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    protected CommunityType type = CommunityType.GROUP;
+
+    @Column
     private String imageLink;
 
     @Lob
@@ -43,11 +47,11 @@ public class Group {
     }, inverseJoinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id")
     })
-    private Collection<User> members;
+    private Collection<User> members= new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "groups_admins")
-    private Collection<User> admins;
+    private Collection<User> admins = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "group")
     @SortNatural
@@ -60,7 +64,6 @@ public class Group {
         this.description = description;
         this.creator = creator;
         this.interests = interests;
-        //todo add creator to members?
     }
 
     public int getId() {
@@ -144,4 +147,23 @@ public class Group {
         result = 31 * result + name.hashCode();
         return result;
     }
+
+    public SortedSet<WallPost> getWall() {
+        return wall;
+    }
+
+    public void setWall(SortedSet<WallPost> wall) {
+        this.wall = wall;
+    }
+
+    public CommunityType getType() {
+        return type;
+    }
+
+    public void setType(CommunityType type) {
+        this.type = type;
+    }
+
+    public enum CommunityType {GROUP, LAB, EVENT, COURSE}
+
 }

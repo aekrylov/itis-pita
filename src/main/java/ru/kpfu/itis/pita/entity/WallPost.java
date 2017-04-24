@@ -32,7 +32,8 @@ public class WallPost implements Comparable<WallPost> {
     @Column(nullable = false)
     private Date timestamp = new Date();
 
-    //tODO photo
+    @Column(name = "image_link")
+    private String imageLink;
 
     @Column(name = "video_link")
     private String videoLink;
@@ -42,6 +43,12 @@ public class WallPost implements Comparable<WallPost> {
     private SortedSet<WallComment> comments;
 
     public WallPost() {}
+
+    public WallPost(User author, String text, String videoLink) {
+        this.author = author;
+        this.text = text;
+        this.videoLink = videoLink;
+    }
 
     public WallPost(Group group, User author, String text, String videoLink) {
         this.group = group;
@@ -138,4 +145,11 @@ public class WallPost implements Comparable<WallPost> {
     }
 
 
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
 }

@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="control-label" for="group_name">Название группы</label>
                     <input onfocus="removeHasError('group_name')" type="text" minlength="3" class="form-control"
-                           name="group_name"
+                           name="name"
                            id="group_name"
                            placeholder="..введите название группы"/>
 
@@ -33,7 +33,7 @@
 
                 <div class="form-group" onclick="removeHasError('group_tags')">
                     <label class=" control-label">Темы группы</label>
-                    <input type="text" id="group_tags" class="selectized"
+                    <input type="text" id="group_tags" class="selectized" name="interests"
                            tabindex="-1" style="display: none;">
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class=" control-label">Информация о группе</label>
                     <textarea class="form-control" style="resize: none"
-                              onfocus="removeHasError('group_info')" rows="5" name="group_info"
+                              onfocus="removeHasError('group_info')" rows="5" name="description"
                               id="group_info"></textarea>
                 </div>
             </div>
@@ -67,10 +67,14 @@
 <script src="/static/js/simpleTagsSelectizer.js"></script>
 <script type="application/javascript">
     //see groupTagsSelectizer for more information about items
-    <#assign items = []>
-    <#list interests as i>
-        <#assign items = items + {value: '${i.getId()}', text: '${i.getName()}'}>
-    </#list>
+    items = [
+            <#if interests??>
+                <#list interests as i>
+                    { value: '${i.name}', text: '${i.name}' },
+                </#list>
+            </#if>
+    ];
+
 
     $.onload = simpleTagsSelectizer('group_tags', items);
 </script>

@@ -27,18 +27,18 @@ public class Event extends Group {
     private int maxMembers = -1;
 
     public Event() {
+        setType(CommunityType.EVENT);
     }
 
     public Event(String name, String description, User creator, Collection<Interest> interests, String place, Date date) {
         super(name, description, creator, interests);
+        setType(CommunityType.EVENT);
         this.place = place;
         this.date = date;
     }
 
     public Event(String name, String description, User creator, Collection<Interest> interests, String place, Date date, int maxMembers) {
-        super(name, description, creator, interests);
-        this.place = place;
-        this.date = date;
+        this(name, description, creator, interests, place, date);
         this.maxMembers = maxMembers;
     }
 

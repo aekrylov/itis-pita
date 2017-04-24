@@ -30,6 +30,11 @@ public class WallComment implements Comparable<WallComment> {
 
     public WallComment() { }
 
+    public WallComment(User author, String text) {
+        this.author = author;
+        this.text = text;
+    }
+
     public WallComment(WallPost post, User author, String text) {
         this.post = post;
         this.author = author;

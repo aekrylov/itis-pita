@@ -29,10 +29,12 @@ public class Course extends Group {
     private Subject subject;
 
     public Course() {
+        setType(CommunityType.COURSE);
     }
 
     public Course(String name, String description, User creator, Collection<Interest> interests, int capacity) {
         super(name, description, creator, interests);
+        setType(CommunityType.COURSE);
         this.capacity = capacity;
     }
 
