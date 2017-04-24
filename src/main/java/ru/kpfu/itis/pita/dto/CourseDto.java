@@ -6,7 +6,7 @@ import ru.kpfu.itis.pita.entity.Course;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/19/17 5:54 PM
  */
-public class CourseDto extends GroupDto {
+public class CourseDto extends CommunityDto {
 
     private int capacity;
 

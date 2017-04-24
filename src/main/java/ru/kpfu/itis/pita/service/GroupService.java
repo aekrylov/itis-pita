@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.WallPost;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -9,6 +8,4 @@ import ru.kpfu.itis.pita.entity.WallPost;
  */
 public interface GroupService extends CommunityService<Group> {
 
-    WallPost addPost(WallPost post);
-    WallPost addPost(int groupId, WallPost post);
 }

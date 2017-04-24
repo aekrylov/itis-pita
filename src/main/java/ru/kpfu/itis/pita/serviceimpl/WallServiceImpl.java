@@ -35,7 +35,7 @@ public class WallServiceImpl implements WallService {
 
     @Override
     public WallComment addComment(int groupId, int postId, WallComment comment) {
-        WallPost post = wallRepository.findByGroupIdAndId(groupId, postId);
+        WallPost post = wallRepository.findByCommunityIdAndId(groupId, postId);
         comment.setPost(post);
         return addComment(comment);
     }

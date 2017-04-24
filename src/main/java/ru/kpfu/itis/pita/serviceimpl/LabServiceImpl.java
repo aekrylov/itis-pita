@@ -3,7 +3,6 @@ package ru.kpfu.itis.pita.serviceimpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.repository.LabRepository;
 import ru.kpfu.itis.pita.service.LabService;
 
@@ -16,8 +15,8 @@ import ru.kpfu.itis.pita.service.LabService;
 public class LabServiceImpl extends CommunityServiceImpl<Lab> implements LabService {
 
     @Autowired
-    public LabServiceImpl(LabRepository labRepository, GroupRepository groupRepository) {
-        super(labRepository, groupRepository);
+    public LabServiceImpl(LabRepository labRepository) {
+        super(labRepository);
     }
 
 }

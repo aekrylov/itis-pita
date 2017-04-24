@@ -2,21 +2,11 @@ package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kpfu.itis.pita.entity.*;
-import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
-
-import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -38,6 +28,10 @@ public class CommunitiesController {
         this.interestService = interestService;
     }
 
+/*
+
+TODO
+TODO
     @GetMapping(path = "/")
     @Transactional
     public String listAll(ModelMap map) {
@@ -66,4 +60,5 @@ public class CommunitiesController {
 
         return "communities_list";
     }
+*/
 }

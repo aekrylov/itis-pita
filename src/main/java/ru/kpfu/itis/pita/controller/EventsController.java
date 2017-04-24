@@ -1,8 +1,9 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.kpfu.itis.pita.entity.Community;
+import ru.kpfu.itis.pita.form.EventCreateForm;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -12,10 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(path = "/events/")
-public class EventsController {
+public class EventsController extends BaseCommunitiesController<EventCreateForm> {
 
-    @GetMapping(path = "/create")
-    public String createGet() {
-        return "event_create";
+    protected EventsController() {
+        super("event_create", "redirect:/communities/");
+    }
+
+    @Override
+    public EventCreateForm newCreateForm() {
+        return new EventCreateForm();
+    }
+
+    @Override
+    protected Community createEntity(EventCreateForm form) {
+        return null;
     }
 }

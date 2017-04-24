@@ -6,8 +6,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.form.CommunityCreateForm;
-import ru.kpfu.itis.pita.misc.CommunityStrategy;
 
 import javax.validation.Valid;
 
@@ -20,20 +20,16 @@ import javax.validation.Valid;
 @PreAuthorize("isFullyAuthenticated()")
 public abstract class BaseCommunitiesController<F extends CommunityCreateForm> {
 
-    private final CommunityStrategy<F> strategy;
     private final String createViewName;
     private final String createRedirect;
 
-    protected BaseCommunitiesController(CommunityStrategy<F> strategy, String createViewName, String createRedirect) {
-        this.strategy = strategy;
+    protected BaseCommunitiesController(String createViewName, String createRedirect) {
         this.createViewName = createViewName;
         this.createRedirect = createRedirect;
     }
 
     @ModelAttribute("form")
-    public CommunityCreateForm newCreateForm() {
-        return strategy.newCreateForm();
-    }
+    public abstract F newCreateForm();
 
     @GetMapping(path = "/create")
     public String doCreateGet() {
@@ -49,7 +45,9 @@ public abstract class BaseCommunitiesController<F extends CommunityCreateForm> {
 
         //todo if exists
 
-        strategy.createEntity(form);
+        createEntity(form);
         return createRedirect;
     }
+
+    protected abstract Community createEntity(F form);
 }

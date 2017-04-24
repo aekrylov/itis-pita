@@ -1,0 +1,117 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="anth" id="1493041854988-1">
+        <renameTable oldTableName="groups" newTableName="communities" />
+        <renameTable oldTableName="groups_members" newTableName="communities_members" />
+        <renameTable oldTableName="groups_admins" newTableName="communities_admins" />
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493041854988-4">
+        <createTable tableName="events_interests">
+            <column name="event_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1493041854988-5" author="anth">
+        <renameColumn tableName="communities_admins" oldColumnName="Group_id" newColumnName="community_id" />
+        <renameColumn tableName="communities_members" oldColumnName="group_id" newColumnName="community_id" />
+
+        <renameTable oldTableName="group_wall" newTableName="community_wall" />
+    </changeSet>
+    <changeSet id="new_communities10" author="anth">
+        <renameSequence oldSequenceName="group_wall_id_seq" newSequenceName="community_wall_id_seq" />
+    </changeSet>
+
+    <changeSet id="new_communities5" author="anth">
+        <renameColumn tableName="community_wall" oldColumnName="group_id" newColumnName="community_id" />
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493043406581-4">
+        <renameColumn tableName="communities_admins" oldColumnName="admins_id" newColumnName="admin_id"/>
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493043652834-2">
+        <createTable tableName="groups">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="new_communities6" author="anth">
+        <sql>ALTER TABLE communities DROP CONSTRAINT "groupsPK" CASCADE</sql>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493043652834-4">
+        <addPrimaryKey columnNames="id" constraintName="groupsPK" tableName="groups"/>
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493044077020-2">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="events_interests" constraintName="FKbdl2n3fuq2lwxlv320vfmqg3h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="events"/>
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493044918834-1">
+        <addPrimaryKey columnNames="id" constraintName="communitiesPK" tableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-2">
+        <addForeignKeyConstraint baseColumnNames="community_id" baseTableName="communities_members" constraintName="FK30sclvpeitwloi0qi20cie0n2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-3">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="events" constraintName="FK4oquq5ahc2v23q6ooiuretssk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-4">
+        <addForeignKeyConstraint baseColumnNames="community_id" baseTableName="communities_admins" constraintName="FK5gcs33u0b5r8vigyw91nyl6y2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-5">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="labs" constraintName="FKapvd1qurokb8m466y21w0x3sq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-6">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="groups" constraintName="FKbm60xda978wr20dx6sn28nmyi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-7">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="courses" constraintName="FKgu7f06et3sxbwr64m5ktlfp0o" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-8">
+        <addForeignKeyConstraint baseColumnNames="interest_id" baseTableName="events_interests" constraintName="FKp0gmcply4s2lfys20vhygreif" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="interests"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493044918834-9">
+        <addForeignKeyConstraint baseColumnNames="community_id" baseTableName="community_wall" constraintName="FKresvt02mig393o0ge097lmcsw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="communities"/>
+    </changeSet>
+
+    <changeSet id="new_communities7" author="anth">
+        <sql>
+            INSERT INTO groups
+            SELECT id FROM communities
+            WHERE type = 'GROUP'
+        </sql>
+    </changeSet>
+
+    <changeSet id="new_communities9" author="anth">
+        <sql>
+            DELETE FROM groups_interests
+            WHERE NOT EXISTS (
+                SELECT * from groups
+                WHERE id = "Group_id"
+            )
+        </sql>
+    </changeSet>
+
+    <changeSet author="anth (generated)" id="1493045315820-1">
+        <addForeignKeyConstraint baseColumnNames="Group_id" baseTableName="groups_interests" constraintName="FKy2p8w3oinrpmlug5nl6239m9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="groups"/>
+    </changeSet>
+    
+    <changeSet author="anth (generated)" id="1493045832574-1">
+        <addDefaultValue columnDataType="int" columnName="id" defaultValueComputed="nextval('community_wall_id_seq'::regclass)" tableName="community_wall"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493045832574-2">
+        <dropDefaultValue columnDataType="varchar(255)" columnName="type" tableName="communities"/>
+    </changeSet>
+
+
+</databaseChangeLog>

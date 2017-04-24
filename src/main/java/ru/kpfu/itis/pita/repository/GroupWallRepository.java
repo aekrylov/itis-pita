@@ -9,5 +9,5 @@ import ru.kpfu.itis.pita.entity.WallPost;
  */
 public interface GroupWallRepository extends JpaRepository<WallPost, Integer> {
 
-    WallPost findByGroupIdAndId(int groupId, int id);
+    WallPost findByCommunityIdAndId(int communityId, int id);
 }

@@ -17,7 +17,6 @@ public class CommunityCreateForm {
     @NotEmpty
     private String description;
 
-    //todo checks
     private MultipartFile image;
 
     public String getName() {

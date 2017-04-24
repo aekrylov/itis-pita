@@ -1,25 +1,19 @@
 package ru.kpfu.itis.pita.controller.ajax_controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kpfu.itis.pita.dto.CourseDto;
 import ru.kpfu.itis.pita.dto.GroupDto;
 import ru.kpfu.itis.pita.dto.InterestDto;
-import ru.kpfu.itis.pita.dto.LabDto;
-import ru.kpfu.itis.pita.entity.*;
+import ru.kpfu.itis.pita.entity.Group;
+import ru.kpfu.itis.pita.entity.Interest;
 import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.security.UserDetails;
 import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -43,6 +37,9 @@ public class CommunityAjaxController {
         this.interestService = interestService;
     }
 
+/*
+
+TODO
     @GetMapping(path = "/")
     public Map<String, Object> listAll() {
         List<Group> allGroups = groupService.getAll(); //returns all groups and child entities as well
@@ -68,6 +65,7 @@ public class CommunityAjaxController {
         returnMap.put("user_role", user.getRole());
         return returnMap;
     }
+*/
 
     private <T extends Group, D extends GroupDto> List<D> toDtoList(Collection<Group> allGroups, Class<T> clazz,
                                                                     Function<T, D> dtoMapper) {

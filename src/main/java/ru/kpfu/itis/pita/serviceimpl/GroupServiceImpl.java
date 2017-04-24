@@ -4,7 +4,6 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.entity.WallPost;
 import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.repository.GroupWallRepository;
 import ru.kpfu.itis.pita.service.GroupService;
@@ -24,40 +23,16 @@ public class GroupServiceImpl extends CommunityServiceImpl<Group> implements Gro
 
     @Autowired
     public GroupServiceImpl(GroupRepository groupRepository, GroupWallRepository wallRepository) {
-        super(groupRepository, groupRepository);
+        super(groupRepository);
         this.groupRepository = groupRepository;
         this.wallRepository = wallRepository;
     }
 
     @Override
-    public Group create(Group group) {
-        group.getMembers().add(group.getCreator());
-        group.getAdmins().add(group.getCreator());
-
-        return groupRepository.save(group);
-    }
-
-    @Override
     @Transactional
     public Group getOne(int id) {
-        Group group = groupRepository.findOne(id);
-        //since lazy collections will be needed, init them now
-        Hibernate.initialize(group.getAdmins());
-        Hibernate.initialize(group.getWall());
+        Group group = super.getOne(id);
         Hibernate.initialize(group.getInterests());
         return group;
     }
-
-    @Override
-    public WallPost addPost(WallPost post) {
-        return wallRepository.save(post);
-    }
-
-    @Override
-    public WallPost addPost(int groupId, WallPost post) {
-        Group group = groupRepository.findOne(groupId);
-        post.setGroup(group);
-        return wallRepository.save(post);
-    }
-
 }

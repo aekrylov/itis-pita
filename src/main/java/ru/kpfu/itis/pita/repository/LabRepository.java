@@ -1,6 +1,5 @@
 package ru.kpfu.itis.pita.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import ru.kpfu.itis.pita.entity.Lab;
 
 /**
@@ -8,5 +7,5 @@ import ru.kpfu.itis.pita.entity.Lab;
  * Date: 3/27/17 6:14 PM
  */
 
-public interface LabRepository extends JpaRepository<Lab, Integer> {
+public interface LabRepository extends CommunityRepository<Lab> {
 }
