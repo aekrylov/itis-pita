@@ -25,7 +25,7 @@
             </div>
         </form>
         <div class="form-group form-group-helper bottom-links-login">
-            <a href="#" id="forgot-pass">Забыли пароль?</a> | <a href="#" id="signup"> Регистрация</a>
+            <a href="#" id="forgot-pass">Забыли пароль?</a> | <a href="/registration" id="signup"> Регистрация</a>
         </div>
     </div>
 </div>
