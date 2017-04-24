@@ -10,7 +10,6 @@ import ru.kpfu.itis.pita.repository.GroupWallRepository;
 import ru.kpfu.itis.pita.service.GroupService;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -18,20 +17,16 @@ import java.util.List;
  */
 
 @Service("groupServiceImpl")
-public class GroupServiceImpl implements GroupService {
+public class GroupServiceImpl extends CommunityServiceImpl<Group> implements GroupService {
 
     private final GroupRepository groupRepository;
     private final GroupWallRepository wallRepository;
 
     @Autowired
     public GroupServiceImpl(GroupRepository groupRepository, GroupWallRepository wallRepository) {
+        super(groupRepository, groupRepository);
         this.groupRepository = groupRepository;
         this.wallRepository = wallRepository;
-    }
-
-    @Override
-    public boolean exists(String name) {
-        return groupRepository.findByName(name) != null;
     }
 
     @Override
@@ -40,11 +35,6 @@ public class GroupServiceImpl implements GroupService {
         group.getAdmins().add(group.getCreator());
 
         return groupRepository.save(group);
-    }
-
-    @Override
-    public List<Group> getAll() {
-        return groupRepository.findAll();
     }
 
     @Override

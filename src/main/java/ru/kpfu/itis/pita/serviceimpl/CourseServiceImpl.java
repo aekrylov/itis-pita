@@ -6,24 +6,25 @@ import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.Semester;
 import ru.kpfu.itis.pita.entity.Subject;
 import ru.kpfu.itis.pita.repository.CourseRepository;
+import ru.kpfu.itis.pita.repository.GroupRepository;
 import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.service.CourseService;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by 1 on 29.03.2017.
  */
 @Service("courseService")
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl extends CommunityServiceImpl<Course> implements CourseService{
 
     private CourseRepository courseRepository;
-
     private SemesterRepository semesterRepository;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository, SemesterRepository semesterRepository) {
+    public CourseServiceImpl(CourseRepository courseRepository, GroupRepository groupRepository,
+                             SemesterRepository semesterRepository) {
+        super(courseRepository, groupRepository);
         this.courseRepository = courseRepository;
         this.semesterRepository = semesterRepository;
     }
@@ -39,16 +40,6 @@ public class CourseServiceImpl implements CourseService{
             course.setSubject(subject);
         }
         return courseRepository.save(course);
-    }
-
-    @Override
-    public boolean exists(String courseName) {
-        return courseRepository.findByName(courseName) != null;
-    }
-
-    @Override
-    public List<Course> getAll() {
-        return courseRepository.findAll();
     }
 
 }
