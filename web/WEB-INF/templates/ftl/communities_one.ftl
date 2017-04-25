@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-lg-12 group-tags">
                         <#list group.interests as interest>
-                            <div class="group-tag">${interest}</div>
+                            <div class="group-tag">${interest.name}</div>
                         </#list>
                     </div>
                 </div>
@@ -168,27 +168,23 @@
                 <div class="col-lg-4">
                     <div class="col-lg-12 group-members">
                         <div class="group-members-label">Участники</div>
-                        <#list 1..2 as i>
-                            <div class="row">
-                            <#--TODO list of members generation-->
-                                <a class="col-lg-4 group-member" href="#">
-                                    <div class="col-lg-12 group-user-image-member">
-                                        <img src="http://placehold.it/50x50"/>
-                                    </div>
-                                    <b class="col-lg-12 group-user-profile-name-member">Имя</b>
-                                </a>
-                                <a class="col-lg-4 group-member" href="#">
-                                    <div class="col-lg-12 group-user-image-member">
-                                        <img src="http://placehold.it/50x50"/>
-                                    </div>
-                                    <b class="col-lg-12 group-user-profile-name-member">Имя</b>
-                                </a>
-                                <a class="col-lg-4 group-member" href="#">
-                                    <div class="col-lg-12 group-user-image-member">
-                                        <img src="http://placehold.it/50x50"/>
-                                    </div>
-                                    <b class="col-lg-12 group-user-profile-name-member">Имя</b>
-                                </a>
+                        <#list 0..(group.members?size/3) as i>
+                            <div class="row" <#if i gt 0>
+                                style="margin-top: 7px"
+                            </#if>>
+                            <#list 1..3 as j>
+                                <#if (course.members?size>=(i+1)*j)>
+                                    <#assign user = course.members[(i+1)*j-1]>
+                                    <#if user?has_content>
+                                    <a class="col-lg-4 group-member" href="#">
+                                        <div class="col-lg-12 group-user-image-member">
+                                            <img src="http://placehold.it/50x50"/>
+                                        </div>
+                                        <b class="col-lg-12 group-user-profile-name-member">Имя</b>
+                                    </a>
+                                    </#if>
+                                </#if>
+                            </#list>
                             </div>
                         </#list>
                     </div>
