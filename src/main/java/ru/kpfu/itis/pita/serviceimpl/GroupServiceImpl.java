@@ -35,6 +35,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    public void save(Group group) {
+        groupRepository.save(group);
+    }
+
+    @Override
     public Group create(Group group) {
         group.getMembers().add(group.getCreator());
         group.getAdmins().add(group.getCreator());

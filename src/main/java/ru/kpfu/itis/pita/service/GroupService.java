@@ -12,6 +12,7 @@ import java.util.List;
 public interface GroupService {
 
     boolean exists(String name);
+    void save(Group group);
     Group create(Group group);
     List<Group> getAll();
     Group getOne(int id);
