@@ -14,7 +14,7 @@ import java.io.Serializable;
  * Each class that can be possibly evaluated should be handled by only one evaluator
  *
  * see also:
- * {@link GroupPermissionEvaluator}
+ * {@link CommunityPermissionEvaluator}
  * {@link GlobalPermissionEvaluator}
  */
 public abstract class AbstractPermissionEvaluator<D> implements PermissionEvaluator {

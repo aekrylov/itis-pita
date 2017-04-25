@@ -12,45 +12,33 @@ import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.service.CourseService;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by 1 on 29.03.2017.
  */
 @Service("courseService")
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implements CourseService{
 
-    private CourseRepository courseRepository;
-
-    private SemesterRepository semesterRepository;
+    private final SemesterRepository semesterRepository;
 
     @Autowired
-    public CourseServiceImpl(CourseRepository courseRepository, SemesterRepository semesterRepository) {
-        this.courseRepository = courseRepository;
+    public CourseServiceImpl(CourseRepository courseRepository,
+                             SemesterRepository semesterRepository) {
+        super(courseRepository);
         this.semesterRepository = semesterRepository;
     }
 
     @Override
-    public Course create(Course course) {
-        if(course.getSubject() == null) {
+    public Course create(Course community) {
+        if(community.getSubject() == null) {
             Semester semester = new Semester(new Date().toString(), new Date());  //TODO
             semester = semesterRepository.save(semester);
 
-            Subject subject = new Subject(course.getName());
+            Subject subject = new Subject(community.getName());
             subject.setSemester(semester);
-            course.setSubject(subject);
+            community.setSubject(subject);
         }
-        return courseRepository.save(course);
-    }
-
-    @Override
-    public boolean exists(String courseName) {
-        return courseRepository.findByName(courseName) != null;
-    }
-
-    @Override
-    public List<Course> getAll() {
-        return courseRepository.findAll();
+        return super.create(community);
     }
 
     @Override

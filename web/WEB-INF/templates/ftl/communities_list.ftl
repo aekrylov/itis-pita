@@ -142,13 +142,13 @@
     {{for items}}
 	<li class="media">
         <div class="media-left media-middle">
-            <a href="/group/{{:id}}/">
+            <a href="/community/{{:id}}/">
                 <div class="media-object thumb-round"
                      style="background-image: url('{{:avatar}}');"></div>
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading community-title"><a class="link" href="/group/{{:id}}/">{{:name}}</a></h4>
+            <h4 class="media-heading community-title"><a class="link" href="/community/{{:id}}/">{{:name}}</a></h4>
 
             <div class="items">
             {{for tags}}
@@ -191,10 +191,7 @@
     all_courses_items = [
         <#list all_courses as ag>
             {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
-                tags:[
-                    <#list ag.interests as i>
-                        {text:'${i.name}'},
-                    </#list>],
+                tags:[],
                 members:${ag.members?size}},
         </#list>
     ];
@@ -202,10 +199,7 @@
     my_courses_items = [
         <#list my_courses as ag>
             {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
-                tags:[
-                    <#list ag.interests as i>
-                        {text:'${i.name}'},
-                    </#list>],
+                tags:[],
                 members:${ag.members?size}},
         </#list>
     ];
@@ -213,10 +207,7 @@
     all_labs_items = [
         <#list all_labs as ag>
             {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
-                tags:[
-                    <#list ag.interests as i>
-                        {text:'${i.name}'},
-                    </#list>],
+                tags:[],
                 members:${ag.members?size}},
         </#list>
     ];
@@ -224,10 +215,7 @@
     my_labs_items = [
         <#list my_labs as ag>
             {id:'${ag.id}', name:'${ag.name}', avatar:'${ag.imageLink!""}',
-                tags:[
-                    <#list ag.interests as i>
-                        {text:'${i.name}'},
-                    </#list>],
+                tags:[],
                 members:${ag.members?size}},
         </#list>
     ];
@@ -248,42 +236,42 @@ tags_items = [
 ];
 
 <#list all_groups_items as ag>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${ag.avatar!""}, ${ag.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${ag.avatar!""}, ${ag.members}</p>
     <#list ag.tags as i>
     <p>${i.name}</p>
     </#list>
 </#list>
 
 <#list my_groups_items as mg>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${mg.avatar!""}, ${mg.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${mg.avatar!""}, ${mg.members}</p>
     <#list mg.tags as i>
     <p>${i.name}</p>
     </#list>
 </#list>
 
 <#list all_courses_items as ac>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${ac.avatar!""}, ${ac.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${ac.avatar!""}, ${ac.members}</p>
     <#list ac.tags as i>
     <p>${i.name}</p>
     </#list>
 </#list>
 
 <#list my_courses_items as mc>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${mc.avatar!""}, ${mc.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${mc.avatar!""}, ${mc.members}</p>
     <#list mc.tags as i>
     <p>${i.name}</p>
     </#list>
 </#list>
 
 <#list all_labs_items as al>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${al.avatar!""}, ${al.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${al.avatar!""}, ${al.members}</p>
     <#list al.tags as i>
     <p>${i.name}</p>
     </#list>
 </#list>
 
 <#list my_labs_items as ml>
-<a href="/group/${ag.id}">${ag.name}</a>, <p>${ml.avatar!""}, ${ml.members}</p>
+<a href="/community/${ag.id}">${ag.name}</a>, <p>${ml.avatar!""}, ${ml.members}</p>
     <#list ml.tags as i>
     <p>${i.name}</p>
     </#list>

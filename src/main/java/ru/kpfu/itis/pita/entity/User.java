@@ -26,7 +26,7 @@ public class User {
 
     private boolean active = true;
 
-    private Collection<Group> groups;
+    private Collection<Community> communities;
 
     public User() {}
 
@@ -121,15 +121,15 @@ public class User {
     }
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "groups_members", joinColumns = {
+    @JoinTable(name = "communities_members", joinColumns = {
             @JoinColumn(name = "user_id")
-    }, inverseJoinColumns = {@JoinColumn(name = "group_id")})
-    public Collection<Group> getGroups() {
-        return groups;
+    }, inverseJoinColumns = {@JoinColumn(name = "community_id")})
+    public Collection<Community> getCommunities() {
+        return communities;
     }
 
-    public void setGroups(Collection<Group> groups) {
-        this.groups = groups;
+    public void setCommunities(Collection<Community> communities) {
+        this.communities = communities;
     }
 
     @Override

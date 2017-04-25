@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by 1 on 29.03.2017.
  */
-public class CourseCreateForm extends GroupCreateForm {
+public class CourseCreateForm extends CommunityCreateForm {
 
     private String schedule;
 

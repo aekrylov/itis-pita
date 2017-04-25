@@ -5,6 +5,6 @@ package ru.kpfu.itis.pita.form;
  * Date: 3/27/17 5:51 PM
  */
 
-public class LabCreateForm extends GroupCreateForm {
+public class LabCreateForm extends CommunityCreateForm {
 
 }

@@ -1,11 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
-import org.hibernate.annotations.SortNatural;
-
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.SortedSet;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -14,88 +10,20 @@ import java.util.SortedSet;
 
 @Entity
 @Table(name = "groups")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Group {
-
-    @Id
-    @GeneratedValue
-    private int id;
-
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected CommunityType type = CommunityType.GROUP;
-
-    @Column
-    private String imageLink;
-
-    @Lob
-    private String description;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User creator;
+@PrimaryKeyJoinColumn(name = "id")
+public class Group extends Community {
 
     @ManyToMany
     @JoinTable(name = "groups_interests")
     private Collection<Interest> interests;
 
-    @ManyToMany
-    @JoinTable(name = "groups_members", joinColumns = {
-            @JoinColumn(name = "group_id", referencedColumnName = "id")
-    }, inverseJoinColumns = {
-            @JoinColumn(name = "user_id", referencedColumnName = "id")
-    })
-    private Collection<User> members= new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(name = "groups_admins")
-    private Collection<User> admins = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "group")
-    @SortNatural
-    private SortedSet<WallPost> wall;
-
-    public Group() {}
+    public Group() {
+        super(CommunityType.GROUP);
+    }
 
     public Group(String name, String description, User creator, Collection<Interest> interests) {
-        this.name = name;
-        this.description = description;
-        this.creator = creator;
+        super(CommunityType.GROUP, name, description, creator);
         this.interests = interests;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
     }
 
     public Collection<Interest> getInterests() {
@@ -105,65 +33,5 @@ public class Group {
     public void setInterests(Collection<Interest> interests) {
         this.interests = interests;
     }
-
-    public Collection<User> getAdmins() {
-        return admins;
-    }
-
-    public void setAdmins(Collection<User> admins) {
-        this.admins = admins;
-    }
-
-    public Collection<User> getMembers() {
-        return members;
-    }
-
-    public void setMembers(Collection<User> members) {
-        this.members = members;
-    }
-
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Group)) return false;
-
-        Group group = (Group) o;
-
-        if (id != group.id) return false;
-        return name.equals(group.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + name.hashCode();
-        return result;
-    }
-
-    public SortedSet<WallPost> getWall() {
-        return wall;
-    }
-
-    public void setWall(SortedSet<WallPost> wall) {
-        this.wall = wall;
-    }
-
-    public CommunityType getType() {
-        return type;
-    }
-
-    public void setType(CommunityType type) {
-        this.type = type;
-    }
-
-    public enum CommunityType {GROUP, LAB, EVENT, COURSE}
 
 }

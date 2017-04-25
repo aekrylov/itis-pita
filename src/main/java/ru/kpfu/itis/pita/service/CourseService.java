@@ -2,17 +2,10 @@ package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Course;
 
-import java.util.List;
-
 /**
  * Created by 1 on 29.03.2017.
  */
-public interface CourseService {
+public interface CourseService extends CommunityService<Course> {
 
-    Course create(Course course);
-    boolean exists(String courseName);
-    List<Course> getAll();
-    Course getOne(int id);
     Course saveAndFlush(Course course);
-
 }
