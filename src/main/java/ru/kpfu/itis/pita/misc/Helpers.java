@@ -42,6 +42,9 @@ public class Helpers {
      * @return URL of uploaded file, or null if IO error is thrown by MultipartImage
      */
     public static String uploadFile(MultipartFile file) {
+        if(file == null || file.getSize() <= 0)
+            return null;
+
         Cloudinary cloudinary = new Cloudinary();
         try {
             Map result = cloudinary.uploader().upload(file.getBytes(), null);
