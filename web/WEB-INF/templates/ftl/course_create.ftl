@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label class=" control-label">Расписание</label>
                             <textarea class="form-control" style="resize: none"
-                                      onfocus="removeHasError('schedule')" rows="6" name="description"
+                                      onfocus="removeHasError('schedule')" rows="6" name="schedule"
                                       id="schedule"></textarea>
                         </div>
                     </div>

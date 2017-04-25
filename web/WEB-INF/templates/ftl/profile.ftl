@@ -8,8 +8,6 @@
 
 </#macro>
 
-
-
 <#macro body>
 <div class="row ">
     <div class="col-md-offset-1 col-md-10 undercover">
@@ -42,18 +40,22 @@
                                     <p class="form-control-static">${user.email}</p>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Группа:</label>
-                                <div class="col-sm-9">
-                                    <p class="form-control-static"> ${academic_group.name}</p>
+                            <#if user.academicGroup??>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Группа:</label>
+                                    <div class="col-sm-9">
+                                        <p class="form-control-static"> ${user.academicGroup.name}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Лаборатория:</label>
-                                <div class="col-sm-9">
-                                    <a style="display: block" href="#" class="form-control-static">${lab_id.name}</a>
+                            </#if>
+                            <#if user.lab??>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Лаборатория:</label>
+                                    <div class="col-sm-9">
+                                        <a style="display: block" href="#" class="form-control-static">${user.lab.name}</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </#if>
                         </div>
 
                     </div>
@@ -160,4 +162,4 @@
 
 </#macro>
 
-<@display "Группы" />
+<@display "Профиль" />

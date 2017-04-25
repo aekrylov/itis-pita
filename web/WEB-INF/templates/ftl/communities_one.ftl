@@ -173,14 +173,14 @@
                                 style="margin-top: 7px"
                             </#if>>
                             <#list 1..3 as j>
-                                <#if (course.members?size>=(i+1)*j)>
-                                    <#assign user = course.members[(i+1)*j-1]>
+                                <#if (group.members?size>=(i+1)*j)>
+                                    <#assign user = group.members[(i+1)*j-1]>
                                     <#if user?has_content>
                                     <a class="col-lg-4 group-member" href="#">
                                         <div class="col-lg-12 group-user-image-member">
                                             <img src="http://placehold.it/50x50"/>
                                         </div>
-                                        <b class="col-lg-12 group-user-profile-name-member">Имя</b>
+                                        <b class="col-lg-12 group-user-profile-name-member">${user.name}</b>
                                     </a>
                                     </#if>
                                 </#if>
