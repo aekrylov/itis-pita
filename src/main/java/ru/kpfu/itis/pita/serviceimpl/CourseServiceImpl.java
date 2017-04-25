@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
+import org.hibernate.Hibernate;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Course;
@@ -50,5 +52,22 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> getAll() {
         return courseRepository.findAll();
     }
+
+    @Override
+    @Transactional
+    public Course getOne(int id) {
+        Course course = courseRepository.findOne(id);
+        Hibernate.initialize(course.getAdmins());
+        Hibernate.initialize(course.getWall());
+        Hibernate.initialize(course.getInterests());
+        Hibernate.initialize(course.getCreator());
+        return course;
+    }
+
+    public Course saveAndFlush(Course course){
+        courseRepository.saveAndFlush(course);
+        return course;
+    }
+
 
 }

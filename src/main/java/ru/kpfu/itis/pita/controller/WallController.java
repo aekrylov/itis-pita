@@ -68,6 +68,7 @@ public class WallController {
             post.setImageLink(Helpers.uploadFile(form.getImage()));
 
         groupService.addPost(group_id, post);
+        // to do that redirect work  also with courses,events,labs
         return "redirect:/group/" + group_id + "/";
     }
 
