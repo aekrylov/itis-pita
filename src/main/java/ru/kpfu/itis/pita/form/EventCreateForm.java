@@ -1,5 +1,7 @@
 package ru.kpfu.itis.pita.form;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -8,8 +10,10 @@ import java.util.Date;
  */
 public class EventCreateForm extends CommunityCreateForm {
 
+    @DateTimeFormat(pattern = "dd MM yyyy - hh:mm")
     private Date date;
     private String place;
+    private int capacity;
 
     public Date getDate() {
         return date;
@@ -25,5 +29,13 @@ public class EventCreateForm extends CommunityCreateForm {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

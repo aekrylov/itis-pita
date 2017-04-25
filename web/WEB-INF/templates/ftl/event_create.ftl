@@ -87,7 +87,7 @@
 <script type="text/javascript">
     $(function () {
         $('#date').datetimepicker({
-            format: "dd mm yyyy - hh:mm",
+            format: "dd mm yyyy - hh:ii",
             startDate: moment().format("YYYY-MM-DD HH:mm"),
             autoclose: true,
             todayBtn: true,

@@ -63,6 +63,11 @@ public abstract class BaseCommunityServiceImpl<T extends Community> implements C
         return wallRepository.save(post);
     }
 
+    @Override
+    public T save(T entity) {
+        return repository.save(entity);
+    }
+
     @Autowired
     public void setWallRepository(WallRepository wallRepository) {
         this.wallRepository = wallRepository;

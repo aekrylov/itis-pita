@@ -1,7 +1,5 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
-import org.hibernate.Hibernate;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Course;
@@ -29,33 +27,15 @@ public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implemen
     }
 
     @Override
-    public Course create(Course community) {
-        if(community.getSubject() == null) {
+    public Course create(Course course) {
+        if(course.getSubject() == null) {
             Semester semester = new Semester(new Date().toString(), new Date());  //TODO
             semester = semesterRepository.save(semester);
 
-            Subject subject = new Subject(community.getName());
+            Subject subject = new Subject(course.getName());
             subject.setSemester(semester);
-            community.setSubject(subject);
+            course.setSubject(subject);
         }
-        return super.create(community);
+        return super.create(course);
     }
-
-    @Override
-    @Transactional
-    public Course getOne(int id) {
-        Course course = courseRepository.findOne(id);
-        Hibernate.initialize(course.getAdmins());
-        Hibernate.initialize(course.getWall());
-        Hibernate.initialize(course.getInterests());
-        Hibernate.initialize(course.getCreator());
-        return course;
-    }
-
-    public Course saveAndFlush(Course course){
-        courseRepository.saveAndFlush(course);
-        return course;
-    }
-
-
 }

@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.Community;
+import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
+import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.CommunityService;
 
 /**
@@ -53,4 +52,23 @@ public class CommunityController {
         map.put("community", community);
         return singleViewName;
     }
+
+    @PostMapping(path = "/")
+    public String doPost(ModelMap modelMap,@PathVariable Integer id,
+                         @RequestParam(value = "action") String action) {
+        Community community = service.getOne(id);
+        User currentUser = Helpers.getCurrentUser();
+
+        if(action.equals("join")){
+            community.getMembers().add(currentUser);
+        }
+        else if(action.equals("leave")){
+            community.getMembers().remove(currentUser);
+            community.getAdmins().remove(currentUser);
+        }
+        community = service.save(community);
+        modelMap.addAttribute("community", community);
+        return "course_page";
+    }
+
 }

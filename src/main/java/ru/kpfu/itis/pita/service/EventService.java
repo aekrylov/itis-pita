@@ -4,8 +4,5 @@ import ru.kpfu.itis.pita.entity.Event;
 /**
  * Created by volkov on 28.03.2017.
  */
-public interface EventService{
-    Event create(Event event);
-    boolean exists(String eventName);
-
+public interface EventService extends CommunityService<Event> {
 }

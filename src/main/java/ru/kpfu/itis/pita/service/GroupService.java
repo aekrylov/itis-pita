@@ -7,6 +7,4 @@ import ru.kpfu.itis.pita.entity.Group;
  * Date: 3/29/17 4:47 PM
  */
 public interface GroupService extends CommunityService<Group> {
-
-    void save(Group group);
 }

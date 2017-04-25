@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 
 /**
  * Created by cmen on 4/24/17.
+ *
+ * TODO move to community controller
  */
 
 @Controller

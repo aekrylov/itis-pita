@@ -10,7 +10,6 @@ import ru.kpfu.itis.pita.form.EventCreateForm;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/21/17 10:41 PM
  *
- * TODO
  */
 @Controller
 @RequestMapping(path = "/events/")
@@ -30,6 +29,7 @@ public class EventsController extends BaseCommunitiesController<EventCreateForm>
         Event event = new Event();
         event.setPlace(form.getPlace());
         event.setDate(form.getDate());
+        event.setMaxMembers(form.getCapacity());
         return event;
     }
 

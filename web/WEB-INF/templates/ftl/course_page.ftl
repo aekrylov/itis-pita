@@ -40,14 +40,14 @@
                 </div>
                 <form method="post" id="joinOrLeave">
                 <#if course.members?seq_contains(current_user)>
-                    <input type="hidden"  name="form" value="leave" form="joinOrLeave">
+                    <input type="hidden"  name="action" value="leave" form="joinOrLeave">
                     <button type="submit" type="submit" class="button-enter-group" form="joinOrLeave">Покинуть группу</button>
                 <#elseif course.admins?seq_contains(current_user)>
-                    <input type="hidden"  name="form" value="leave" form="joinOrLeave">
+                    <input type="hidden"  name="action" value="leave" form="joinOrLeave">
                     <button type="submit" class="button-enter-group"  style="display:inline; margin: 230px 0 0 87px">Покинуть группу
                     </button>
                 <#else>
-                    <input type="hidden"  name="form" value="join" form="joinOrLeave">
+                    <input type="hidden"  name="action" value="join" form="joinOrLeave">
                     <button type="submit" class="button-enter-group">Вступить в группу</button>
                 </#if>
                 </form>

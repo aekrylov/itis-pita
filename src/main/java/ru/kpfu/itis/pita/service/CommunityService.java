@@ -15,6 +15,7 @@ public interface CommunityService<T extends Community> {
     List<T> getAll();
     boolean exists(String name);
     T create(T entity);
+    T save(T entity);
 
     WallPost addPost(WallPost post);
     WallPost addPost(int groupId, WallPost post);

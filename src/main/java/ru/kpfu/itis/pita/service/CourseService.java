@@ -7,5 +7,4 @@ import ru.kpfu.itis.pita.entity.Course;
  */
 public interface CourseService extends CommunityService<Course> {
 
-    Course saveAndFlush(Course course);
 }
