@@ -17,14 +17,12 @@ import java.util.Date;
 @Service("courseService")
 public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implements CourseService{
 
-    private final CourseRepository courseRepository;
     private final SemesterRepository semesterRepository;
 
     @Autowired
     public CourseServiceImpl(CourseRepository courseRepository,
                              SemesterRepository semesterRepository) {
         super(courseRepository);
-        this.courseRepository = courseRepository;
         this.semesterRepository = semesterRepository;
     }
 

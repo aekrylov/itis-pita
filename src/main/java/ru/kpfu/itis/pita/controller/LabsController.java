@@ -8,10 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.LabCreateForm;
-import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.service.LabService;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -22,12 +19,9 @@ import ru.kpfu.itis.pita.service.LabService;
 @RequestMapping(path = "/labs")
 public class LabsController extends BaseCommunitiesController<LabCreateForm> {
 
-    private final LabService service;
-
     @Autowired
-    public LabsController(LabService service) {
-        super("lab_create", "redirect:/communities/");
-        this.service = service;
+    public LabsController() {
+        super("lab_create");
     }
 
     @Override
@@ -46,14 +40,8 @@ public class LabsController extends BaseCommunitiesController<LabCreateForm> {
     }
 
     @Override
-    protected Community createEntity(LabCreateForm form) {
-        User user = Helpers.getCurrentUser();
-        Lab lab = new Lab(form.getName(), form.getDescription(), user);
-
-        //todo save image
-
-        return service.create(lab);
-
+    protected Community getNewEntity(LabCreateForm form) {
+        return new Lab();
     }
 
     //TODO teachers list

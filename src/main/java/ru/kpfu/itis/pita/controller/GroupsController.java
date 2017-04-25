@@ -8,8 +8,6 @@ import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Interest;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
-import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.service.GroupService;
 import ru.kpfu.itis.pita.service.InterestService;
 
 import java.util.Arrays;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping(path = "/groups")
 public class GroupsController extends BaseCommunitiesController<GroupCreateForm> {
-    private GroupService groupService;
     private InterestService interestService;
 
     @ModelAttribute("interests")
@@ -31,9 +28,8 @@ public class GroupsController extends BaseCommunitiesController<GroupCreateForm>
     }
 
     @Autowired
-    public GroupsController(GroupService groupService, InterestService interestService) {
-        super("groupOfInterestCreation", "redirect:/communities/");
-        this.groupService = groupService;
+    public GroupsController(InterestService interestService) {
+        super("groupOfInterestCreation");
         this.interestService = interestService;
     }
 
@@ -43,9 +39,8 @@ public class GroupsController extends BaseCommunitiesController<GroupCreateForm>
     }
 
     @Override
-    protected Community createEntity(GroupCreateForm form) {
+    protected Community getNewEntity(GroupCreateForm form) {
         Group group = new Group();
-        group.setCreator(Helpers.getCurrentUser());
 
         String tags = form.getInterests();
         String[] separated_tags = tags.split(",");
@@ -55,10 +50,7 @@ public class GroupsController extends BaseCommunitiesController<GroupCreateForm>
                 .collect(Collectors.toList());
 
         group.setInterests(interests);
-        group.setName(form.getName());
-        group.setDescription(form.getDescription());
-        //todo image
-
-        return groupService.create(group);
+        return group;
     }
+
 }

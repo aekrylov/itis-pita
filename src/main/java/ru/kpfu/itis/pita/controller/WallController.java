@@ -12,7 +12,7 @@ import ru.kpfu.itis.pita.entity.WallPost;
 import ru.kpfu.itis.pita.form.PostCreateForm;
 import ru.kpfu.itis.pita.form.WallCommentForm;
 import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.CommunityService;
 import ru.kpfu.itis.pita.service.WallService;
 
 import javax.validation.Valid;
@@ -27,12 +27,12 @@ import javax.validation.Valid;
 @SessionAttributes("form")
 public class WallController {
 
-    private GroupService groupService;
+    private CommunityService communityService;
     private WallService wallService;
 
     @Autowired
-    public WallController(GroupService groupService, WallService wallService) {
-        this.groupService = groupService;
+    public WallController(CommunityService communityService, WallService wallService) {
+        this.communityService = communityService;
         this.wallService = wallService;
     }
 
@@ -47,13 +47,13 @@ public class WallController {
     }
 
     @GetMapping(path = "/new")
-    @PreAuthorize("hasPermission(#group_id, 'Group', 'post')")
+    @PreAuthorize("hasPermission(#group_id, 'Community', 'post')")
     public String newPostGet(@ModelAttribute("group_id") int group_id) {
         return "communities_newpost";
     }
 
     @PostMapping(path = "/new")
-    @PreAuthorize("hasPermission(#group_id, 'Group', 'post')")
+    @PreAuthorize("hasPermission(#group_id, 'Community', 'post')")
     public String newPostPost(@ModelAttribute("form") @Valid PostCreateForm form, BindingResult result,
                               /* Parameter group_id is needed here for security expression evaluation */
                               @ModelAttribute("group_id") int group_id,
@@ -67,12 +67,12 @@ public class WallController {
         if(form.getImage() != null || form.getImage().getSize() > 0)
             post.setImageLink(Helpers.uploadImage(form.getImage()));
 
-        groupService.addPost(group_id, post);
+        communityService.addPost(group_id, post);
         return "redirect:/group/" + group_id + "/";
     }
 
     @PostMapping(path = "/{post_id}/comments/new")
-    @PreAuthorize("hasPermission(#group_id, 'Group', 'comment')")
+    @PreAuthorize("hasPermission(#group_id, 'Community', 'comment')")
     public String newCommentPost(@ModelAttribute @Valid WallCommentForm form, BindingResult result,
                                  @ModelAttribute("group_id") int group_id,
                                  @PathVariable int post_id) {

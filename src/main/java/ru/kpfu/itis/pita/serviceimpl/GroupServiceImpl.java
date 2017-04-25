@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.repository.GroupRepository;
-import ru.kpfu.itis.pita.repository.WallRepository;
 import ru.kpfu.itis.pita.service.GroupService;
 
 import javax.transaction.Transactional;
@@ -18,14 +17,9 @@ import javax.transaction.Transactional;
 @Service("groupServiceImpl")
 public class GroupServiceImpl extends BaseCommunityServiceImpl<Group> implements GroupService {
 
-    private final GroupRepository groupRepository;
-    private final WallRepository wallRepository;
-
     @Autowired
-    public GroupServiceImpl(GroupRepository groupRepository, WallRepository wallRepository) {
+    public GroupServiceImpl(GroupRepository groupRepository) {
         super(groupRepository);
-        this.groupRepository = groupRepository;
-        this.wallRepository = wallRepository;
     }
 
     @Override

@@ -11,8 +11,6 @@ import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.CourseCreateForm;
-import ru.kpfu.itis.pita.misc.Helpers;
-import ru.kpfu.itis.pita.service.CourseService;
 import ru.kpfu.itis.pita.service.UserService;
 
 import javax.validation.Valid;
@@ -24,13 +22,11 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/courses")
 public class CoursesController extends BaseCommunitiesController<CourseCreateForm> {
-    private CourseService courseService;
     private UserService userService;
 
     @Autowired
-    public CoursesController(CourseService courseService, UserService userService) {
-        super("course_create", "redirect:/communities/");
-        this.courseService = courseService;
+    public CoursesController(UserService userService) {
+        super("course_create");
         this.userService = userService;
     }
 
@@ -56,14 +52,11 @@ public class CoursesController extends BaseCommunitiesController<CourseCreateFor
     }
 
     @Override
-    protected Community createEntity(CourseCreateForm form) {
+    protected Community getNewEntity(CourseCreateForm form) {
         Course course = new Course();
-        course.setName(form.getName());
-        course.setDescription(form.getDescription());
         course.setSchedule(form.getSchedule());
         course.setCapacity(form.getCapacity());
-        course.setCreator(Helpers.getCurrentUser());
-
-        return courseService.create(course);
+        return course;
     }
+
 }

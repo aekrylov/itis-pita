@@ -10,11 +10,11 @@ import ru.kpfu.itis.pita.service.GroupService;
  */
 @Controller
 @RequestMapping(path = "/group/{id}/")
-public class GroupController extends BaseCommunityController {
+public class GroupController extends CommunityController {
 
     @Autowired
     public GroupController(GroupService groupService) {
-        super(groupService, "communities_one");
+        super(groupService);
     }
 
 }
