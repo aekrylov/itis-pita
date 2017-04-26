@@ -126,11 +126,6 @@
 <script type="application/javascript">
     //see simpleTagsSelectizer for more information about items
     tags_items = [
-        {value: 'informatic', text: 'informatic'},
-        {value: 'java language', text: 'java language'},
-        {value: '.net framework', text: '.net framework'},
-        {value: 'itis-music', text: 'itis-music'},
-        {value: 'text_in_tag3', text: 'text_in_tag3'},
         <#list tags as tag>
             {value: '${tag.name}', text: '${tag.name}'},
         </#list>
