@@ -26,14 +26,21 @@ public abstract class BaseCommunitiesController<F extends CommunityCreateForm> {
 
     private final String createViewName;
     private CommunityService<Community> communityService;
+    private final Community.CommunityType type;
 
-    protected BaseCommunitiesController(String createViewName) {
-        this.createViewName = createViewName;
+    protected BaseCommunitiesController(Community.CommunityType type) {
+        this.createViewName = "communities_create";
+        this.type = type;
     }
 
     @ModelAttribute("form")
     public CommunityCreateForm newCreateForm() {
         return new CommunityCreateForm();
+    }
+
+    @ModelAttribute("type")
+    public Community.CommunityType communityType() {
+        return type;
     }
 
     private boolean isValid(CommunityCreateForm form, BindingResult result) {

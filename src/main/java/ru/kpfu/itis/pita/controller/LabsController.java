@@ -21,7 +21,7 @@ public class LabsController extends BaseCommunitiesController<LabCreateForm> {
 
     @Autowired
     public LabsController() {
-        super("lab_create");
+        super(Community.CommunityType.LAB);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CoursesController extends BaseCommunitiesController<CourseCreateFor
 
     @Autowired
     public CoursesController(UserService userService) {
-        super("course_create");
+        super(Community.CommunityType.COURSE);
         this.userService = userService;
     }
 

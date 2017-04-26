@@ -16,7 +16,7 @@ import ru.kpfu.itis.pita.form.EventCreateForm;
 public class EventsController extends BaseCommunitiesController<EventCreateForm> {
 
     protected EventsController() {
-        super("event_create");
+        super(Community.CommunityType.EVENT);
     }
 
     @Override

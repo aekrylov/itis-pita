@@ -29,7 +29,7 @@ public class GroupsController extends BaseCommunitiesController<GroupCreateForm>
 
     @Autowired
     public GroupsController(InterestService interestService) {
-        super("groupOfInterestCreation");
+        super(Community.CommunityType.GROUP);
         this.interestService = interestService;
     }
 
