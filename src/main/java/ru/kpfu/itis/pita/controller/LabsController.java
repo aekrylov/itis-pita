@@ -17,7 +17,7 @@ import ru.kpfu.itis.pita.form.LabCreateForm;
 
 @Controller
 @RequestMapping(path = "/labs")
-public class LabsController extends BaseCommunitiesController<LabCreateForm> {
+public class LabsController extends BaseCommunitiesController<Lab> {
 
     @Autowired
     public LabsController() {
@@ -40,7 +40,7 @@ public class LabsController extends BaseCommunitiesController<LabCreateForm> {
     }
 
     @Override
-    protected Community getNewEntity(LabCreateForm form) {
+    protected Lab getNewEntity() {
         return new Lab();
     }
 

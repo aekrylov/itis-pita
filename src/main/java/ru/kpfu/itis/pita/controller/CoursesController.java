@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(path = "/courses")
-public class CoursesController extends BaseCommunitiesController<CourseCreateForm> {
+public class CoursesController extends BaseCommunitiesController<Course> {
     private UserService userService;
 
     @Autowired
@@ -52,11 +52,8 @@ public class CoursesController extends BaseCommunitiesController<CourseCreateFor
     }
 
     @Override
-    protected Community getNewEntity(CourseCreateForm form) {
-        Course course = new Course();
-        course.setSchedule(form.getSchedule());
-        course.setCapacity(form.getCapacity());
-        return course;
+    protected Course getNewEntity() {
+        return new Course();
     }
 
 }

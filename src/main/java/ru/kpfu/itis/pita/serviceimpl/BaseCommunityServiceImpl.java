@@ -28,6 +28,8 @@ public abstract class BaseCommunityServiceImpl<T extends Community> implements C
     @Transactional
     public T getOne(int id) {
         T community = repository.findOne(id);
+        if(community == null)
+            return null;
         //since lazy collections will be needed, init them now
         Hibernate.initialize(community.getAdmins());
         Hibernate.initialize(community.getWall());
