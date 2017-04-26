@@ -12,6 +12,7 @@
 <!--for uploading pic-->
 <script src="/static/bootstrap-fileinputs/js/plugins/purify.min.js" type="text/javascript"></script>
 <script src="/static/bootstrap-fileinputs/js/locales/fa.js"></script>
+<!-- the main fileinput plugin file -->
 <script src="/static/bootstrap-fileinputs/js/fileinput.min.js"></script>
 <!--for tags-->
 <script src="/static/selectize/js/standalone/selectize.js"></script>
@@ -52,6 +53,7 @@
                 <input onfocus="removeHasError('name')" type="text" minlength="3" class="form-control"
                        name="name"
                        id="name"
+                       value="${form.name!""}"
                        placeholder="..введите название <#switch type><#case "COURSE">курса<#break><#case "GROUP">группы<#break><#case "LAB">лаборатории<#break><#case "EVENT">события<#break></#switch>"/>
 
             </div>
@@ -63,11 +65,11 @@
                         <label class=" control-label">Информация</label>
                         <textarea class="form-control" style="resize: none"
                                   onfocus="removeHasError('description')" rows="4" name="description"
-                                  id="description"></textarea>
+                                  id="description">${form.description!""}</textarea>
                     </div>
                     <div class="form-group" onclick="removeHasError('group_tags')">
                         <label class=" control-label">Темы группы</label>
-                        <input type="text" id="group_tags" class="selectized" name="interests"
+                        <input value="${form.interests!""}" type="text" id="group_tags" class="selectized" name="interests"
                                tabindex="-1" style="display: none;">
                     </div>
                     <script type="application/javascript">
@@ -88,7 +90,7 @@
                                 <label class=" control-label">Информация</label>
                                 <textarea class="form-control" style="resize: none"
                                           onfocus="removeHasError('description')" rows="4" name="description"
-                                          id="description"></textarea>
+                                          id="description">${form.description!""}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -118,7 +120,7 @@
                                 <label class=" control-label">Информация</label>
                                 <textarea class="form-control" style="resize: none"
                                           onfocus="removeHasError('description')" rows="6" name="description"
-                                          id="description"></textarea>
+                                          id="description">${form.description!""}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -126,7 +128,7 @@
                                 <label class=" control-label">Расписание</label>
                                 <textarea class="form-control" style="resize: none"
                                           onfocus="removeHasError('schedule')" rows="6" name="schedule"
-                                          id="schedule"></textarea>
+                                          id="schedule">${form.schedule!""}</textarea>
                             </div>
                         </div>
                     </div>
@@ -153,7 +155,7 @@
                             <div class="form-group" onclick="removeHasError('capacity')">
                                 <label class=" control-label">Количеcтво мест </label>
                                 <input type="number" class="form-control bfh-number" id="capacity" name="capacity"
-                                       data-min=1 data-max=1000>
+                                       data-min=1 value="${form.capacity!""}" data-max=1000>
                             </div>
                         </div>
                     </div>
@@ -167,18 +169,18 @@
                                 <textarea class="form-control" style="resize: none"
                                           onfocus="removeHasError('description')" rows="8" name="description"
                                           maxlength="2000"
-                                          id="description"></textarea>
+                                          id="description">${form.description!""}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label" for="place">Место события</label>
-                                <input class="form-control" type="text" id="place" name="place" maxlength="100"
+                                <input class="form-control" type="text" value="${form.place!""}" id="place" name="place" maxlength="100"
                                        onfocus="removeHasError('place')"/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="date">Дата и время проведения</label>
-                                <input type="text" class="form-control" id="date" name="date"
+                                <input type="text" class="form-control" id="date" name="date" value="${form.date!""}"
                                        onfocus="removeHasError('date')" readonly/>
                                 <script type="application/javascript">
                                     $(function () {
@@ -198,7 +200,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="capacity">Количество участников</label>
                                 <input type="number" class="form-control bfh-number" id="capacity" name="capacity"
-                                       data-min=0 data-max=1000>
+                                       data-min=0 value="${form.capacity!""}" data-max=1000>
                             </div>
                         </div>
                     </div>

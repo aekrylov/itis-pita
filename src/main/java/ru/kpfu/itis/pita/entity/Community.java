@@ -17,7 +17,26 @@ import java.util.SortedSet;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Community {
 
-    public enum CommunityType {GROUP, LAB, EVENT, COURSE}
+    public enum CommunityType {
+        GROUP(Group.class),
+        LAB(Lab.class),
+        EVENT(Event.class),
+        COURSE(Course.class);
+
+        private Class<? extends Community> clazz;
+
+        CommunityType(Class<? extends Community> clazz) {
+            this.clazz = clazz;
+        }
+
+        public static CommunityType getByClass(Class<? extends Community> clazz) {
+            for(CommunityType type: values()) {
+                if(type.clazz.isAssignableFrom(clazz))
+                    return type;
+            }
+            return null;
+        }
+    }
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

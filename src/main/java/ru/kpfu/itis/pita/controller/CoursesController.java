@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Course;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.form.CommunityCreateForm;
 import ru.kpfu.itis.pita.form.CourseCreateForm;
 import ru.kpfu.itis.pita.service.UserService;
 
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(path = "/courses")
-public class CoursesController extends BaseCommunitiesController<CourseCreateForm> {
+public class CoursesController extends BaseCommunitiesController<Course> {
     private UserService userService;
 
     @Autowired
@@ -41,22 +42,21 @@ public class CoursesController extends BaseCommunitiesController<CourseCreateFor
     }
 
     //override methods to add more annotations
+    @Override
     @PreAuthorize("hasAuthority('CREATE_COURSE')")
     public String doCreateGet() {
         return super.doCreateGet();
     }
 
+    @Override
     @PreAuthorize("hasAuthority('CREATE_COURSE')")
-    public String doCreatePost(@ModelAttribute @Valid CourseCreateForm form, BindingResult result, ModelMap map) {
+    public String doCreatePost(@ModelAttribute @Valid CommunityCreateForm<Course> form, BindingResult result, ModelMap map) {
         return super.doCreatePost(form, result, map);
     }
 
     @Override
-    protected Community getNewEntity(CourseCreateForm form) {
-        Course course = new Course();
-        course.setSchedule(form.getSchedule());
-        course.setCapacity(form.getCapacity());
-        return course;
+    protected Course getNewEntity() {
+        return new Course();
     }
 
 }

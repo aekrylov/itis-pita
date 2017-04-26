@@ -2,6 +2,8 @@ package ru.kpfu.itis.pita.form;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.itis.pita.entity.Community;
+import ru.kpfu.itis.pita.misc.Helpers;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -9,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * Base class for community forms
  */
-public class CommunityCreateForm {
+public class CommunityCreateForm<E extends Community> implements InfoForm<E> {
 
     @NotEmpty
     private String name;
@@ -41,5 +43,26 @@ public class CommunityCreateForm {
 
     public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    @Override
+    public void toEntity(E entity) {
+        entity.setName(getName());
+        entity.setDescription(getDescription());
+
+        if(entity.getCreator() == null)
+            entity.setCreator(Helpers.getCurrentUser());
+
+        if(getImage() != null && getImage().getSize() > 0) {
+            entity.setImageLink(Helpers.uploadImage(getImage()));
+        }
+    }
+
+    @Override
+    public CommunityCreateForm<E> fromEntity(E entity) {
+        name = entity.getName();
+        description = entity.getDescription();
+
+        return this;
     }
 }

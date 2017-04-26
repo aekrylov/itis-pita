@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Lab;
+import ru.kpfu.itis.pita.form.CommunityCreateForm;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.LabCreateForm;
 import ru.kpfu.itis.pita.service.UserService;
@@ -22,7 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/labs")
-public class LabsController extends BaseCommunitiesController<LabCreateForm> {
+public class LabsController extends BaseCommunitiesController<Lab> {
 
     private final UserService userService;
 
@@ -37,18 +38,20 @@ public class LabsController extends BaseCommunitiesController<LabCreateForm> {
         return new LabCreateForm();
     }
 
+    @Override
     @PreAuthorize("hasAuthority('CREATE_LAB')")
     public String doCreateGet() {
         return super.doCreateGet();
     }
 
+    @Override
     @PreAuthorize("hasAuthority('CREATE_LAB')")
-    public String doCreatePost(LabCreateForm form, BindingResult result, ModelMap map) {
+    public String doCreatePost(CommunityCreateForm<Lab> form, BindingResult result, ModelMap map) {
         return super.doCreatePost(form, result, map);
     }
 
     @Override
-    protected Community getNewEntity(LabCreateForm form) {
+    protected Lab getNewEntity() {
         return new Lab();
     }
 

@@ -10,16 +10,14 @@ import ru.kpfu.itis.pita.entity.Interest;
 import ru.kpfu.itis.pita.form.GroupCreateForm;
 import ru.kpfu.itis.pita.service.InterestService;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by taa on 30.03.2017.
  */
 @Controller
 @RequestMapping(path = "/groups")
-public class GroupsController extends BaseCommunitiesController<GroupCreateForm> {
+public class GroupsController extends BaseCommunitiesController<Group> {
     private InterestService interestService;
 
     @ModelAttribute("interests")
@@ -39,18 +37,8 @@ public class GroupsController extends BaseCommunitiesController<GroupCreateForm>
     }
 
     @Override
-    protected Community getNewEntity(GroupCreateForm form) {
-        Group group = new Group();
-
-        String tags = form.getInterests();
-        String[] separated_tags = tags.split(",");
-        List<Interest> interests = Arrays.stream(separated_tags)
-                .map(Interest::new)
-                .map(interest -> interestService.save(interest))
-                .collect(Collectors.toList());
-
-        group.setInterests(interests);
-        return group;
+    protected Group getNewEntity() {
+        return new Group();
     }
 
 }
