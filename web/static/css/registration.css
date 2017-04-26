@@ -1,0 +1,91 @@
+.header {
+    height: 60px;
+    background-color: #175132;
+    padding: 5px;
+    text-align: center;
+}
+
+.registration-block {
+    width: 450px;
+    padding: 20px;
+    background-color: rgba(29, 79, 80, 0.8);
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin: 90px auto;
+}
+
+.registration-block h1 {
+    text-align: center;
+    color: rgb(249, 165, 39);
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.registration-form input{
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    font-size: 14px;
+    outline: none;
+    color: white;
+    background: rgba(37, 103, 104, 0.7);
+}
+
+.forms-label{
+    text-align: start;
+    color: white;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.btn-submit-registration{
+    text-align: center;
+}
+
+.btn-registration {
+    font-size: 17px;
+    font-weight: bold;
+    width: 50%;
+    color: white;
+    display: inline-block;
+    padding: 6px 12px;
+    margin: auto;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgba(249, 165, 39, 0.7) none;
+    border-radius: 4px;
+    border: 1px solid #a5590d;
+}
+
+.btn-registration:active{
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    border: solid 1px #203E5F;
+    color: white;
+    outline: transparent none;
+}
+
+.btn-registration:hover{
+    color: white;
+    outline: none;
+}
+
+.btn-registration:focus {
+    color: white;
+    outline: none;
+}
