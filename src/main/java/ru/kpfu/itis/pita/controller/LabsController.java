@@ -5,10 +5,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Lab;
+import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.LabCreateForm;
+import ru.kpfu.itis.pita.service.UserService;
+
+import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -19,9 +24,12 @@ import ru.kpfu.itis.pita.form.LabCreateForm;
 @RequestMapping(path = "/labs")
 public class LabsController extends BaseCommunitiesController<LabCreateForm> {
 
+    private final UserService userService;
+
     @Autowired
-    public LabsController() {
+    public LabsController(UserService userService) {
         super(Community.CommunityType.LAB);
+        this.userService = userService;
     }
 
     @Override
@@ -45,5 +53,8 @@ public class LabsController extends BaseCommunitiesController<LabCreateForm> {
     }
 
     //TODO teachers list
-
+    @ModelAttribute("names")
+    public List<User> getAllWorkers() {
+        return userService.findAllWorkers();
+    }
 }
