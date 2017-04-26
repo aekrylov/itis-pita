@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Lab;
+import ru.kpfu.itis.pita.form.CommunityCreateForm;
 import ru.kpfu.itis.pita.form.LabCreateForm;
 
 /**
@@ -29,13 +30,15 @@ public class LabsController extends BaseCommunitiesController<Lab> {
         return new LabCreateForm();
     }
 
+    @Override
     @PreAuthorize("hasAuthority('CREATE_LAB')")
     public String doCreateGet() {
         return super.doCreateGet();
     }
 
+    @Override
     @PreAuthorize("hasAuthority('CREATE_LAB')")
-    public String doCreatePost(LabCreateForm form, BindingResult result, ModelMap map) {
+    public String doCreatePost(CommunityCreateForm<Lab> form, BindingResult result, ModelMap map) {
         return super.doCreatePost(form, result, map);
     }
 

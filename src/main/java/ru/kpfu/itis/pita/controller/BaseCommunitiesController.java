@@ -23,12 +23,11 @@ import javax.validation.Valid;
 @PreAuthorize("isFullyAuthenticated()")
 public abstract class BaseCommunitiesController<E extends Community> {
 
-    private final String createViewName;
-    private CommunityService<Community> communityService;
+    private final String createViewName = "communities_create";
+    private CommunityService<E> communityService;
     private final Community.CommunityType type;
 
     protected BaseCommunitiesController(Community.CommunityType type) {
-        this.createViewName = "communities_create";
         this.type = type;
     }
 
@@ -72,7 +71,7 @@ public abstract class BaseCommunitiesController<E extends Community> {
     }
 
     @Autowired
-    public void setCommunityService(CommunityService<Community> communityService) {
+    public void setCommunityService(CommunityService<E> communityService) {
         this.communityService = communityService;
     }
 }

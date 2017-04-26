@@ -39,7 +39,7 @@
                     <input onfocus="removeHasError('name')" type="text" minlength="3" class="form-control"
                            name="name"
                            id="name"
-                           placeholder="..введите название курса"/>
+                           placeholder="Название..." value="${form.name!""}"/>
 
                 </div>
                 <div class="row">
@@ -48,21 +48,22 @@
                             <label class=" control-label">Информация</label>
                             <textarea class="form-control" style="resize: none"
                                       onfocus="removeHasError('description')" rows="6" name="description"
-                                      id="description"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class=" control-label">Расписание</label>
-                            <textarea class="form-control" style="resize: none"
-                                      onfocus="removeHasError('schedule')" rows="6" name="schedule"
-                                      id="schedule"></textarea>
+                                      id="description">${form.description!""}</textarea>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <#switch type>
                         <#case "COURSE">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class=" control-label">Расписание</label>
+                                    <textarea class="form-control" style="resize: none"
+                                              onfocus="removeHasError('schedule')" rows="6" name="schedule"
+                                              id="schedule">${form.schedule!""}</textarea>
+                                </div>
+                            </div>
+
                             <div class="col-md-8">
                                 <div class="form-group" onclick="removeHasError('course_teacher_search')">
                                     <label class=" control-label"><span
@@ -76,57 +77,33 @@
                                 <div class="form-group"  onclick="removeHasError('capacity')">
                                     <label class=" control-label">Количеcтво мест </label>
                                     <input type="number" class="form-control bfh-number" id="capacity"  name="capacity"
-                                           data-min=1 data-max=1000>
+                                           data-min=1 data-max=1000 value="${form.capacity!""}">
                                 </div>
                             </div>
-
-                            <script type="application/javascript">
-                                //see simpleTagsSelectizer for more information about items
-                                items = [
-                                    <#list names as name>
-                                        {value:'${name.id}, text:${name.name}},
-                                    </#list>
-                                ];
-                                $.onload = simpleTagsSelectizer('course_teacher_search',items);
-                            </script>
-
 
                             <#break>
                         <#case "GROUP">
                             <div class="form-group" onclick="removeHasError('group_tags')">
                                 <label class=" control-label">Темы группы</label>
                                 <input type="text" id="group_tags" class="selectized" name="interests"
-                                       tabindex="-1" style="display: none;">
+                                       tabindex="-1" style="display: none;" value="${form.interests!""}">
                             </div>
 
-                        <script type="application/javascript">
-                            //see groupTagsSelectizer for more information about items
-                            items = [
-                                <#if interests??>
-                                    <#list interests as i>
-                                        { value: '${i.name}', text: '${i.name}' },
-                                    </#list>
-                                </#if>
-                            ];
-
-
-                            $.onload = simpleTagsSelectizer('group_tags', items);
-                        </script>
                         <#break >
                         <#case "EVENT">
                             <div class="form-group">
                                 <label class="control-label" for="place">Место события</label>
-                                <input class="form-control" id="place" name="place" onfocus="removeHasError('place')"/>
+                                <input class="form-control" id="place" name="place" value="${form.place!""}" onfocus="removeHasError('place')"/>
                             </div>
                             <div class="form-group">
                             <#-- TODO incorrect date format -->
                                 <label class="control-label" for="date">Дата и время проведения</label>
-                                <input type="text" class="form-control" id="date" name="date" onfocus="removeHasError('date')" readonly/>
+                                <input type="text" class="form-control" id="date" name="date" value="${form.date!""}" onfocus="removeHasError('date')" readonly/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="capacity">Количество участников</label>
                                 <input type="number" class="form-control bfh-number" id="capacity" name="capacity"
-                                       data-min=0 data-max=1000>
+                                       data-min=0 data-max=1000 value="${form.capacity!""}">
                             </div>
 
                         <script type="text/javascript">
@@ -176,6 +153,35 @@
 <script src="/static/js/simpleTagsSelectizer.js"></script>
 <script src="/static/js/removeHasError.js"></script>
 <script src="/static/formhelper/js/bootstrap-formhelpers.js"></script>
+
+<#-- TODO -->
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    interests = [
+        <#if interests??>
+            <#list interests as i>
+                { value: '${i.name}', text: '${i.name}' },
+            </#list>
+        </#if>
+    ];
+
+
+    $(simpleTagsSelectizer('group_tags', interests));
+</script>
+
+<script type="application/javascript">
+    //see simpleTagsSelectizer for more information about items
+    names = [
+        <#if names??>
+        <#list names as name>
+            {value:'${name.id}, text:${name.name}},
+        </#list>
+        </#if>
+    ];
+    $(simpleTagsSelectizer('course_teacher_search',names));
+</script>
+
+
 </#macro>
 
 <#--<#macro body>

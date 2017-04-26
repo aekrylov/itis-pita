@@ -50,6 +50,9 @@ public class CommunityCreateForm<E extends Community> implements InfoForm<E> {
         entity.setName(getName());
         entity.setDescription(getDescription());
 
+        if(entity.getCreator() == null)
+            entity.setCreator(Helpers.getCurrentUser());
+
         if(getImage() != null && getImage().getSize() > 0) {
             entity.setImageLink(Helpers.uploadImage(getImage()));
         }

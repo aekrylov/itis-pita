@@ -50,7 +50,7 @@ public abstract class BaseCommunityServiceImpl<T extends Community> implements C
     public T create(T community) {
         community.getMembers().add(community.getCreator());
         community.getAdmins().add(community.getCreator());
-        return repository.save(community);
+        return save(community);
     }
 
     @Override
