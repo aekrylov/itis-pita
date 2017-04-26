@@ -17,19 +17,11 @@
     margin-left: 10px;
 }
 
-.first-tab.work-block {
-     border-top-left-radius: 0px;
 
-}
-.tab-content>.work-block {
+.tab-content.work-block {
     margin-top: 0px;
 }
-.tab-content>.work-block + .work-block {
-    border-top-left-radius: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 0;
-}
+
 
 
 .no-border-tabs, .no-border-tabs:active, .no-border-tabs:hover {
@@ -40,8 +32,12 @@
     margin-bottom: 0px;
     padding-bottom: 0px;
 }
-
-
+.no-border-tabs > li > a {
+    color: white;
+}
+.no-border-tabs > li > a:hover {
+    color: black;
+}
 
 .test{
     background-color: red;
