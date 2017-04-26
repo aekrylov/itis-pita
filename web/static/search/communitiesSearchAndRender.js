@@ -10,12 +10,9 @@ function renderGroups(items, target) {
     target.html(html);
 }
 function tagsFilter(items, tags_source) {
-    console.log('tags_filter_on');
-    console.log(tags_source.val());
     if (typeof tags_source === 'undefined' || tags_source.val() === null || typeof tags_source.val() === 'undefined' || tags_source.val() === '') {
         return items;
     }
-    console.log(tags_source);
     var values = tags_source.val().split(',');
 
     var options = {
@@ -53,7 +50,7 @@ function searchGroups(items, source, tagsSource) {
         if (tagsSource !== null && typeof tagsSource !== 'undefined') {
             var options = {
                 shouldSort: true,
-                threshold: 0.8,
+                threshold: 0.2,
                 location: 0,
                 distance: 100,
                 maxPatternLength: 32,
@@ -73,56 +70,56 @@ function searchGroups(items, source, tagsSource) {
     }
 }
 function searchAndRender(querySource, tagsSource, items, container) {
-    var items = searchGroups(items, querySource, tagsSource);
-    renderGroups(items, container);
+    var items_to_render = searchGroups(items, querySource, tagsSource);
+    renderGroups(items_to_render, container);
     return false;
 }
-var currentSearchConfig;
+
 var types = {
     my: new Object(), all: new Object()
-}
+};
 var scopes = {
     courses: new Object(), labs: new Object(), groups: new Object()
-}
+};
+var container = $('#communities_list');
 var currentSearchConfig = {
     type: types.my,
     input: $('#search_input'),
     tags_input : $('#search_tags_input'),
     scope : scopes.groups,
-    out : $('#courses_list')
+    out : container
 };
 
 var configs = {
     my_courses : {
         scope_items : my_courses_items,
-        out:$('#courses_list')
+        out:container
     },
     my_labs : {
         scope_items : my_labs_items,
-        out:$('#labs_list')
+        out:container
     },
     my_groups : {
         scope_items : my_groups_items,
-        out:$('#groups_list')
+        out:container
     },
     all_courses : {
         scope_items : all_courses_items,
-        out:$('#courses_list')
+        out:container
     },
     all_labs : {
         scope_items : all_labs_items,
-        out:$('#labs_list')
+        out:container
     },
     all_groups : {
         scope_items : all_groups_items,
-        out:$('#groups_list')
+        out:container
     }
 
 
-}
+};
 function changeSearchConfig(type,scope) {
-    console.log(type);
-    console.log(scope);
+
     if (typeof type !== 'undefined'){
         currentSearchConfig.type = type;
     }
@@ -136,27 +133,21 @@ function standartSearch() {
     if (currentSearchConfig.type === types.my){
         if (currentSearchConfig.scope === scopes.courses){
             currentCollectionConfig = configs.my_courses;
-            console.log('selected my_courses');
         } else {
             if (currentSearchConfig.scope === scopes.groups){
                 currentCollectionConfig = configs.my_groups;
-                console.log('selected my_groups');
             } else {
                 currentCollectionConfig = configs.my_labs;
-                console.log('selected my_labs');
             }
         }
     } else {
         if (currentSearchConfig.scope === scopes.courses){
             currentCollectionConfig = configs.all_courses;
-            console.log('selected all_courses');
         } else {
             if (currentSearchConfig.scope === scopes.groups){
                 currentCollectionConfig = configs.all_groups;
-                console.log('selected all_groups');
             } else {
                 currentCollectionConfig = configs.all_labs;
-                console.log('selected all_labs');
             }
         }
     }
