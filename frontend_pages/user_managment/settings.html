@@ -1,152 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--suppress ALL -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Настройки</title>
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <link href="../formhelper/css/bootstrap-formhelpers.css" rel="stylesheet" media="screen">
+    <link href="../css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="../selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../css/profile.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="../js/jquery-3.1.1.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../formhelper/js/bootstrap-formhelpers.js"></script>
+    <script src="../formhelper/js/bootstrap-formhelper-phone.js"></script>
+    <script src="../js/passwordsMatcher.js"></script>
+    <script src="../js/ajax-email-checker.js"></script>
+    <script src="../js/checkform.js"></script>
+    <script src="../js/removeHasError.js"></script>
+
 </head>
-
 <body>
-<div class="row">
-    <div class="col-md-12">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+<div class="page">
+    <header>
 
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="../img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="../img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
 
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">Вход</a></li>
-                        <li><a href="/profile">Моя страница</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-offset-2 col-xs-8">
-        <h1 class="page-header"> Настройки </h1>
-    </div>
-</div>
-<!-- /.row -->
-
-
-<div class="row">
-    <div class="col-xs-offset-2 col-xs-8">
-        <form role="form" class="form-horizontal" action="/profile/edit" method="POST"
-              onsubmit="return checkform(['email']) && checkEmail()">
-            <div class="form-group">
-                <label class="col-xs-3 control-label">ФИО</label>
-
-                <div class="col-xs-6" style="margin-top: 7px">
-                    Вася Пупкин Сергеевич
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Обо мне</label>
-                <div class="col-xs-6">
-                        <textarea class="form-control" rows="3" name="about_me" id="about_me">Обо мне инфа
-                    </textarea>
-                </div>
+        </div><!-- /.container-fluid -->
+    </nav>
 
-            </div>
-            <div class="form-group">
-                <label class="col-xs-3 control-label">Интересы</label>
-                <div class="col-xs-6">
-                    <textarea class="form-control" rows="3" name="interests" id="interests">Мои интересы</textarea>
-                </div>
 
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-xs-3 control-label">Номер телефона</label>
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-offset-3 col-md-6 undercover">
+                <div class="row">
+                    <div class="col-md-12 green-header">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2>Настройки</h2>
+                            </div>
+                        </div>
 
-                <div class="col-xs-6">
-                    <input type="text" class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-xs-3 control-label">Email</label>
+                <div class="row">
+                    <div class="col-md-12">
+                        <br/>
 
-                <div class="col-xs-6">
-                    <input type="email" class="form-control" name="email"
-                           id="email" maxlength="50" oninput="checkEmail()"
-                           placeholder="ololo@mail.ru"/>
+                        <form role="form" action="/profile/edit" method="POST"
+                              onsubmit="return checkform(['email']) && checkEmail()">
+                            <div class="form-group">
+                                <label class="control-label">ФИО</label>
+                                <p class="form-control form-control-static">Вася Пупкин Сергеевич</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Обо мне</label>
+                                <textarea class="form-control" rows="3" name="about_me"
+                                          id="about_me">Обо мне инфа</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Интересы</label>
+                                <textarea class="form-control" rows="3" name="interests"
+                                          id="interests">Мои интересы</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Номер телефона</label>
+                                <input type="text" class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd"
+                                       value="+74531233333">
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                       id="email" maxlength="50" oninput="checkEmail()"
+                                       value="ololo@mail.ru"/>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn-warning btn btn-block" type="submit">Сохранить</button>
+                            </div>
+                        </form>
+
+
+                        <a class="btn btn-primary btn-block" data-toggle="modal"
+                           data-target="#change_password_modal"> Сменить
+                            пароль</a>
+
+                        <div class="modal fade" id="change_password_modal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form class="form-horizontal" action="/settings" method="POST"
+                                          onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="form-group">
+                                                <label for="password" class="col-xs-3 control-label">Старый
+                                                    пароль</label>
+
+                                                <div class="col-xs-6">
+                                                    <input type="password" class="form-control" name="old_password"
+                                                           id="old_password" maxlength="50"
+                                                           oninput="removeHasError('old_password')"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password" class="col-xs-3 control-label">Новый
+                                                    пароль</label>
+
+                                                <div class="col-xs-6">
+                                                    <input type="password" class="form-control" name="password"
+                                                           id="password" maxlength="50"
+                                                           oninput="removeHasError('password')"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="repeated_password" class="col-xs-3 control-label">Повторите
+                                                    пароль</label>
+
+                                                <div class="col-xs-6">
+                                                    <input type="password" class="form-control" name="password"
+                                                           id="repeated_password" maxlength="50"
+                                                           oninput="removeHasError('repeated_password')"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена
+                                            </button>
+                                            <button class="btn-success btn" type="submit">Изменить пароль</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <button class="btn-success btn btn-block" type="submit">Сохранить</button>
-                </div>
-            </div>
-        </form>
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6">
-                <a class="btn btn-primary btn-block" data-toggle="modal" data-target="#change_password_modal"> Сменить
-                    пароль</a>
             </div>
         </div>
-        <div class="modal fade" id="change_password_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form class="form-horizontal" action="/settings" method="POST"
-                          onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
+        <!-- /.row -->
 
-                            <div class="form-group">
-                                <label for="password" class="col-xs-3 control-label">Старый пароль</label>
 
-                                <div class="col-xs-6">
-                                    <input type="password" class="form-control" name="old_password"
-                                           id="old_password" maxlength="50" oninput="removeHasError('old_password')"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-xs-3 control-label">Новый пароль</label>
-
-                                <div class="col-xs-6">
-                                    <input type="password" class="form-control" name="password"
-                                           id="password" maxlength="50" oninput="removeHasError('password')"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="repeated_password" class="col-xs-3 control-label">Повторите пароль</label>
-
-                                <div class="col-xs-6">
-                                    <input type="password" class="form-control" name="password"
-                                           id="repeated_password" maxlength="50" oninput="removeHasError('repeated_password')"/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                            <button class="btn-success btn" type="submit">Изменить пароль</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
     </div>
-</div>
+    <div class="push"></div>
 
-<hr>
-<script src="../js/jquery-3.1.1.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../formhelper/js/bootstrap-formhelpers.js"></script>
-<script src="../formhelper/js/bootstrap-formhelper-phone.js"></script>
-<script src="../js/passwordsMatcher.js"></script>
-<script src="../js/checkform.js"></script>
-<script src="../js/removeHasError.js"></script>
+</div>
+<footer>
+
+</footer>
+
+
 </body>
 </html>
