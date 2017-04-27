@@ -58,20 +58,6 @@
     font-family: HelveticaBold;
 }
 
-.group-label-admins{
-    font-size: large;
-    text-align: center;
-    width: 145px;
-    border-bottom: 2px solid #244ca5;
-}
-
-.group-teacher-label, .group-timetable-label {
-    margin-top: 40px;
-    font-size: large;
-    background-color: rgba(242, 242, 242, 1);
-    padding: 4px 5px 4px;
-}
-
 .group-teacher-profile{
     margin-top: 10px;
 }
@@ -168,8 +154,6 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
-.group-user-profile
 
 .group-create-post-image-upload-icon{
     font-size: 40px;

@@ -9,7 +9,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "courses")
 @PrimaryKeyJoinColumn(name = "id")
-public class Course extends Group {
+public class Course extends Community {
 
     @Column(nullable = false)
     private int capacity;
@@ -29,12 +29,11 @@ public class Course extends Group {
     private Subject subject;
 
     public Course() {
-        setType(CommunityType.COURSE);
+        super(CommunityType.COURSE);
     }
 
-    public Course(String name, String description, User creator, Collection<Interest> interests, int capacity) {
-        super(name, description, creator, interests);
-        setType(CommunityType.COURSE);
+    public Course(String name, String description, User creator, int capacity) {
+        super(CommunityType.COURSE, name, description, creator);
         this.capacity = capacity;
     }
 

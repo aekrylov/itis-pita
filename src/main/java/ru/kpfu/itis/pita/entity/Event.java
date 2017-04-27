@@ -1,9 +1,6 @@
 package ru.kpfu.itis.pita.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
@@ -15,7 +12,15 @@ import java.util.Date;
 @Entity
 @Table(name = "events")
 @PrimaryKeyJoinColumn(name = "id")
-public class Event extends Group {
+public class Event extends Community {
+
+    @ManyToMany
+    @JoinTable(name = "events_interests", joinColumns = {
+            @JoinColumn(name = "event_id", referencedColumnName = "id")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "interest_id", referencedColumnName = "id")
+    })
+    private Collection<Interest> interests;
 
     @Column(name = "place", nullable = false)
     private String place;
@@ -27,12 +32,14 @@ public class Event extends Group {
     private int maxMembers = -1;
 
     public Event() {
+        super(CommunityType.EVENT);
         setType(CommunityType.EVENT);
     }
 
     public Event(String name, String description, User creator, Collection<Interest> interests, String place, Date date) {
-        super(name, description, creator, interests);
+        super(CommunityType.EVENT, name, description, creator);
         setType(CommunityType.EVENT);
+        this.interests = interests;
         this.place = place;
         this.date = date;
     }
@@ -64,5 +71,13 @@ public class Event extends Group {
 
     public void setMaxMembers(int maxMembers) {
         this.maxMembers = maxMembers;
+    }
+
+    public Collection<Interest> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(Collection<Interest> interests) {
+        this.interests = interests;
     }
 }

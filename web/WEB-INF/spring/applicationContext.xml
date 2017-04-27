@@ -13,6 +13,7 @@
     <context:component-scan base-package="ru.kpfu.itis.pita.serviceimpl" />
     <context:component-scan base-package="ru.kpfu.itis.pita.config" />
     <context:component-scan base-package="ru.kpfu.itis.pita.validator" />
+    <context:component-scan base-package="ru.kpfu.itis.pita.misc" />
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="WEB-INF/messages/messages" />

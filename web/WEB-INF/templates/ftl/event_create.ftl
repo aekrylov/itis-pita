@@ -52,6 +52,7 @@
                     <input class="form-control" id="place" name="place" onfocus="removeHasError('place')"/>
                 </div>
                 <div class="form-group">
+                    <#-- TODO incorrect date format -->
                     <label class="control-label" for="date">Дата и время проведения</label>
                     <input type="text" class="form-control" id="date" name="date" onfocus="removeHasError('date')" readonly/>
                 </div>
@@ -86,8 +87,7 @@
 <script type="text/javascript">
     $(function () {
         $('#date').datetimepicker({
-            language: 'ru',
-            format: "dd MM yyyy - hh:ii",
+            format: "dd mm yyyy - hh:ii",
             startDate: moment().format("YYYY-MM-DD HH:mm"),
             autoclose: true,
             todayBtn: true,

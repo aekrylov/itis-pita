@@ -7,7 +7,7 @@ html, body {
     height: 100%;
 }
 body {
-    background: url('../img/kfu_background.png') fixed; /* fixed stops background from scrolling */
+    background: url('/static/img/kfu_background.png') fixed; /* fixed stops background from scrolling */
     background-size: cover;
 
 }
@@ -27,6 +27,7 @@ footer {
 .page {
     min-height: 100%;
     height: auto !important;
+    height: 100%;
     margin: 0 auto -50px;
 }
 
@@ -41,7 +42,7 @@ footer {
 
 }
 
-.pita-header .navbar-collapse,a  {
+.pita-header .navbar-collapse, .pita-header a  {
     color: white;
 }
 

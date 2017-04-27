@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.security.UserDetails;
-import ru.kpfu.itis.pita.service.GroupService;
+import ru.kpfu.itis.pita.service.CommunityService;
 import ru.kpfu.itis.pita.service.InterestService;
 import ru.kpfu.itis.pita.service.UserService;
 
@@ -27,32 +27,38 @@ import java.util.List;
 @PreAuthorize("isFullyAuthenticated()")
 public class CommunitiesController {
 
-    private GroupService groupService;
     private UserService userService;
     private InterestService interestService;
+    private CommunityService<Community> communityService;
 
     @Autowired
-    public CommunitiesController(GroupService groupService, UserService userService, InterestService interestService) {
-        this.groupService = groupService;
+    public CommunitiesController(UserService userService, InterestService interestService, CommunityService<Community> communityService) {
         this.userService = userService;
         this.interestService = interestService;
+        this.communityService = communityService;
     }
+
 
     @GetMapping(path = "/")
     @Transactional
     public String listAll(ModelMap map) {
-        List<Group> allGroups = groupService.getAll(); //returns all groups and child entities as well
-        List<Course> allCourses = Helpers.filterByType(allGroups, Course.class);
-        List<Lab> allLabs = Helpers.filterByType(allGroups, Lab.class);
+        Class<?>[] classes = new Class[]{Group.class, Course.class, Lab.class, Event.class};
+        //todo reasonable hierarchy
+
+        List<Community> allComms = communityService.getAll();
+        List<Group> allGroups = Helpers.filterByType(allComms, Group.class);
+        List<Course> allCourses = Helpers.filterByType(allComms, Course.class);
+        List<Lab> allLabs = Helpers.filterByType(allComms, Lab.class);
 
         User user = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
         //todo lazy init
         //user is stored in http session and hence is detached from db session
         user = userService.findByEmail(user.getEmail());
 
-        Collection<Group> myGroups = user.getGroups(); //returns all groups and child entities as well
-        Collection<Course> myCourses = Helpers.filterByType(myGroups, Course.class);
-        Collection<Lab> myLabs = Helpers.filterByType(myGroups, Lab.class);
+        Collection<Community> myComms = user.getCommunities(); //returns all groups and child entities as well
+        Collection<Group> myGroups = Helpers.filterByType(myComms, Group.class);
+        Collection<Course> myCourses = Helpers.filterByType(myComms, Course.class);
+        Collection<Lab> myLabs = Helpers.filterByType(myComms, Lab.class);
 
         map.put("all_courses", allCourses);
         map.put("all_labs", allLabs);

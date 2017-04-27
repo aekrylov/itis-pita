@@ -65,6 +65,8 @@ public class RegistrationController {
             return "redirect:/registration";
         }
 
+        //todo add student specific information
+
         User user = new User();
         user.setName(form.getSurname() + " " + form.getName());
         user.setEmail(form.getEmail());

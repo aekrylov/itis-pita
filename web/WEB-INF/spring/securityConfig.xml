@@ -14,9 +14,11 @@
         <!-- TODO enable CSRF -->
         <!-- TODO remember me -->
         <security:csrf disabled="true" />
-        <security:form-login login-page="/login" username-parameter="email" password-parameter="password"/>
+        <security:form-login login-page="/login" username-parameter="email" password-parameter="password"
+                             default-target-url="/profile"/>
         <security:logout logout-url="/logout" logout-success-url="/login" />
         <security:intercept-url pattern="/admin/**" access="hasRole('SUPERUSER')" />
+        <security:intercept-url pattern="/" access="isFullyAuthenticated()" />
     </security:http>
 
     <security:authentication-manager>

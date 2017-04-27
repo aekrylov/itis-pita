@@ -8,8 +8,6 @@
 
 </#macro>
 
-
-
 <#macro body>
 <div class="row ">
     <div class="col-md-offset-1 col-md-10 undercover">
@@ -29,36 +27,37 @@
                     <div class="col-md-12">
                         <h4>Инфо</h4>
                         <hr class="full-grey-hr"/>
-
-                            <div>
-                                <div class="form-group">
-                                    <#--'E' char in "Email" need to be in Cyrillic. :) No idea, how to fix.-->
-                                    <label class="col-sm-4 control-label">Еmail:</label>
-                                    <div class="col-sm-8">
-                                        <p class="form-control-static">${user.email}</p>
-                                    </div>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                            <#--'E' char in "Email" need to be in Cyrillic. :) No idea, how to fix.-->
+                                <label class="col-sm-3 control-label">Еmail:</label>
+                                <div class="col-sm-9">
+                                    <p class="form-control-static">${user.email}</p>
                                 </div>
+                            </div>
+                            <#if user.academicGroup??>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Группа:</label>
                                     <div class="col-sm-8">
-                                        <p class="form-control-static">${academic_group.name}</p>
+                                        <p class="form-control-static"> ${user.academicGroup.name}</p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Телефон:</label>
-                                    <div class="col-sm-8">
-                                        <p class="form-control-static">${user.phone}</p>
-                                    </div>
+                            </#if>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Телефон:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">${user.phone}</p>
                                 </div>
+                            </div>
+                            <#if user.lab??>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Лаборатория:</label>
                                     <div class="col-sm-8">
-                                        <a style="display: block" href="/group/>${lab_id.id}" class="form-control-static">${lab_id.name}</a>
+                                        <a style="display: block" href="/group/>${user.lab.id}" class="form-control-static">${user.lab.name}</a>
                                     </div>
                                 </div>
-                            </div>
-
-
+                            </#if>
+                        </div>
 
                     </div>
                 </div>
@@ -164,4 +163,4 @@
 
 </#macro>
 
-<@display "Группы" />
+<@display "Профиль" />

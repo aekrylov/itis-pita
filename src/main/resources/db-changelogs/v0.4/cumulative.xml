@@ -8,5 +8,6 @@
 
     <include file="01_wallpost_image.xml" relativeToChangelogFile="true" />
     <include file="02_community_type.xml" relativeToChangelogFile="true" />
+    <include file="03_communities.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>

@@ -19,7 +19,7 @@
     <link href="/static/css/common.css" rel="stylesheet">
 
     <script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
     <@header_custom_imports>
 
     </@header_custom_imports>

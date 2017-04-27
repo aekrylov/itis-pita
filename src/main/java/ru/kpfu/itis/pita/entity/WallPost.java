@@ -12,7 +12,7 @@ import java.util.SortedSet;
  */
 
 @Entity
-@Table(name = "group_wall")
+@Table(name = "community_wall")
 public class WallPost implements Comparable<WallPost> {
 
     @Id
@@ -21,7 +21,7 @@ public class WallPost implements Comparable<WallPost> {
     private int id;
 
     @ManyToOne(optional = false)
-    private Group group;
+    private Community community;
 
     @ManyToOne(optional = false)
     private User author;
@@ -50,15 +50,15 @@ public class WallPost implements Comparable<WallPost> {
         this.videoLink = videoLink;
     }
 
-    public WallPost(Group group, User author, String text, String videoLink) {
-        this.group = group;
+    public WallPost(Community community, User author, String text, String videoLink) {
+        this.community = community;
         this.author = author;
         this.text = text;
         this.videoLink = videoLink;
     }
 
-    public WallPost(Group group, User author, String text, Date timestamp, String videoLink) {
-        this.group = group;
+    public WallPost(Community community, User author, String text, Date timestamp, String videoLink) {
+        this.community = community;
         this.author = author;
         this.text = text;
         this.timestamp = timestamp;
@@ -71,14 +71,6 @@ public class WallPost implements Comparable<WallPost> {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 
     public User getAuthor() {
@@ -113,6 +105,22 @@ public class WallPost implements Comparable<WallPost> {
         this.videoLink = videoLink;
     }
 
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public SortedSet<WallComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(SortedSet<WallComment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,14 +128,14 @@ public class WallPost implements Comparable<WallPost> {
 
         WallPost groupPost = (WallPost) o;
 
-        if (!group.equals(groupPost.group)) return false;
+        if (!community.equals(groupPost.getCommunity())) return false;
         if (!author.equals(groupPost.author)) return false;
         return timestamp.equals(groupPost.timestamp);
     }
 
     @Override
     public int hashCode() {
-        int result = group.hashCode();
+        int result = community.hashCode();
         result = 31 * result + author.hashCode();
         result = 31 * result + timestamp.hashCode();
         return result;
