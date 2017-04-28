@@ -31,7 +31,7 @@
                             <div class="form-group">
                             <#--'E' char in "Email" need to be in Cyrillic. :) No idea, how to fix.-->
                                 <label class="col-sm-4 control-label">Еmail:</label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <p class="form-control-static">${user.email}</p>
                                 </div>
                             </div>

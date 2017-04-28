@@ -66,11 +66,8 @@
                                         <@security.authentication property="principal.user.name" /> <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
+                                        <li><a href="/communities/">Сообщества</a></li>
+                                        <li><a href="/profile/edit">Настройки</a></li>
                                     </ul>
 
                                 </li>
