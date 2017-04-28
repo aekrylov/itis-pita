@@ -3,6 +3,9 @@ package ru.kpfu.itis.pita.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.kpfu.itis.pita.entity.Course;
+import ru.kpfu.itis.pita.form.CommunityCreateForm;
+import ru.kpfu.itis.pita.form.CourseCreateForm;
 import ru.kpfu.itis.pita.service.CourseService;
 
 /**
@@ -10,9 +13,14 @@ import ru.kpfu.itis.pita.service.CourseService;
  */
 @Controller
 @RequestMapping(path = "/course/{id}/")
-public class CourseController extends CommunityController  {
+public class CourseController extends CommunityController<Course>  {
     @Autowired
     public CourseController(CourseService courseService) {
-        super(courseService,"course_page");
+        super(courseService);
+    }
+
+    @Override
+    protected CommunityCreateForm<Course> editForm(Course community) {
+        return new CourseCreateForm().fromEntity(community);
     }
 }

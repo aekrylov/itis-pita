@@ -16,28 +16,71 @@
                     <p>${community.description}</p>
                 </div>
                 <div class="row">
-                    <#-- TODO -->
-<#--
-                    <div class="col-lg-12 group-tags">
-                        <#list community.interests as interest>
-                            <div class="group-tag">${interest}</div>
-                        </#list>
-                    </div>
--->
+
+                    <#switch community.type>
+                        <#case "GROUP">
+                            <div class="col-lg-12 group-tags">
+                                <#list community.interests as interest>
+                                    <div class="group-tag">${interest}</div>
+                                </#list>
+                            </div>
+                            <#break >
+                        <#case "EVENT">
+                            <h5 class="col-lg-12 group-info-header">Дата</h5>
+                            <div class="col-lg-12 group-timetable">
+                            ${community.date}
+                            </div>
+                            <h5 class="col-lg-12 group-info-header">Место проведения</h5>
+                            <div class="col-lg-12 group-timetable">
+                            ${community.place}
+                            </div>
+                            <h5 class="col-lg-12 group-info-header">Количество свободных мест</h5>
+                            <div class="col-lg-12 group-timetable">
+                                <#if community.maxMembers==-1>
+                                    Неограниченно
+                                <#else>
+                                    Зарегистрированно ${community.members?size} из ${community.maxMembers}
+                                </#if>
+                            </div>
+                            <#break >
+                        <#case "COURSE">
+                            <h5 class="col-lg-12 group-info-header">Преподаватели</h5>
+                            <div class="col-lg-12 group-teacher">
+                                <#list community.teachers as teacher>
+                                    <a href="/profile?id=${teacher.id}">
+                                        <div class="group-teacher-profile">
+                                        <#--TODO teacher's avatar-->
+                                            <img src="http://placehold.it/50x50"/>
+                                            <b class="group-teacher-profile-name">${teacher.name}</b>
+                                        </div>
+                                    </a>
+                                </#list>
+                            </div>
+                            <h5 class="col-lg-12 group-info-header">Расписание</h5>
+                            <div class="col-lg-12 group-timetable">
+                                ${community.schedule!""}
+                            </div>
+                            <#break >
+                        </#switch>
                 </div>
             </div>
             <div class="col-lg-4 group-block">
+                    <form method="post">
                 <div class="group-image">
                     <img src="${community.imageLink!"/static/img/avatar_example.png"}">
                 </div>
                 <#if community.members?seq_contains(current_user)>
-                    <button class="button-enter-group">Покинуть группу</button>
+                    <input type="hidden"  name="action" value="leave" >
+                    <button type="submit" class="button-enter-group">Покинуть группу</button>
                 <#elseif community.admins?seq_contains(current_user)>
-                <button class="button-enter-group" style="display:inline; margin: 230px 0 0 87px">Покинуть группу</button>
-                <a href="#"><span class="glyphicon glyphicon-edit group-modify-icon"></span></a>
+                    <input type="hidden"  name="action" value="leave">
+                    <button type="submit" class="button-enter-group" style="display:inline; margin: 230px 0 0 87px">Покинуть группу</button>
+                    <a href="#"><span class="glyphicon glyphicon-edit group-modify-icon"></span></a>
                 <#else>
-                    <button class="button-enter-group">Вступить в группу</button>
+                    <input type="hidden"  name="action" value="join">
+                    <button type="submit" class="button-enter-group">Вступить в группу</button>
                 </#if>
+                    </form>
                 <div class="col-lg-12 group-admins">
                     <#list community.admins as admin>
                         <a class="" href="/profile?id=${admin.id}">

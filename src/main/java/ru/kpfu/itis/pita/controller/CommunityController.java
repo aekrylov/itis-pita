@@ -29,18 +29,13 @@ import javax.validation.Valid;
 public class CommunityController<E extends Community> {
 
     private final CommunityService<E> service;
-    private final String singleViewName;
+    private final String singleViewName = "communities_one";
 
     private E community;
 
-    public CommunityController(CommunityService<E> service, String singleViewName) {
-        this.service = service;
-        this.singleViewName = singleViewName;
-    }
-
     @Autowired
     public CommunityController(@Qualifier("communityService") CommunityService<E> service) {
-        this(service, "communities_one");
+        this.service = service;
     }
 
     @ModelAttribute("id")
@@ -87,7 +82,7 @@ public class CommunityController<E extends Community> {
         }
         community = service.save(community);
         modelMap.addAttribute("community", community);
-        return "communities_one";
+        return singleViewName;
     }
 
     @GetMapping(path = "/edit")
@@ -111,7 +106,7 @@ public class CommunityController<E extends Community> {
         form.toEntity(community);
 
         service.save(community);
-        return "communities_one";
+        return singleViewName;
 
     }
 }

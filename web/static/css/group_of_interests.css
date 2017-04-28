@@ -314,3 +314,10 @@
 .group-create-comment-submit{
     float: right;
 }
+
+.group-info-header {
+    margin-top: 40px;
+    font-size: large;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 4px 5px 4px;
+}
