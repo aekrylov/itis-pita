@@ -39,28 +39,28 @@
                       onsubmit="return checkform(['email']) && checkEmail()">
                     <div class="form-group">
                         <label class="control-label">ФИО</label>
-                        <p class="form-control form-control-static">${name}</p>
+                        <p class="form-control form-control-static">${form.name}</p>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Обо мне</label>
                         <textarea class="form-control" rows="3" name="about_me"
-                                  id="about_me"><#if info?has_content>${info}</#if></textarea>
+                                  id="about_me">${form.about_me!""}</textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Интересы</label>
                         <input class="selectized"  name="interests"
-                                  id="interests" value="<#if interset?has_content>${interests}</#if>"/>
+                                  id="interests" value="${form.interests!""}"/>
                     </div>
                     <div class="form-group">
                         <label for="email" class="control-label">Номер телефона</label>
                         <input type="text" class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd"
-                               value="${phone_number}">
+                               value="${form.phone}" name="phone">
                     </div>
                     <div class="form-group">
                         <label for="email" class="control-label">Email</label>
                         <input type="email" class="form-control" name="email"
                                id="email" maxlength="50" oninput="checkEmail()"
-                               value="${email}"/>
+                               value="${form.email}"/>
                     </div>
                     <div class="form-group">
                         <button class="btn-warning btn btn-block" type="submit">Сохранить</button>

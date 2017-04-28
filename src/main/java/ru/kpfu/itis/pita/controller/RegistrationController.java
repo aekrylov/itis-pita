@@ -70,7 +70,7 @@ public class RegistrationController {
         User user = new User();
         user.setName(form.getSurname() + " " + form.getName());
         user.setEmail(form.getEmail());
-        user.setPasswordHash(form.getPassword());
+        user.setPasswordRaw(form.getPassword());
         user.setPhone(form.getPhone());
         user.setRole(UserRole.ROLE_STUDENT);
         //todo set inactive

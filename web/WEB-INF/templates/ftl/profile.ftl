@@ -57,6 +57,13 @@
                                     </div>
                                 </div>
                             </#if>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Обо мне:</label>
+                                <div class="col-sm-8">
+                                    <p class="form-control-static">${user.aboutMe!""}</p>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

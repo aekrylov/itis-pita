@@ -17,6 +17,9 @@ public class User {
     private String name;
     private String email;
     private String phone;
+    private String aboutMe;
+
+    private String passwordRaw;
     private String passwordHash;
 
     private String secretQuestion;
@@ -131,6 +134,26 @@ public class User {
     public void setCommunities(Collection<Community> communities) {
         this.communities = communities;
     }
+
+    @Transient
+    public String getPasswordRaw() {
+        return passwordRaw;
+    }
+
+    public void setPasswordRaw(String passwordRaw) {
+        this.passwordRaw = passwordRaw;
+    }
+
+    @Column(name = "about_me")
+    @Lob
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
 
     @Override
     public boolean equals(Object o) {
