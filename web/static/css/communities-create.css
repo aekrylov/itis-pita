@@ -1,0 +1,15 @@
+
+.green-header{
+    color: white;
+    background-color: rgba(0, 82, 71, 0.86);
+    font-family: Helvetica, Helvetica Neue,sans-serif;
+}
+.work-block {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin:15px 0px;
+
+}

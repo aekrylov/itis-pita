@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.form.CommunityCreateForm;
-import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.CommunityService;
 
 import javax.validation.Valid;
@@ -22,31 +21,34 @@ import javax.validation.Valid;
  * and also can override handler methods to add custom annotations.
  */
 @PreAuthorize("isFullyAuthenticated()")
-public abstract class BaseCommunitiesController<F extends CommunityCreateForm> {
+public abstract class BaseCommunitiesController<E extends Community> {
 
-    private final String createViewName;
-    private CommunityService<Community> communityService;
+    private final String createViewName = "communities_create";
+    private CommunityService<E> communityService;
+    private final Community.CommunityType type;
 
-    protected BaseCommunitiesController(String createViewName) {
-        this.createViewName = createViewName;
+    protected BaseCommunitiesController(Community.CommunityType type) {
+        this.type = type;
     }
 
     @ModelAttribute("form")
-    public CommunityCreateForm newCreateForm() {
-        return new CommunityCreateForm();
+    public CommunityCreateForm<E> newCreateForm() {
+        return new CommunityCreateForm<E>();
+    }
+
+    /**
+     * Creates new empty entity
+     * @return new entity
+     */
+    protected abstract E getNewEntity();
+
+    @ModelAttribute("type")
+    public Community.CommunityType communityType() {
+        return type;
     }
 
     private boolean isValid(CommunityCreateForm form, BindingResult result) {
         return !(result.hasErrors() || communityService.exists(form.getName()));
-    }
-
-    private void fillEntity(CommunityCreateForm form, Community community) {
-        community.setName(form.getName());
-        community.setDescription(form.getDescription());
-        community.setCreator(Helpers.getCurrentUser());
-        if(form.getImage() != null && form.getImage().getSize() > 0) {
-            community.setImageLink(Helpers.uploadImage(form.getImage()));
-        }
     }
 
     @GetMapping(path = "/create")
@@ -55,30 +57,21 @@ public abstract class BaseCommunitiesController<F extends CommunityCreateForm> {
     }
 
     @PostMapping(path = "/create")
-    public String doCreatePost(@ModelAttribute("form") @Valid F form, BindingResult result,
+    public String doCreatePost(@ModelAttribute("form") @Valid CommunityCreateForm<E> form, BindingResult result,
                                ModelMap map) {
         if(!isValid(form, result)) {
             return createViewName;
         }
 
-        Community community = getNewEntity(form);
+        E community = getNewEntity();
         //todo move to form/entity?
-        fillEntity(form, community);
+        form.toEntity(community);
         communityService.create(community);
         return "redirect:/communities/";
     }
 
-    /**
-     * Creates new entity given the form and performs child class - specific operations
-     * (like filling child-specific fields).
-     * Entity returned will be saved to DB
-     * @param form form
-     * @return entity to save to the DB
-     */
-    protected abstract Community getNewEntity(F form);
-
     @Autowired
-    public void setCommunityService(CommunityService<Community> communityService) {
+    public void setCommunityService(CommunityService<E> communityService) {
         this.communityService = communityService;
     }
 }

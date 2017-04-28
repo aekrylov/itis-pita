@@ -5,12 +5,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.form.CommunityCreateForm;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.CommunityService;
+
+import javax.validation.Valid;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -22,18 +26,20 @@ import ru.kpfu.itis.pita.service.CommunityService;
 @Controller
 @RequestMapping(path = "/community/{id}")
 @PreAuthorize("isFullyAuthenticated()")
-public class CommunityController {
+public class CommunityController<E extends Community> {
 
-    private final CommunityService service;
+    private final CommunityService<E> service;
     private final String singleViewName;
 
-    public CommunityController(CommunityService service, String singleViewName) {
+    private E community;
+
+    public CommunityController(CommunityService<E> service, String singleViewName) {
         this.service = service;
         this.singleViewName = singleViewName;
     }
 
     @Autowired
-    public CommunityController(@Qualifier("communityService") CommunityService service) {
+    public CommunityController(@Qualifier("communityService") CommunityService<E> service) {
         this(service, "communities_one");
     }
 
@@ -42,21 +48,34 @@ public class CommunityController {
         return id;
     }
 
-    @GetMapping(path = "/")
-    public String getOne(@PathVariable("id") int id, ModelMap map) {
-        Community community = service.getOne(id);
+    @ModelAttribute("community")
+    public E community(@PathVariable("id") int id) {
+        E community = service.getOne(id);
         if(community == null) {
             throw new EntityNotFoundException(id);
         }
 
-        map.put("community", community);
+        this.community = community;
+        return community;
+    }
+
+    @ModelAttribute("type")
+    public final Community.CommunityType type(@ModelAttribute("community") E community) {
+        return community.getType();
+    }
+
+    protected CommunityCreateForm<E> editForm(E community) {
+        return new CommunityCreateForm<E>().fromEntity(community);
+    }
+
+    @GetMapping(path = "/")
+    public String getOne() {
         return singleViewName;
     }
 
     @PostMapping(path = "/")
     public String doPost(ModelMap modelMap,@PathVariable Integer id,
                          @RequestParam(value = "action") String action) {
-        Community community = service.getOne(id);
         User currentUser = Helpers.getCurrentUser();
 
         if(action.equals("join")){
@@ -68,7 +87,31 @@ public class CommunityController {
         }
         community = service.save(community);
         modelMap.addAttribute("community", community);
-        return singleViewName;
+        return "communities_one";
     }
 
+    @GetMapping(path = "/edit")
+    public String doEditGet(ModelMap map) {
+        map.put("form", editForm(community));
+        //todo
+        return "communities_create";
+    }
+
+    private boolean isValid(BindingResult result) {
+        return !(result.hasErrors());
+    }
+
+    @PostMapping("/edit")
+    public String doEditPost(@ModelAttribute("form") @Valid CommunityCreateForm<E> form, BindingResult result) {
+        if(!isValid(result)) {
+            //todo
+            return "communities_create";
+        }
+
+        form.toEntity(community);
+
+        service.save(community);
+        return "communities_one";
+
+    }
 }

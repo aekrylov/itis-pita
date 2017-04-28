@@ -2,6 +2,7 @@ package ru.kpfu.itis.pita.form;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.kpfu.itis.pita.entity.Event;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +12,7 @@ import java.util.Date;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 4/24/17 4:41 PM
  */
-public class EventCreateForm extends CommunityCreateForm {
+public class EventCreateForm extends CommunityCreateForm<Event> {
 
     //@DateTimeFormat(pattern = "dd MM yyyy - hh:mm")
     private Date date;
@@ -42,5 +43,22 @@ public class EventCreateForm extends CommunityCreateForm {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    @Override
+    public void toEntity(Event entity) {
+        super.toEntity(entity);
+        entity.setDate(date);
+        entity.setPlace(place);
+        entity.setMaxMembers(capacity);
+    }
+
+    @Override
+    public EventCreateForm fromEntity(Event entity) {
+        date = entity.getDate();
+        place = entity.getPlace();
+        capacity = entity.getMaxMembers();
+        super.fromEntity(entity);
+        return this;
     }
 }

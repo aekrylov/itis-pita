@@ -13,10 +13,10 @@ import ru.kpfu.itis.pita.form.EventCreateForm;
  */
 @Controller
 @RequestMapping(path = "/events/")
-public class EventsController extends BaseCommunitiesController<EventCreateForm> {
+public class EventsController extends BaseCommunitiesController<Event> {
 
     protected EventsController() {
-        super("event_create");
+        super(Community.CommunityType.EVENT);
     }
 
     @Override
@@ -25,12 +25,8 @@ public class EventsController extends BaseCommunitiesController<EventCreateForm>
     }
 
     @Override
-    protected Community getNewEntity(EventCreateForm form) {
-        Event event = new Event();
-        event.setPlace(form.getPlace());
-        event.setDate(form.getDate());
-        event.setMaxMembers(form.getCapacity());
-        return event;
+    protected Event getNewEntity() {
+        return new Event();
     }
 
 }
