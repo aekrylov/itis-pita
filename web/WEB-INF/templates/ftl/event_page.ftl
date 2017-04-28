@@ -7,7 +7,7 @@
 <#macro body>
 <div class="undercover">
     <#if error?has_content>
-    <p>${error}</p>
+        <p>${error}</p>
     <#else>
         <div class="col-lg-12 group-main-block">
             <h2 class="group-label-text">${community.name}</h2>
@@ -17,21 +17,21 @@
                 <div class="col-lg-12 group-info">
                     <p>${community.description}</p>
                 </div>
-                <h5 class="col-lg-12 group-teacher-label">Преподаватели</h5>
-                <div class="col-lg-12 group-teacher">
-                    <#list community.teachers as teacher>
-                        <a href="/profile?id=${teacher.id}">
-                            <div class="group-teacher-profile">
-                            <#--TODO teacher's avatar-->
-                                <img src="http://placehold.it/50x50"/>
-                                <b class="group-teacher-profile-name">${teacher.name}</b>
-                            </div>
-                        </a>
-                    </#list>
-                </div>
-                <h5 class="col-lg-12 group-timetable-label">Расписание</h5>
+                <h5 class="col-lg-12 group-timetable-label">Дата</h5>
                 <div class="col-lg-12 group-timetable">
-                ${community.schedule}
+                ${community.date}
+                </div>
+                <h5 class="col-lg-12 group-timetable-label">Место проведения</h5>
+                <div class="col-lg-12 group-timetable">
+                ${community.place}
+                </div>
+                <h5 class="col-lg-12 group-timetable-label">Количество свободных мест</h5>
+                <div class="col-lg-12 group-timetable">
+                    <#if community.maxMembers==-1>
+                        Неограниченно
+                    <#else>
+                        Зарегистрированно ${community.members?size} из ${community.maxMembers}
+                    </#if>
                 </div>
             </div>
             <div class="col-lg-4 group-block">
@@ -39,17 +39,17 @@
                     <img src="http://placehold.it/275x280">
                 </div>
                 <form method="post" id="joinOrLeave">
-                <#if community.members?seq_contains(current_user)>
-                    <input type="hidden"  name="action" value="leave" form="joinOrLeave">
-                    <button type="submit" type="submit" class="button-enter-group" form="joinOrLeave">Покинуть группу</button>
-                <#elseif community.admins?seq_contains(current_user)>
-                    <input type="hidden"  name="action" value="leave" form="joinOrLeave">
-                    <button type="submit" class="button-enter-group"  style="display:inline; margin: 230px 0 0 87px">Покинуть группу
-                    </button>
-                <#else>
-                    <input type="hidden"  name="action" value="join" form="joinOrLeave">
-                    <button type="submit" class="button-enter-group">Вступить в группу</button>
-                </#if>
+                    <#if community.members?seq_contains(current_user)>
+                        <input type="hidden"  name="action" value="leave" form="joinOrLeave">
+                        <button type="submit" type="submit" class="button-enter-group" form="joinOrLeave">Покинуть мероприяте</button>
+                    <#elseif community.admins?seq_contains(current_user)>
+                        <input type="hidden"  name="action" value="leave" form="joinOrLeave">
+                        <button type="submit" class="button-enter-group"  style="display:inline; margin: 230px 0 0 87px">Покинуть мероприятие
+                        </button>
+                    <#else>
+                        <input type="hidden"  name="action" value="join" form="joinOrLeave">
+                        <button type="submit" class="button-enter-group">Записаться на мероприятие</button>
+                    </#if>
                 </form>
                 <div class="col-lg-12 group-admins">
                     <#list community.admins as admin>
@@ -169,8 +169,8 @@
                             </#if>
                             <div class="col-lg-12 group-comment-create">
                                 <textarea class="group-create-comment-text" type="text" id="create-comment"
-                                placeholder="Введите свой комментарий&hellip;"
-                                name="create-comment">
+                                          placeholder="Введите свой комментарий&hellip;"
+                                          name="create-comment">
                                 </textarea>
                                 <button class="group-create-comment-submit" type="submit">ОТПРАВИТЬ</button>
                                 <div class="group-create-post-image-upload">
@@ -190,19 +190,19 @@
                         <#list 0..(((community.members?size)-1)/3) as i>
                             <div class="row" <#if i == 1>
                                  style="margin-bottom: 7px"
-                                 </#if>>
+                            </#if>>
                                 <#list 1..3 as j>
                                     <#if (community.members?size>=i*3+j)>
-                                    <#assign user = community.members[i*3+j-1]>
-                                    <#if user?has_content>
-                                        <a class="col-lg-4 group-member" href="#">
-                                            <div class="col-lg-12 group-user-image-member">
-                                            <#--TODO user's avatar-->
-                                                <img src="http://placehold.it/50x50"/>
-                                            </div>
-                                            <b class="col-lg-12 group-user-profile-name-member">${user.name}</b>
-                                        </a>
-                                    </#if>
+                                        <#assign user = community.members[i*3+j-1]>
+                                        <#if user?has_content>
+                                            <a class="col-lg-4 group-member" href="#">
+                                                <div class="col-lg-12 group-user-image-member">
+                                                <#--TODO user's avatar-->
+                                                    <img src="http://placehold.it/50x50"/>
+                                                </div>
+                                                <b class="col-lg-12 group-user-profile-name-member">${user.name}</b>
+                                            </a>
+                                        </#if>
                                     </#if>
                                 </#list>
                             </div>

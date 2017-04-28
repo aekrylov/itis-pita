@@ -31,6 +31,7 @@ public abstract class BaseCommunityServiceImpl<T extends Community> implements C
         //since lazy collections will be needed, init them now
         Hibernate.initialize(community.getAdmins());
         Hibernate.initialize(community.getWall());
+        Hibernate.initialize(community.getCreator());
         return community;
     }
 

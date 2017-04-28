@@ -1,7 +1,10 @@
 package ru.kpfu.itis.pita.form;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,7 +13,7 @@ import java.util.Date;
  */
 public class EventCreateForm extends CommunityCreateForm {
 
-    @DateTimeFormat(pattern = "dd MM yyyy - hh:mm")
+    //@DateTimeFormat(pattern = "dd MM yyyy - hh:mm")
     private Date date;
     private String place;
     private int capacity;
@@ -19,8 +22,10 @@ public class EventCreateForm extends CommunityCreateForm {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(String date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy - hh:mm");
+        Date pars = format.parse(date);
+        this.date = pars;
     }
 
     public String getPlace() {

@@ -45,7 +45,6 @@ public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implemen
     @Transactional
     public Course getOne(int id) {
         Course course = super.getOne(id);
-        Hibernate.initialize(course.getCreator());
         return course;
     }
 }

@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Event;
@@ -14,5 +15,10 @@ public class EventServiceImpl extends BaseCommunityServiceImpl<Event> implements
     @Autowired
     public EventServiceImpl(EventRepository eventRepository) {
         super(eventRepository);
+    }
+
+    public Event getOne(int id) {
+        Event event = super.getOne(id);
+        return event;
     }
 }
