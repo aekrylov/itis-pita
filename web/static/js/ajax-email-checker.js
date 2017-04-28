@@ -4,18 +4,18 @@
 var checkEmail = function() {
     var email = $('#email');
     $.ajax({
-        'url': '/ajax/email-check',
-        'data': {
+        url: 'http://localhost:8080/ajax/email-check',
+        data: {
             'email': email.val()
         },
-        'method': 'get',
-        'success': function (obj) {
-            if (obj.result) {
+        method: 'get',
+        success: function (obj) {
+            if (obj) {
                 $("#email_exists").remove();
                 email.parent().removeClass("has-error");
-                email.parent().addClass("has-success");
+                //email.parent().addClass("has-success");
             } else {
-                email.parent().removeClass("has-success");
+                //email.parent().removeClass("has-success");
                 email.parent().addClass("has-error");
                 if ($("#email_exists").length) {
 

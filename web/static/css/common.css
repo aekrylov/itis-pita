@@ -7,7 +7,7 @@ html, body {
     height: 100%;
 }
 body {
-    background: url('/static/img/kfu_background.png') fixed; /* fixed stops background from scrolling */
+    background: url('/static/img/kfu_background.png') no-repeat fixed; /* fixed stops background from scrolling */
     background-size: cover;
 
 }
