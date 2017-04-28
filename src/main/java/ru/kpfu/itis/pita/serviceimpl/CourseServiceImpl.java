@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.serviceimpl;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.itis.pita.entity.Course;
@@ -9,6 +10,7 @@ import ru.kpfu.itis.pita.repository.CourseRepository;
 import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.service.CourseService;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 
 /**
@@ -37,5 +39,13 @@ public class CourseServiceImpl extends BaseCommunityServiceImpl<Course> implemen
             course.setSubject(subject);
         }
         return super.create(course);
+    }
+
+    @Override
+    @Transactional
+    public Course getOne(int id) {
+        Course course = super.getOne(id);
+        Hibernate.initialize(course.getCreator());
+        return course;
     }
 }

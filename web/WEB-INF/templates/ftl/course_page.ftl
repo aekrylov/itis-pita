@@ -187,13 +187,13 @@
                 <div class="col-lg-4">
                     <div class="col-lg-12 group-members">
                         <div class="group-members-label">Участники</div>
-                        <#list 0..(course.members?size/3) as i>
+                        <#list 0..(((course.members?size)-1)/3) as i>
                             <div class="row" <#if i == 1>
                                  style="margin-bottom: 7px"
                                  </#if>>
                                 <#list 1..3 as j>
-                                    <#if (course.members?size>=(i+1)*j)>
-                                    <#assign user = course.members[(i+1)*j-1]>
+                                    <#if (course.members?size>=i*3+j)>
+                                    <#assign user = course.members[i*3+j-1]>
                                     <#if user?has_content>
                                         <a class="col-lg-4 group-member" href="#">
                                             <div class="col-lg-12 group-user-image-member">

@@ -49,7 +49,7 @@ public class CommunityController {
             throw new EntityNotFoundException(id);
         }
 
-        map.put("community", community);
+        map.put("course", community);
         return singleViewName;
     }
 
@@ -67,8 +67,8 @@ public class CommunityController {
             community.getAdmins().remove(currentUser);
         }
         community = service.save(community);
-        modelMap.addAttribute("community", community);
-        return "course_page";
+        modelMap.addAttribute("course", community);
+        return singleViewName;
     }
 
 }
