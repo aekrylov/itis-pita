@@ -27,10 +27,10 @@
                     <div class="col-md-12">
                         <h4>Инфо</h4>
                         <hr class="full-grey-hr"/>
-                        <div class="form-horizontal">
+                        <div>
                             <div class="form-group">
                             <#--'E' char in "Email" need to be in Cyrillic. :) No idea, how to fix.-->
-                                <label class="col-sm-3 control-label">Еmail:</label>
+                                <label class="col-sm-4 control-label">Еmail:</label>
                                 <div class="col-sm-9">
                                     <p class="form-control-static">${user.email}</p>
                                 </div>
