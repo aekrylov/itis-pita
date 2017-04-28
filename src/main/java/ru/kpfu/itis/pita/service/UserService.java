@@ -14,4 +14,6 @@ public interface UserService {
     User findById(int id);
 
     List<User> findAllWorkers();
+
+    boolean changePassword(User currentUser, String oldPassword, String password);
 }

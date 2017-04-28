@@ -34,12 +34,21 @@
         <div class="row">
             <div class="col-md-12">
                 <br/>
-
+                <#if error?has_content>
+                    <div class="alert alert-danger" role="alert">Пароль должен содержать от 8 до 30 символов</div>
+                </#if>
+                <#if PasswordChangedSuccess?has_content>
+                    <#if PasswordChangedSuccess>
+                        <div class="alert alert-success" role="alert">Пароль изменен.</div>
+                    <#else>
+                        <div class="alert alert-danger" role="alert">Неверный текущий пароль.</div>
+                    </#if>
+                </#if>
                 <form role="form" action="/profile/edit" method="POST"
                       onsubmit="return checkform(['email']) && checkEmail()">
                     <div class="form-group">
                         <label class="control-label">ФИО</label>
-                        <p class="form-control form-control-static">${name}</p>
+                        <p class="form-control form-control-static"><#if name?has_content>${name}</#if></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Обо мне</label>
@@ -54,13 +63,13 @@
                     <div class="form-group">
                         <label for="email" class="control-label">Номер телефона</label>
                         <input type="text" class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd"
-                               value="${phone_number}">
+                               value="<#if phone_number?has_content>${phone_number}</#if>">
                     </div>
                     <div class="form-group">
                         <label for="email" class="control-label">Email</label>
                         <input type="email" class="form-control" name="email"
                                id="email" maxlength="50" oninput="checkEmail()"
-                               value="${email}"/>
+                               value="<#if email?has_content>${email}</#if>"/>
                     </div>
                     <div class="form-group">
                         <button class="btn-warning btn btn-block" type="submit">Сохранить</button>
@@ -76,12 +85,12 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form class="form-horizontal" action="/settings" method="POST"
+                            <form class="form-horizontal" action="/profile/edit/password" method="POST"
                                   onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Смена пароля</h4>
                                 </div>
                                 <div class="modal-body">
 

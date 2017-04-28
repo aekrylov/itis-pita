@@ -49,6 +49,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public boolean changePassword(User currentUser, String oldPassword, String password) {
+        String oldPasswordHash = bCryptPasswordEncoder.encode(oldPassword);
+        String newPasswordHash = bCryptPasswordEncoder.encode(password);
+        if (currentUser.getPasswordHash().equals(oldPasswordHash)) {
+            currentUser.setPasswordHash(newPasswordHash);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public ru.kpfu.itis.pita.security.UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if(user == null)
