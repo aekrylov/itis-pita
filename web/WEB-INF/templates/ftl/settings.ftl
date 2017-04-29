@@ -76,8 +76,7 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form class="form-horizontal" action="/settings" method="POST"
-                                  onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
+                            <@formTags.form method="POST" action="/profile/edit/change_password" class="form-horizontal" modelAttribute="passwordForm">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
@@ -86,33 +85,25 @@
                                 <div class="modal-body">
 
                                     <div class="form-group">
-                                        <label for="password" class="col-xs-3 control-label">Старый
+                                        <label for="old_password" class="col-xs-3 control-label">Старый
                                             пароль</label>
-
                                         <div class="col-xs-6">
-                                            <input type="password" class="form-control" name="old_password"
-                                                   id="old_password" maxlength="50"
-                                                   oninput="removeHasError('old_password')"/>
+                                            <@formTags.input path="old_password" cssClass="form-control" />
+                                            <@formTags.errors path="old_password" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password" class="col-xs-3 control-label">Новый
+                                        <label for="new_password" class="col-xs-3 control-label">Новый
                                             пароль</label>
-
                                         <div class="col-xs-6">
-                                            <input type="password" class="form-control" name="password"
-                                                   id="password" maxlength="50"
-                                                   oninput="removeHasError('password')"/>
+                                            <@formTags.password path="new_password" cssClass="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="repeated_password" class="col-xs-3 control-label">Повторите
+                                        <label for="password_confirmed" class="col-xs-3 control-label">Повторите
                                             пароль</label>
-
                                         <div class="col-xs-6">
-                                            <input type="password" class="form-control" name="password"
-                                                   id="repeated_password" maxlength="50"
-                                                   oninput="removeHasError('repeated_password')"/>
+                                            <input class="form-control" type="password" id="password_confirmed" name="password_confirmed"/>
                                         </div>
                                     </div>
 
@@ -122,7 +113,8 @@
                                     </button>
                                     <button class="btn-success btn" type="submit">Изменить пароль</button>
                                 </div>
-                            </form>
+                                <@formTags.errors path="*"/>
+                            </@formTags.form>
                         </div>
                     </div>
 

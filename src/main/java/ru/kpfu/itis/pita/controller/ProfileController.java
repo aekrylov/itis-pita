@@ -7,11 +7,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.pita.entity.User;
+import ru.kpfu.itis.pita.form.ChangePasswordForm;
 import ru.kpfu.itis.pita.form.ModifyProfileForm;
+import ru.kpfu.itis.pita.form.RegistrationForm;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.UserService;
+import ru.kpfu.itis.pita.validator.NewPasswordFormValidator;
 
 import javax.validation.Valid;
 /**
@@ -25,6 +29,7 @@ import javax.validation.Valid;
 public class ProfileController {
 
     private UserService userService;
+    private NewPasswordFormValidator validator;
 
     @ModelAttribute("form")
     public ModifyProfileForm profileEditForm() {
@@ -37,10 +42,15 @@ public class ProfileController {
         //todo interests
         return form;
     }
+    @ModelAttribute("passwordForm")
+    public ChangePasswordForm changePasswordForm() {
+        return new ChangePasswordForm();
+    }
 
     @Autowired
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, NewPasswordFormValidator validator) {
         this.userService = userService;
+        this.validator = validator;
     }
 
     @GetMapping("/edit")
@@ -76,6 +86,26 @@ public class ProfileController {
         }
 
         return new ModelAndView("profile", modelMap);
+    }
+
+    @PostMapping("/edit/change_password")
+    public String doPost(@ModelAttribute("passwordForm") @Valid ChangePasswordForm form,
+                         BindingResult bindingResult,
+                         ModelMap map,
+                         RedirectAttributes redirectAttributes) {
+        validator.validate(form, bindingResult);
+        if(bindingResult.hasErrors()) {
+            map.put("error", bindingResult.getModel());
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.form", bindingResult);
+            return  "redirect:/profile/edit";
+        }
+
+        User currentUser = Helpers.getCurrentUser();
+        currentUser.setPasswordRaw(form.getNew_password());
+
+        userService.save(currentUser);
+
+        return "redirect:/profile";
     }
 
 }
