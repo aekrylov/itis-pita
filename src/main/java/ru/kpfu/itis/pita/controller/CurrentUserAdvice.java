@@ -1,10 +1,9 @@
 package ru.kpfu.itis.pita.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.kpfu.itis.pita.entity.User;
-import ru.kpfu.itis.pita.security.UserDetails;
+import ru.kpfu.itis.pita.misc.Helpers;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -18,13 +17,11 @@ public class CurrentUserAdvice {
 
     @ModelAttribute("logged_in")
     public boolean isLoggedIn() {
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof UserDetails;
+        return Helpers.getCurrentUser() != null;
     }
 
     @ModelAttribute("current_user")
     public User currentUser() {
-        return isLoggedIn()
-                ? ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser()
-                : null;
+        return Helpers.getCurrentUser();
     }
 }

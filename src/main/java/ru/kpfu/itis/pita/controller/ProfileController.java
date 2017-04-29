@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.form.ChangePasswordForm;
 import ru.kpfu.itis.pita.form.ModifyProfileForm;
-import ru.kpfu.itis.pita.form.RegistrationForm;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.UserService;
@@ -21,7 +20,6 @@ import javax.validation.Valid;
 /**
  * Created by 1 on 17.03.2017.
  *
- * FIXME backend
  */
 @Controller
 @RequestMapping(path = "/profile")
@@ -97,6 +95,10 @@ public class ProfileController {
         if(bindingResult.hasErrors()) {
             map.put("error", bindingResult.getModel());
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.form", bindingResult);
+            
+            if(bindingResult.hasFieldErrors("old_password")) {
+                redirectAttributes.addFlashAttribute("PasswordChangedSuccess", false);
+            }
             return  "redirect:/profile/edit";
         }
 
@@ -105,7 +107,8 @@ public class ProfileController {
 
         userService.save(currentUser);
 
-        return "redirect:/profile";
+        redirectAttributes.addFlashAttribute("PasswordChangedSuccess", true);
+        return "redirect:/profile/edit";
     }
 
 }

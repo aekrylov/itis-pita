@@ -85,8 +85,9 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <@formTags.form method="POST" action="/profile/edit/change_password" class="form-horizontal" modelAttribute="passwordForm"
-                                cssClass="form-horizontal" onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
+                            <@formTags.form method="POST" action="/profile/edit/change_password" modelAttribute="passwordForm"
+                            cssClass="form-horizontal"
+                            onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
@@ -98,7 +99,7 @@
                                         <label for="old_password" class="col-xs-3 control-label">Старый
                                             пароль</label>
                                         <div class="col-xs-6">
-                                            <@formTags.input path="old_password" cssClass="form-control" />
+                                            <@formTags.password path="old_password" cssClass="form-control" />
                                             <@formTags.errors path="old_password" />
                                         </div>
                                     </div>

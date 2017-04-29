@@ -39,7 +39,7 @@ public class CommunitiesController {
     }
 
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     @Transactional
     public String listAll(ModelMap map) {
         Class<?>[] classes = new Class[]{Group.class, Course.class, Lab.class, Event.class};
