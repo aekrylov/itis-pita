@@ -34,7 +34,16 @@
         <div class="row">
             <div class="col-md-12">
                 <br/>
-
+                <#if error?has_content>
+                    <div class="alert alert-danger" role="alert">Пароль должен содержать от 8 до 30 символов</div>
+                </#if>
+                <#if PasswordChangedSuccess?has_content>
+                    <#if PasswordChangedSuccess>
+                        <div class="alert alert-success" role="alert">Пароль изменен.</div>
+                    <#else>
+                        <div class="alert alert-danger" role="alert">Неверный текущий пароль.</div>
+                    </#if>
+                </#if>
                 <form role="form" action="/profile/edit" method="POST"
                       onsubmit="return checkform(['email']) && checkEmail()">
                     <div class="form-group">
@@ -76,11 +85,12 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <@formTags.form method="POST" action="/profile/edit/change_password" class="form-horizontal" modelAttribute="passwordForm">
+                            <@formTags.form method="POST" action="/profile/edit/change_password" class="form-horizontal" modelAttribute="passwordForm"
+                                cssClass="form-horizontal" onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Смена пароля</h4>
                                 </div>
                                 <div class="modal-body">
 
