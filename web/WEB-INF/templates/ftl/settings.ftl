@@ -34,16 +34,22 @@
         <div class="row">
             <div class="col-md-12">
                 <br/>
-                <#if error?has_content>
-                    <div class="alert alert-danger" role="alert">Пароль должен содержать от 8 до 30 символов</div>
-                </#if>
-                <#if PasswordChangedSuccess?has_content>
-                    <#if PasswordChangedSuccess>
-                        <div class="alert alert-success" role="alert">Пароль изменен.</div>
-                    <#else>
+                <#if passwordError?has_content>
+                    <#if passwordError.hasFieldErrors("old_password")>
                         <div class="alert alert-danger" role="alert">Неверный текущий пароль.</div>
+                    <#else>
+                        <#if passwordError.hasFieldErrors("new_password")>
+                            <div class="alert alert-danger" role="alert">Новый пароль должен содержать от 8 до 30 символов.</div>
+                        <#else>
+                            <div class="alert alert-danger" role="alert">Пароли не совпадают.</div>
+                        </#if>
+                    </#if>
+                <#else>
+                    <#if PasswordChangedSuccess?has_content>
+                        <div class="alert alert-success" role="alert">Пароль изменен.</div>
                     </#if>
                 </#if>
+
                 <form role="form" action="/profile/edit" method="POST"
                       onsubmit="return checkform(['email']) && checkEmail()">
                     <div class="form-group">

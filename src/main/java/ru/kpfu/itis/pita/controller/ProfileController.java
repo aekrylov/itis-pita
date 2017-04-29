@@ -93,12 +93,7 @@ public class ProfileController {
                          RedirectAttributes redirectAttributes) {
         validator.validate(form, bindingResult);
         if(bindingResult.hasErrors()) {
-            map.put("error", bindingResult.getModel());
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.form", bindingResult);
-            
-            if(bindingResult.hasFieldErrors("old_password")) {
-                redirectAttributes.addFlashAttribute("PasswordChangedSuccess", false);
-            }
+            redirectAttributes.addFlashAttribute("passwordError", bindingResult);
             return  "redirect:/profile/edit";
         }
 
