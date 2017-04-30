@@ -177,9 +177,14 @@
                                 </div>
                             </div>
                             <#if post.comments?has_content>
+                                <#if post.comments?size gt 3>
+                                    <div class="col-lg-12 comments-button-helper" id="${post.id}">
+                                        <a class="col-lg-12 comments-button" id="${post.id} button">Показать все комментарии</a>
+                                    </div>
+                                </#if>
                                 <div class="col-lg-12 group-comment-label">Комментарии:</div>
                                 <#list post.comments as comment>
-                                    <div class="col-lg-12 group-comment">
+                                    <div id="${comment.id} comments" <#if comment?index < post.comments?size - 3> style="display: none;" </#if> class="col-lg-12 group-comment">
                                         <a class="" href="/profile?id=${comment.author.id}">
                                             <div class="row group-user-profile">
                                             <#--TODO user's avatar-->
@@ -208,6 +213,25 @@
                                             })
                                         </script>
                                     </div>
+                                    <script>
+                                        function slideComments() {
+                                            $('#${post.id}').click(function () {
+                                                var comments = $('#${comment.id} comments');
+                                                if(${comment?index} < ${post.comments?size - 3}){
+                                                    if (!comments.is(':visible')) {
+                                                        comments.slideDown('fast', function () {
+                                                            $('#${post.id} button').text('Скрыть комментарии');
+                                                        });
+                                                    } else {
+                                                        comments.slideUp('fast', function () {
+                                                            $('#${post.id} button').text('Показать все комментарии');
+                                                        });
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        $(document).ready(slideComments);
+                                    </script>
                                 </#list>
                             </#if>
                             <div class="col-lg-12 group-comment-create">
