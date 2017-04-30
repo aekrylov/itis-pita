@@ -38,6 +38,7 @@
 }
 
 .group-user-time{
+    margin-top: 7px;
     color: grey;
     width: 100%;
     float: left;
@@ -92,9 +93,9 @@
     padding: 10px 25px;
     display: inline-block;
     text-align: center;
-    background-color: rgba(121, 121, 121, 0.258823529411765);
+    background: #1b9dec linear-gradient(to bottom, #1da7ee, #178ee9) repeat-x;
     border-radius: 2px;
-    color: rgba(0, 0, 0, 0.258823529411765);
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -173,14 +174,29 @@
     font-size: 18px;
 }
 
+.group-comment-text{
+    float: right;
+}
+
 .group-user-profile-name{
     float: left;
 }
 
-.group-create-post, .group-post, .group-comment, .group-comment-create{
+.group-create-post, .group-comment-create{
     padding: 10px;
     background-color: rgba(242, 242, 242, 0.788235294117647);
     border-radius: 4px;
+}
+
+.group-post, .group-comment{
+    padding: 10px;
+    background-color: rgba(242, 242, 242, 0.788235294117647);
+}
+
+.group-comment-label{
+    padding: 10px;
+    background-color: rgba(242, 242, 242, 0.788235294117647);
+    font-size: 20px;
 }
 
 .group-create-post{
