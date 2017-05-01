@@ -29,11 +29,14 @@
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #000;
-    margin-bottom: 20px;
     font-size: 14px;
     outline: none;
     color: white;
     background: rgba(37, 103, 104, 0.7);
+}
+
+.error-message{
+    color: red;
 }
 
 .forms-label{
