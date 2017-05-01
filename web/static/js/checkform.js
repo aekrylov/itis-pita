@@ -8,8 +8,7 @@ function checkform(fields, label_is_underfield) {
     for (var i = 0; i < fields.length; i++) {
         var elem = $("#" + fields[i]);
         //set remove error handler
-        //todo: fixme
-        //elem.focus( function(){removeHasError(elem.attr('id'))});
+        elem.focus( function(){removeHasError($(this).attr('id'))});
         if (elem.val() === '') {
             //remove old notification about empty login
             if (elem.val() !== '' && elem.parent().children().is($("#" + elem.attr('id') + "_warning"))){
