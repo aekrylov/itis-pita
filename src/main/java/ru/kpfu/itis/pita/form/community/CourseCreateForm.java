@@ -1,4 +1,4 @@
-package ru.kpfu.itis.pita.form;
+package ru.kpfu.itis.pita.form.community;
 
 import org.springframework.format.annotation.NumberFormat;
 import ru.kpfu.itis.pita.entity.Course;

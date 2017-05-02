@@ -1,4 +1,4 @@
-package ru.kpfu.itis.pita.form;
+package ru.kpfu.itis.pita.form.community;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import ru.kpfu.itis.pita.entity.Group;
