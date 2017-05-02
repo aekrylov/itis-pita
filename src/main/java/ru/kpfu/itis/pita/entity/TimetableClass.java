@@ -2,10 +2,15 @@ package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/29/17 6:04 PM
+ *
+ * Entity representing certain class for certain group/groups during one semester
+ * (e.g. Math, 11-501, Fall 2017)
+ * Dates for classes are represented by separate entity for maximum flexibility
  */
 
 @Entity
@@ -13,17 +18,22 @@ import java.util.Collection;
 public class TimetableClass {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne(optional = false)
     private Subject subject;
 
+    //todo move to date?
     @ManyToOne(optional = false)
     private User teacher;
 
     @ManyToMany
     @JoinTable(name = "timetable_classes_groups")
     private Collection<AcademicGroup> groups;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "timetableClass")
+    private List<TimetableDate> dates;
 
     public TimetableClass() {
     }
@@ -72,9 +82,9 @@ public class TimetableClass {
 
         TimetableClass that = (TimetableClass) o;
 
-        if (id != that.id) return false;
-        if (!subject.equals(that.subject)) return false;
-        if (!teacher.equals(that.teacher)) return false;
+        if (id != that.getId()) return false;
+        if (!subject.equals(that.getSubject())) return false;
+        if (!teacher.equals(that.getTeacher())) return false;
         return groups != null ? groups.equals(that.groups) : that.groups == null;
     }
 
@@ -85,5 +95,13 @@ public class TimetableClass {
         result = 31 * result + teacher.hashCode();
         result = 31 * result + (groups != null ? groups.hashCode() : 0);
         return result;
+    }
+
+    public List<TimetableDate> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<TimetableDate> dates) {
+        this.dates = dates;
     }
 }

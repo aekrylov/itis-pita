@@ -1,0 +1,82 @@
+package ru.kpfu.itis.pita.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import ru.kpfu.itis.pita.entity.*;
+import ru.kpfu.itis.pita.form.TimetableClassCreateForm;
+import ru.kpfu.itis.pita.misc.Helpers;
+import ru.kpfu.itis.pita.service.SubjectService;
+import ru.kpfu.itis.pita.service.TimetableService;
+import ru.kpfu.itis.pita.service.UserService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+/**
+ * By Anton Krylov (anthony.kryloff@gmail.com)
+ * Date: 5/2/17 4:46 PM
+ */
+@Controller
+@RequestMapping("/timetable")
+public class TimetableController {
+
+    private TimetableService timetableService;
+    private UserService userService;
+    private SubjectService subjectService;
+
+    @ModelAttribute("createForm")
+    public TimetableClassCreateForm classCreateForm() {
+        return new TimetableClassCreateForm();
+    }
+
+    @Autowired
+    public TimetableController(TimetableService timetableService, UserService userService, SubjectService subjectService) {
+        this.timetableService = timetableService;
+        this.userService = userService;
+        this.subjectService = subjectService;
+    }
+
+    @GetMapping("/my")
+    @ResponseBody
+    public Map viewMine() {
+        User user = Helpers.getCurrentUser();
+        List<TimetableClass> classes;
+        if(user instanceof Student) {
+            //todo
+            classes = timetableService.findAllByAcademicGroup(((Student) user).getAcademicGroup());
+        } else if(user.getRole() == UserRole.ROLE_WORKER) {
+            //todo
+            classes = timetableService.findAllByTeacher(user);
+        } else {
+            classes = timetableService.findAll();
+        }
+
+        List<TimetableDate> dates = classes.stream()
+                .flatMap(c -> c.getDates().stream())
+                .collect(Collectors.toList());
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("dates", dates);
+        map.put("classes", classes);
+        return map;
+    }
+
+    @GetMapping("/create")
+    public String newClassGet() {
+        return "timetable_newclass";
+    }
+
+    @PostMapping("/create")
+    public String newClassPost(@ModelAttribute("createForm") TimetableClassCreateForm form, BindingResult result) {
+        TimetableClass timetableClass = new TimetableClass();
+        timetableClass.setTeacher(userService.findById(form.getTeacherId()));
+        timetableClass.setSubject(subjectService.findById(form.getSubjectId()));
+
+        timetableService.saveClass(timetableClass, form.getAcademicGroups());
+        return "redirect:/timetable/create";
+    }
+}

@@ -162,9 +162,7 @@ public class User {
 
         User user = (User) o;
 
-        //todo
-        if (id != user.getId()) return false;
-        return email.equals(user.getEmail());
+        return id == user.getId() && email.equals(user.getEmail());
     }
 
     @Override
