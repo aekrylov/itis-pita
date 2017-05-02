@@ -1,21 +1,33 @@
 /**
  * Created by Олег on 02.11.2016.
  */
+//two password and repeated password matcher
+function passwordsMatcher(password, repeated) {
+    var pass;
+    var pass_rep;
+    if (typeof password === 'undefined') {
+        //set default
+        pass = $("#password");
+    } else {
+        pass = password;
+    }
+    if (typeof password === 'undefined') {
+        //set default
+        pass_rep = $("#repeated_password");
+    } else {
+        pass_rep = repeated;
+    }
 
-function passwordsMatcher() {
-    var pass = $("#password").val();
-    var pass_rep = $("#repeated_password").val();
-
-    if (pass !== pass_rep) {
-        if ( !$("#repeated_password").parent().hasClass("has-error")) {
-            $("#repeated_password").parent().append('\<label class="control-label" id ="repeated_password_warning" for="repeated_password">Пароли не совпадают</label>');
-            $("#repeated_password").parent().addClass("has-error");
+    if (pass.val() !== pass_rep.val()) {
+        if ( !pass_rep.parent().hasClass("has-error")) {
+            pass_rep.parent().append('\<label class="control-label" id ="'+pass_rep.attr('id')+'\_warning" for="'+pass_rep.attr('id') + '\ ">Пароли не совпадают</label>');
+            pass_rep.parent().addClass("has-error");
         }
         return false;
     } else {
 
-        $("#passwords_not_matching_warning").remove();
-        $("#repeated_password").parent().removeClass("has-error");
+        $('#'+pass_rep.attr('id')+'\_warning').remove();
+        pass_rep.parent().removeClass("has-error");
         return true;
     }
 };

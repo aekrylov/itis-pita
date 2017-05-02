@@ -34,16 +34,28 @@
         <div class="row">
             <div class="col-md-12">
                 <br/>
-                <#if error?has_content>
-                    <div class="alert alert-danger" role="alert">Пароль должен содержать от 8 до 30 символов</div>
-                </#if>
-                <#if PasswordChangedSuccess?has_content>
-                    <#if PasswordChangedSuccess>
-                        <div class="alert alert-success" role="alert">Пароль изменен.</div>
+                <div id="alert_container">
+                    <#--
+                    <#if passwordError?has_content>
+                        <#if passwordError.hasFieldErrors("old_password")>
+                            <div class="alert alert-danger" role="alert">Неверный текущий пароль.</div>
+                        <#else>
+                            <#if passwordError.hasFieldErrors("new_password")>
+                                <div class="alert alert-danger" role="alert">Новый пароль должен содержать от 8 до 30
+                                    символов.
+                                </div>
+                            <#else>
+                                <div class="alert alert-danger" role="alert">Пароли не совпадают.</div>
+                            </#if>
+                        </#if>
                     <#else>
-                        <div class="alert alert-danger" role="alert">Неверный текущий пароль.</div>
+                        <#if PasswordChangedSuccess?has_content>
+                            <div class="alert alert-success" role="alert">Пароль изменен.</div>
+                        </#if>
                     </#if>
-                </#if>
+                    -->
+                </div>
+
                 <form role="form" action="/profile/edit" method="POST"
                       onsubmit="return checkform(['email']) && checkEmail()">
                     <div class="form-group">
@@ -57,8 +69,8 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Интересы</label>
-                        <input class="selectized"  name="interests"
-                                  id="interests" value="${form.interests!""}"/>
+                        <input class="selectized" name="interests"
+                               id="interests" value="${form.interests!""}"/>
                     </div>
                     <div class="form-group">
                         <label for="email" class="control-label">Номер телефона</label>
@@ -77,7 +89,7 @@
                 </form>
 
 
-                <a class="btn btn-primary btn-block" data-toggle="modal"
+                <a class="btn btn-primary btn-block" data-toggle="modal" onclick="$('#alert_container').children().remove()"
                    data-target="#change_password_modal"> Сменить
                     пароль</a>
 
@@ -85,36 +97,39 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <@formTags.form method="POST" action="/profile/edit/change_password" modelAttribute="passwordForm"
+                            <@formTags.form method="POST" action="/ajax/profile/edit/change_password" modelAttribute="passwordForm"
+                            id="passwordChangeForm"
                             cssClass="form-horizontal"
-                            onsubmit="return checkform(['password', 'old_password', 'repeated_password']) && passwordsMatcher()">
+                            <#--onsubmit="return checkform(['new_password', 'old_password', 'password_confirmed']) && passwordsMatcher()"-->>
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    <button type="button" class="close" data-dismiss="modal"
+                                             aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" id="myModalLabel">Смена пароля</h4>
                                 </div>
                                 <div class="modal-body">
 
                                     <div class="form-group">
-                                        <label for="old_password" class="col-xs-3 control-label">Старый
+                                        <label for="old_password" class="col-xs-4 control-label">Старый
                                             пароль</label>
                                         <div class="col-xs-6">
-                                            <@formTags.password path="old_password" cssClass="form-control" />
-                                            <@formTags.errors path="old_password" />
+                                            <@formTags.password path="old_password" cssClass="form-control" id="old_password"/>
+                                            <#--<@formTags.errors path="old_password" />-->
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="new_password" class="col-xs-3 control-label">Новый
+                                        <label for="new_password" class="col-xs-4 control-label">Новый
                                             пароль</label>
                                         <div class="col-xs-6">
-                                            <@formTags.password path="new_password" cssClass="form-control" />
+                                            <@formTags.password path="new_password" cssClass="form-control" id="new_password"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password_confirmed" class="col-xs-3 control-label">Повторите
+                                        <label for="password_confirmed" class="col-xs-4 control-label">Повторите
                                             пароль</label>
                                         <div class="col-xs-6">
-                                            <input class="form-control" type="password" id="password_confirmed" name="password_confirmed"/>
+                                            <input class="form-control" type="password" id="password_confirmed"
+                                                   name="password_confirmed"/>
                                         </div>
                                     </div>
 
@@ -137,15 +152,28 @@
 
 </#macro>
 <#macro footer_custom_imports>
+<#-- scripts for ajax-post form
+    to rollback to plain controller:
+    - uncomment ftl-comments;
+    - comment next three scripts;
+    - chande actinon path in form
+    -->
+<script src="/static/js/jquery.form.js"></script>
+<script type="application/javascript" src="/static/js/changePassPrepare.js">
+</script>
+<script>
+    $(document).ready(changePassPrepare());
+</script>
+
+
 <script type="application/javascript">
     //see groupTagsSelectizer for more information about items
     items = [
         <#if all_interests??>
             <#list all_interests as i>
-                { value: '${i.name}', text: '${i.name}' },
+                {value: '${i.name}', text: '${i.name}'},
             </#list>
-        </#if>
-    ];
+        </#if>];
 
 
     $.onload = simpleTagsSelectizer('interests', items);

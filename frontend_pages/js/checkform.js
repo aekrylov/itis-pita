@@ -6,21 +6,24 @@ function checkform(fields, label_is_underfield) {
     label_is_underfield = label_is_underfield == null? true : label_is_underfield;
     var flag = true;
     for (var i = 0; i < fields.length; i++) {
-        if ($("#" + fields[i]).val() === '') {
+        var elem = $("#" + fields[i]);
+        //set remove error handler
+        elem.focus( function(){removeHasError($(this).attr('id'))});
+        if (elem.val() === '') {
             //remove old notification about empty login
-            if ($("#" + fields[i]).val() !== '' && $("#" + fields[i]).parent().children().is($("#" + fields[i] + "_warning"))){
+            if (elem.val() !== '' && elem.parent().children().is($("#" + elem.attr('id') + "_warning"))){
                 $("#" + fields[i] + "_warning").remove();
-                $("#" + fields[i]).parent().removeClass("has-error");
+                elem.parent().removeClass("has-error");
 
             }
             //add notification about empty login
-            if ($("#" + fields[i]).val() === '' && !$("#" + fields[i]).parent().children().is($("#" + fields[i] + "_warning"))){
+            if (elem.val() === '' && !elem.parent().children().is($("#" + elem.attr('id') + "_warning"))){
                 if (label_is_underfield){
-                    $("#" + fields[i]).parent().append('\<label class="control-label" id ="' + fields[i] + '\_warning" for="input_login">Обязательное поле</label>');
+                    elem.parent().append('\<label class="control-label" id ="' + elem.attr('id') + '\_warning" for="input_login">Обязательное поле</label>');
                 } else {
-                    $('\<label class="control-label" id ="' + fields[i] + '\_warning" for="input_login"> - обязательное поле</label>').insertBefore($("#" + fields[i]));
+                    $('\<label class="control-label" id ="' + elem.attr('id') + '\_warning" for="input_login"> - обязательное поле</label>').insertBefore(elem);
                 }
-                $("#" + fields[i]).parent().addClass("has-error");
+                elem.parent().addClass("has-error");
             }
 
             flag = false;
