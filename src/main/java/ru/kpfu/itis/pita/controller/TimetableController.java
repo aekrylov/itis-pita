@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -8,10 +9,14 @@ import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.form.TimetableClassCreateForm;
 import ru.kpfu.itis.pita.form.TimetableClassSimpleForm;
 import ru.kpfu.itis.pita.misc.Helpers;
+import ru.kpfu.itis.pita.service.SemesterService;
 import ru.kpfu.itis.pita.service.SubjectService;
 import ru.kpfu.itis.pita.service.TimetableService;
 import ru.kpfu.itis.pita.service.UserService;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +33,7 @@ public class TimetableController {
     private TimetableService timetableService;
     private UserService userService;
     private SubjectService subjectService;
+    private SemesterService semesterService;
 
     @ModelAttribute("createForm")
     public TimetableClassCreateForm classCreateForm() {
@@ -39,15 +45,22 @@ public class TimetableController {
         return new TimetableClassSimpleForm();
     }
 
+    @ModelAttribute("daysOfWeek")
+    public DayOfWeek[] daysOfWeek() {
+        return DayOfWeek.values();
+    }
+
     @Autowired
-    public TimetableController(TimetableService timetableService, UserService userService, SubjectService subjectService) {
+    public TimetableController(TimetableService timetableService, UserService userService, SubjectService subjectService, SemesterService semesterService) {
         this.timetableService = timetableService;
         this.userService = userService;
         this.subjectService = subjectService;
+        this.semesterService = semesterService;
     }
 
     @GetMapping("/my")
     @ResponseBody
+    @PreAuthorize("isFullyAuthenticated()")
     public Map viewMine() {
         User user = Helpers.getCurrentUser();
         List<TimetableClass> classes;
@@ -67,7 +80,6 @@ public class TimetableController {
 
         Map<String, Object> map = new HashMap<>();
         map.put("dates", dates);
-        map.put("classes", classes);
         return map;
     }
 
@@ -93,8 +105,30 @@ public class TimetableController {
 
     @PostMapping("/create")
     public String createSimplePost(@ModelAttribute("simpleForm") TimetableClassSimpleForm form, BindingResult result) {
-        Subject subject = subjectService.findByName(form.getSubject());
-        //todo
+        Subject subject = subjectService.findCurrentByName(form.getSubject());
+        User teacher = userService.findById(form.getTeacherId());
+
+        Semester semester = semesterService.getCurrentSemester();
+
+        TimetableClass timetableClass = new TimetableClass();
+        timetableClass.setSubject(subject);
+        timetableClass.setTeacher(teacher);
+
+        //genearate dates
+        List<TimetableDate> dates = new ArrayList<>();
+        for(DayOfWeek dow: form.getDaysOfWeek()) {
+            LocalDate startDate = LocalDate.from(dow.adjustInto(semester.getStartDate().plusWeeks(1)));
+            for(LocalDate date = startDate; date.isBefore(semester.getEndDate()); date = date.plusDays(7)) {
+                TimetableDate timetableDate = new TimetableDate();
+                timetableDate.setStartTime(date.atTime(form.getTimeStart()));
+                timetableDate.setPlace(form.getPlace());
+                timetableDate.setTimetableClass(timetableClass);
+                dates.add(timetableDate);
+            }
+        }
+
+        timetableClass.setDates(dates);
+        timetableService.saveClass(timetableClass, form.getGroups());
 
         return "timetable_simple_newclass";
     }

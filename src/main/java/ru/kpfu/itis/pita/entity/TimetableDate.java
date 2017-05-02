@@ -1,7 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -15,21 +15,17 @@ import java.util.Date;
 public class TimetableDate {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne(optional = false)
     private TimetableClass timetableClass;
 
     @Column(name = "start_time", nullable = false)
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "place")
     private String place;
-
-    public TimetableDate(TimetableClass timetableClass, Date startTime) {
-        this.timetableClass = timetableClass;
-        this.startTime = startTime;
-    }
 
     public TimetableDate() {
     }
@@ -50,11 +46,11 @@ public class TimetableDate {
         this.timetableClass = timetableClass;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 

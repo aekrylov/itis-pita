@@ -1,7 +1,7 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -20,10 +20,10 @@ public class Semester {
     private String name;
 
     @Column(name = "start_date", nullable = false)
-    private Date startDate = new Date();
+    private LocalDate startDate = LocalDate.now();
 
     @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
     public Semester() {
     }
@@ -44,11 +44,11 @@ public class Semester {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -70,11 +70,11 @@ public class Semester {
         return result;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

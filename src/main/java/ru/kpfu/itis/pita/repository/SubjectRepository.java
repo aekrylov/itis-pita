@@ -1,6 +1,7 @@
 package ru.kpfu.itis.pita.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import ru.kpfu.itis.pita.entity.Semester;
 import ru.kpfu.itis.pita.entity.Subject;
 
 /**
@@ -9,4 +10,5 @@ import ru.kpfu.itis.pita.entity.Subject;
  */
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     Subject findByName(String name);
+    Subject findByNameAndSemester(String name, Semester semester);
 }

@@ -8,7 +8,7 @@ import ru.kpfu.itis.pita.entity.Subject;
  */
 public interface SubjectService {
 
-    Subject findByName(String name);
+    Subject findCurrentByName(String name);
     Subject findById(int id);
 
     Subject save(Subject subject);

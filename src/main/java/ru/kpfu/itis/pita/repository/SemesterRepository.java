@@ -10,6 +10,7 @@ import ru.kpfu.itis.pita.entity.Semester;
  */
 public interface SemesterRepository extends CrudRepository<Semester, Integer> {
 
-    @Query("select s from Semester as s where s.startDate < current_date order by s.startDate desc")
+    @Query("select s from Semester as s where s.startDate < current_date and current_date < s.endDate " +
+            "order by s.startDate desc")
     Semester findCurrentSemester();
 }

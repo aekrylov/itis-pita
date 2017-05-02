@@ -1,7 +1,9 @@
 package ru.kpfu.itis.pita.form;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.DayOfWeek;
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -16,11 +18,12 @@ public class TimetableClassSimpleForm {
 
     private int teacherId;
 
-    private Date time_start;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime timeStart;
 
     private String place;
-
-    private DayOfWeek dayOfWeek;
+    
+    private List<DayOfWeek> daysOfWeek;
 
     public String getSubject() {
         return subject;
@@ -46,12 +49,12 @@ public class TimetableClassSimpleForm {
         this.teacherId = teacherId;
     }
 
-    public Date getTime_start() {
-        return time_start;
+    public LocalTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setTime_start(Date time_start) {
-        this.time_start = time_start;
+    public void setTimeStart(LocalTime timeStart) {
+        this.timeStart = timeStart;
     }
 
     public String getPlace() {
@@ -62,11 +65,11 @@ public class TimetableClassSimpleForm {
         this.place = place;
     }
 
-    public DayOfWeek getDayOfWeek() {
-        return dayOfWeek;
+    public List<DayOfWeek> getDaysOfWeek() {
+        return daysOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+    public void setDaysOfWeek(List<DayOfWeek> daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 }

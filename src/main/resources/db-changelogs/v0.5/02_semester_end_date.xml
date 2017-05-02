@@ -7,15 +7,33 @@
             <column name="end_date" type="timestamp"/>
         </addColumn>
     </changeSet>
+    
+    <changeSet id="1493739366840-4" author="anth">
+        <modifyDataType tableName="semesters" columnName="end_date" newDataType="date" />
+        <modifyDataType tableName="semesters" columnName="start_date" newDataType="date" />
+    </changeSet>
 
-    <changeSet id="1493739366840-2" author="anth">
+    <changeSet id="1493739366840-5" author="anth">
         <sql>
             UPDATE semesters
             SET end_date = start_date + 6*30
         </sql>
     </changeSet>
 
-    <changeSet id="1493739366840-3" author="anth">
+    <changeSet id="1493739366840-6" author="anth">
         <addNotNullConstraint tableName="semesters" columnName="end_date" />
+    </changeSet>
+
+    <changeSet id="1493739366840-8" author="anth">
+        <sql>
+            UPDATE subjects
+            SET semester_id = (SELECT id FROM semesters ORDER BY start_date DESC, name DESC LIMIT 1)
+        </sql>
+    </changeSet>
+    <changeSet id="1493739366840-9" author="anth">
+        <sql>
+            DELETE FROM semesters
+            WHERE id NOT IN (SELECT id FROM semesters ORDER BY start_date DESC, name DESC LIMIT 1)
+        </sql>
     </changeSet>
 </databaseChangeLog>
