@@ -31,7 +31,7 @@ public class CommunityController<E extends Community> {
     private final CommunityService<E> service;
     private final String singleViewName = "communities_one";
 
-    private E community;
+    protected E community;
 
     @Autowired
     public CommunityController(@Qualifier("communityService") CommunityService<E> service) {
