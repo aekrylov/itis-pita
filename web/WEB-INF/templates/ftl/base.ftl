@@ -68,6 +68,8 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="/communities/">Сообщества</a></li>
                                         <li><a href="/profile/edit">Настройки</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="/logout">Выход</a></li>
                                     </ul>
 
                                 </li>
