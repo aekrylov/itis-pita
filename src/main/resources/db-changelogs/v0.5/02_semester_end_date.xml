@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="anth (generated)" id="1493739366840-1">
+        <addColumn tableName="semesters">
+            <column name="end_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="1493739366840-2" author="anth">
+        <sql>
+            UPDATE semesters
+            SET end_date = start_date + 6*30
+        </sql>
+    </changeSet>
+
+    <changeSet id="1493739366840-3" author="anth">
+        <addNotNullConstraint tableName="semesters" columnName="end_date" />
+    </changeSet>
+</databaseChangeLog>

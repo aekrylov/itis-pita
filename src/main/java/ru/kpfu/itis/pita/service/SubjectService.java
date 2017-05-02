@@ -10,4 +10,6 @@ public interface SubjectService {
 
     Subject findByName(String name);
     Subject findById(int id);
+
+    Subject save(Subject subject);
 }

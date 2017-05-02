@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.form.TimetableClassCreateForm;
+import ru.kpfu.itis.pita.form.TimetableClassSimpleForm;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.SubjectService;
 import ru.kpfu.itis.pita.service.TimetableService;
@@ -31,6 +32,11 @@ public class TimetableController {
     @ModelAttribute("createForm")
     public TimetableClassCreateForm classCreateForm() {
         return new TimetableClassCreateForm();
+    }
+
+    @ModelAttribute("simpleForm")
+    public TimetableClassSimpleForm classSimpleForm() {
+        return new TimetableClassSimpleForm();
     }
 
     @Autowired
@@ -65,18 +71,31 @@ public class TimetableController {
         return map;
     }
 
-    @GetMapping("/create")
+    @GetMapping("/create2")
     public String newClassGet() {
         return "timetable_newclass";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create2")
     public String newClassPost(@ModelAttribute("createForm") TimetableClassCreateForm form, BindingResult result) {
         TimetableClass timetableClass = new TimetableClass();
         timetableClass.setTeacher(userService.findById(form.getTeacherId()));
         timetableClass.setSubject(subjectService.findById(form.getSubjectId()));
 
         timetableService.saveClass(timetableClass, form.getAcademicGroups());
-        return "redirect:/timetable/create";
+        return "redirect:/timetable/create2";
+    }
+
+    @GetMapping("/create")
+    public String createSimpleGet() {
+        return "timetable_simple_newclass";
+    }
+
+    @PostMapping("/create")
+    public String createSimplePost(@ModelAttribute("simpleForm") TimetableClassSimpleForm form, BindingResult result) {
+        Subject subject = subjectService.findByName(form.getSubject());
+        //todo
+
+        return "timetable_simple_newclass";
     }
 }

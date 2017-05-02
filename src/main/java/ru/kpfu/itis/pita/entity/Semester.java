@@ -22,12 +22,10 @@ public class Semester {
     @Column(name = "start_date", nullable = false)
     private Date startDate = new Date();
 
-    public Semester() {
-    }
+    @Column(name = "end_date", nullable = false)
+    private Date endDate;
 
-    public Semester(String name, Date startDate) {
-        this.name = name;
-        this.startDate = startDate;
+    public Semester() {
     }
 
     public int getId() {
@@ -70,5 +68,13 @@ public class Semester {
         int result = id;
         result = 31 * result + startDate.hashCode();
         return result;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
