@@ -14,7 +14,7 @@
     <div class="col-md-offset-1 col-md-10 undercover">
         <div class="row">
             <div class="col-md-12 green-header">
-                <h1>СООБЩЕСТВА</h1>
+                <h1>Сообщества</h1>
             </div>
         </div>
         <div class="row">
@@ -54,7 +54,7 @@
                                 <span class="input-group-addon"><button type="submit"><span
                                         class="glyphicon glyphicon-search"></span></button></span>
                             </div>
-                            <div class="row">
+                            <div class="row" id="tag_bar">
                                 <div class="col-md-1">
                                     <div class="tags-label-container">
                                         <label>Теги:</label>

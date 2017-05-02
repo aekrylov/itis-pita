@@ -82,10 +82,12 @@ var scopes = {
     courses: new Object(), labs: new Object(), groups: new Object()
 };
 var container = $('#communities_list');
+var standartTagsInput = $('#search_tags_input');
+var standartTagsInputBlock = $('#tag_bar');
 var currentSearchConfig = {
     type: types.my,
     input: $('#search_input'),
-    tags_input : $('#search_tags_input'),
+    tags_input : standartTagsInput,
     scope : scopes.groups,
     out : container
 };
@@ -130,6 +132,21 @@ function changeSearchConfig(type,scope) {
 }
 function standartSearch() {
     var currentCollectionConfig = configs.all_courses;
+
+    if (currentSearchConfig.scope == scopes.groups){
+        currentSearchConfig.tags_input = standartTagsInput;
+        standartTagsInputBlock.show();
+        standartTagsInputBlock.parent().children('br').remove();
+
+    } else {
+        //no tags search if search by labs or by
+        currentSearchConfig.tags_input = null;
+        if (standartTagsInputBlock.parent().children('br').length == 0){
+            standartTagsInputBlock.parent().append('\<br/>');
+        }
+        standartTagsInputBlock.hide();
+    }
+
     if (currentSearchConfig.type === types.my){
         if (currentSearchConfig.scope === scopes.courses){
             currentCollectionConfig = configs.my_courses;
