@@ -1,5 +1,6 @@
 package ru.kpfu.itis.pita.form;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.DayOfWeek;
@@ -14,6 +15,7 @@ public class TimetableClassSimpleForm {
 
     private String subject;
 
+    @Length(min = 1)
     private List<String> groups;
 
     private int teacherId;

@@ -59,6 +59,11 @@ public class TimetableServiceImpl implements TimetableService {
     }
 
     @Override
+    public TimetableClass findOne(int id) {
+        return classRepository.findOne(id);
+    }
+
+    @Override
     public void addDate(TimetableClass timetableClass, TimetableDate date) {
         if(!timetableClass.getDates().contains(date)){
             timetableClass.getDates().add(date);

@@ -6,7 +6,9 @@ import java.util.Date;
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 5/2/17 4:54 PM
  */
-public class TimetableDateCreateForm {
+public class TimetableDateForm {
+
+    private int id;
 
     private int classId;
 
@@ -35,5 +37,13 @@ public class TimetableDateCreateForm {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

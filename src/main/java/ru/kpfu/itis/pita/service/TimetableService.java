@@ -20,6 +20,8 @@ public interface TimetableService {
     List<TimetableClass> findAllByAcademicGroup(AcademicGroup group);
     List<TimetableClass> findAllByTeacher(User teacher);
 
+    TimetableClass findOne(int id);
+
     void addDate(TimetableClass timetableClass, TimetableDate date);
     void addDate(int classId, TimetableDate date);
 

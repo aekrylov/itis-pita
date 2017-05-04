@@ -12,9 +12,7 @@
         <@formTags.input path="teacherId" />
     timestart
         <@formTags.select path="timeStart">
-            <option>10:00</option>
-            <option>11:50</option>
-            <option>13:35</option>
+            <@formTags.options items=lessonTimes />
         </@formTags.select>
     place
     <@formTags.input path="place" />

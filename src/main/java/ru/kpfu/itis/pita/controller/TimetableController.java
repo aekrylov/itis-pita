@@ -3,12 +3,14 @@ package ru.kpfu.itis.pita.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.*;
-import ru.kpfu.itis.pita.form.TimetableClassCreateForm;
+import ru.kpfu.itis.pita.form.TimetableClassForm;
 import ru.kpfu.itis.pita.form.TimetableClassSimpleForm;
 import ru.kpfu.itis.pita.misc.Helpers;
+import ru.kpfu.itis.pita.misc.LessonStartTime;
 import ru.kpfu.itis.pita.service.SemesterService;
 import ru.kpfu.itis.pita.service.SubjectService;
 import ru.kpfu.itis.pita.service.TimetableService;
@@ -16,10 +18,8 @@ import ru.kpfu.itis.pita.service.UserService;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,9 +35,9 @@ public class TimetableController {
     private SubjectService subjectService;
     private SemesterService semesterService;
 
-    @ModelAttribute("createForm")
-    public TimetableClassCreateForm classCreateForm() {
-        return new TimetableClassCreateForm();
+    @ModelAttribute("form")
+    public TimetableClassForm classCreateForm() {
+        return new TimetableClassForm();
     }
 
     @ModelAttribute("simpleForm")
@@ -48,6 +48,11 @@ public class TimetableController {
     @ModelAttribute("daysOfWeek")
     public DayOfWeek[] daysOfWeek() {
         return DayOfWeek.values();
+    }
+
+    @ModelAttribute("lessonTimes")
+    public List<String> lessonTimes() {
+        return Arrays.stream(LessonStartTime.values()).map(LessonStartTime::getString).collect(Collectors.toList());
     }
 
     @Autowired
@@ -89,13 +94,31 @@ public class TimetableController {
     }
 
     @PostMapping("/create2")
-    public String newClassPost(@ModelAttribute("createForm") TimetableClassCreateForm form, BindingResult result) {
+    public String newClassPost(@ModelAttribute("form") TimetableClassForm form, BindingResult result) {
         TimetableClass timetableClass = new TimetableClass();
-        timetableClass.setTeacher(userService.findById(form.getTeacherId()));
-        timetableClass.setSubject(subjectService.findById(form.getSubjectId()));
+        fillEntity(timetableClass, form);
 
-        timetableService.saveClass(timetableClass, form.getAcademicGroups());
+        timetableService.saveClass(timetableClass, form.getGroups());
         return "redirect:/timetable/create2";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editClassGet(@PathVariable("id") int id, ModelMap map) {
+        map.put("form", getForm(timetableService.findOne(id)));
+        //todo
+        return "timetable_newclass";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editClassPost(@ModelAttribute("form") TimetableClassForm form, BindingResult result,
+                                @PathVariable("id") int id) {
+        TimetableClass timetableClass = timetableService.findOne(id);
+        fillEntity(timetableClass, form);
+
+        timetableService.saveClass(timetableClass, form.getGroups());
+
+        //todo
+        return "redirect:/timetable";
     }
 
     @GetMapping("/create")
@@ -115,7 +138,7 @@ public class TimetableController {
         timetableClass.setTeacher(teacher);
 
         //genearate dates
-        List<TimetableDate> dates = new ArrayList<>();
+        Set<TimetableDate> dates = new TreeSet<>();
         for(DayOfWeek dow: form.getDaysOfWeek()) {
             LocalDate startDate = LocalDate.from(dow.adjustInto(semester.getStartDate().plusWeeks(1)));
             for(LocalDate date = startDate; date.isBefore(semester.getEndDate()); date = date.plusDays(7)) {
@@ -132,4 +155,35 @@ public class TimetableController {
 
         return "timetable_simple_newclass";
     }
+
+    private void fillEntity(TimetableClass entity, TimetableClassForm form) {
+        entity.setTeacher(userService.findById(form.getTeacherId()));
+        entity.setSubject(subjectService.findCurrentByName(form.getSubject()));
+
+        entity.getDates().clear();
+        for (int i = 0; i < form.getStartTimes().size(); i++) {
+            LocalDateTime startTime = form.getStartTimes().get(i);
+            String place = form.getPlaces().get(i);
+            if(startTime == null || place == null)
+                continue;
+
+            TimetableDate newDate = new TimetableDate(entity, startTime, place);
+            entity.getDates().add(newDate);
+        }
+    }
+
+    private TimetableClassForm getForm(TimetableClass entity) {
+        TimetableClassForm form = new TimetableClassForm();
+        form.setSubject(entity.getSubject().getName());
+        form.setTeacherId(entity.getTeacher().getId());
+        form.setGroups(entity.getGroups().stream().map(AcademicGroup::getName).collect(Collectors.toList()));
+
+        for (TimetableDate date: entity.getDates()) {
+            form.getStartTimes().add(date.getStartTime());
+            form.getPlaces().add(date.getPlace());
+        }
+
+        return form;
+    }
+
 }

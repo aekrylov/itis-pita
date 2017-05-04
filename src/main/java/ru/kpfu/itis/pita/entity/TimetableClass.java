@@ -1,8 +1,11 @@
 package ru.kpfu.itis.pita.entity;
 
+import org.hibernate.annotations.SortNatural;
+
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -32,8 +35,9 @@ public class TimetableClass {
     @JoinTable(name = "timetable_classes_groups")
     private Collection<AcademicGroup> groups;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "timetableClass")
-    private List<TimetableDate> dates;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "timetableClass", orphanRemoval = true)
+    @SortNatural
+    private Set<TimetableDate> dates = new TreeSet<>();
 
     public TimetableClass() {
     }
@@ -97,11 +101,11 @@ public class TimetableClass {
         return result;
     }
 
-    public List<TimetableDate> getDates() {
+    public Set<TimetableDate> getDates() {
         return dates;
     }
 
-    public void setDates(List<TimetableDate> dates) {
+    public void setDates(Set<TimetableDate> dates) {
         this.dates = dates;
     }
 }

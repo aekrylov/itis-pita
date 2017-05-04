@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "timetable_dates")
-public class TimetableDate {
+public class TimetableDate implements Comparable<TimetableDate> {
 
     @Id
     @GeneratedValue
@@ -28,6 +28,12 @@ public class TimetableDate {
     private String place;
 
     public TimetableDate() {
+    }
+
+    public TimetableDate(TimetableClass timetableClass, LocalDateTime startTime, String place) {
+        this.timetableClass = timetableClass;
+        this.startTime = startTime;
+        this.place = place;
     }
 
     public int getId() {
@@ -69,9 +75,9 @@ public class TimetableDate {
 
         TimetableDate that = (TimetableDate) o;
 
-        if (id != that.id) return false;
-        if (!timetableClass.equals(that.timetableClass)) return false;
-        return startTime.equals(that.startTime);
+        return id == that.getId()
+                && timetableClass.equals(that.getTimetableClass())
+                && startTime.equals(that.getStartTime());
     }
 
     @Override
@@ -80,5 +86,10 @@ public class TimetableDate {
         result = 31 * result + timetableClass.hashCode();
         result = 31 * result + startTime.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(TimetableDate o) {
+        return startTime.compareTo(o.getStartTime());
     }
 }
