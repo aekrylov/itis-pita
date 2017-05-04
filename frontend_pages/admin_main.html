@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="css/common.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap-fileinputs/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="selectize/css/selectize.default.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="formhelper/css/bootstrap-formhelpers.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="css/admin-main.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="selectize/js/standalone/selectize.js"></script>
+
+    <script src="search/jsrender.js"></script>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+          rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+</head>
+<body>
+<div class="page">
+    <header>
+
+    </header>
+    <nav class="navbar pita-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img class="img-responsive header-logo" alt="Brand" src="img/pita_logo_wide_light.png">
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/messages"><span class="glyphicon glyphicon-envelope"
+                                                          aria-hidden="true"></span>
+                                Сообщения</a></li>
+                            <li><a href="/feed"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                                Лента новостей</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="divider-vertical"><a href="/info"><span id="icon_span"
+                                                                               class="glyphicon glyphicon-bell"
+                                                                               aria-hidden="true"></span></a>
+                            </li>
+                            <li>
+                                <a id="avatar-link" class="navbar-brand" href="/profile">
+                                    <img href="/profile" class="img-responsive  avatar" height="40" width="40"
+                                         src="img/avatar_example.png"/>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Александр <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-12 undercover">
+                <div class="row">
+                    <div class="col-md-12 green-header">
+                        <h1>Управление данными</h1>
+                    </div>
+                </div>
+
+                <br>
+
+
+                <ul class="nav nav-tabs no-border-tabs" role="tablist">
+
+                    <li role="presentation" class="active"
+                        onmouseenter="$('.tab-content.work-block').css('border-top-left-radius', '0px')"
+                        onmouseleave="if (!$(this).hasClass('active')) $('.tab-content.work-block').css('border-top-left-radius', '5px')"
+                        onclick="$('.tab-content.work-block').css('border-top-left-radius', '0px')"
+                    ><a href="#g" role="tab" data-toggle="tab"
+                        onclick="changeSearchConfig(undefined, scopes.groups)">Группы</a>
+                    </li>
+                    <li role="presentation"
+                        onclick="$('.tab-content.work-block').css('border-top-left-radius', '5px')"><a
+                            href="#c" role="tab"
+                            data-toggle="tab" onclick="changeSearchConfig(undefined, scopes.courses)">Курсы</a>
+                    </li>
+                    <li role="presentation"
+                        onclick="$('.tab-content.work-block').css('border-top-left-radius', '5px')"><a
+                            href="#l" role="tab"
+                            data-toggle="tab"
+                            onclick="changeSearchConfig(undefined, scopes.labs)">Лаборатории</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content work-block">
+                    <div class="row">
+                        <div class="col-md-12" style="padding: 0px 25px">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" name="search" class="form-control"
+                                       placeholder="Поиск" id="search_input"
+                                       oninput="standartSearch()">
+                                <span class="input-group-addon"><button type="submit"><span
+                                        class="glyphicon glyphicon-search"></span></button></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane active" id="entities_list">
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <div class="push"></div>
+
+</div>
+<footer>
+
+</footer>
+<script src="js/checkform.js"></script>
+<script src="js/removeHasError.js"></script>
+<script src="js/simpleTagsSelectizer.js"></script>
+<script src="search/fuse.js"></script>
+<script src="search/jsrender.js"></script>
+<script>
+    //script to fix default border radius
+    $('.tab-content.work-block').css('border-top-left-radius', '0px');
+</script>
+
+<script type="application/javascript">
+    //see groupTagsSelectizer for more information about items
+    /*tags_items = [
+     {value: 'inf', text: 'informatic'},
+     {value: 'java', text: 'java language'},
+     {value: '.net', text: '.net framework'},
+     {value: 'itis-music', text: 'itis-music'},
+     {value: 'text_in_tag3', text: 'text_in_tag3'}
+     ];
+     var selectizable = simpleTagsSelectizer('search_tags_input', tags_items, false)[0].selectize;*/
+
+</script>
+<script id="entityTemplate" type="text/x-jsrender">
+    <table class="table table-hover table-condensed table-striped" >
+
+        <thead>
+            <tr>
+                <th/>
+                {{for fields}}
+                <th>{{:}}</th>
+                {{/for}}
+            </tr>
+        </thead>
+        <tbody>
+            {{for entries}}
+            <tr>
+                <th/>
+                {{for fields}}
+                {{if ~isArray(value)}}
+                <td><a class="editable" data-type="text" data-url="/ajax/admin/{{:#parent.parent.parent.parent.parent.data.name}}/edit">{{:value.join(', ')}}</a></td>
+                {{else}}
+                <td><a class="editable" data-type="text" data-url="/ajax/admin/{{:#data.parent}}/edit">{{:value}}</a></td>
+                {{/if}}
+                {{/for}}
+                <td><a class="btn-danger" href="delete?id={{:id}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+            </tr>
+            {{/for}}
+        </tbody>
+    
+    </table>
+
+</script>
+<script type="application/javascript">
+    /*{{for items}}
+     <li class="media">
+     <hr class="list-grey-hr"/>
+     <div class="media-left media-middle">
+     <a href="#">
+     <div class="media-object thumb-round"
+     style="background-image: url('{{:avatar}}');"></div>
+     </a>
+     </div>
+     <div class="media-body">
+     <h4 class="media-heading community-title"><a class="link" href="#">{{:name}}</a></h4>
+
+     <div class="items">
+     {{for tags}}
+     <div class="custom-tag" data-value="inf" onclick = (addTag(this))>{{:text}}</div>
+     {{/for}}
+     </div>
+     <p class="small"><span class="glyphicon glyphicon-user"
+     aria-hidden="true"></span> {{:members}}</p>
+     </div>
+
+     </li>
+     {{/for}}*/
+    var entity = {
+        name: 'entitityName',
+        fields: ["field1", "field2"],
+        entries: [
+            {
+                id: 1,
+                fields: [
+                    {
+                        field:"fieldname1",
+                        value: "val1"
+                    },
+                    {
+                        field:"fieldname2",
+                        value: ["val2","extraval"]
+                    }
+                    ]
+            },
+            {
+                id: 2,
+                fields: [
+                    {
+                        field:"fieldname1",
+                        value: "val3"
+                    }
+                ]
+            }
+        ]
+    };
+</script>
+<script src="search/adminSearchAndRender.js"></script>
+</body>
+</html>
