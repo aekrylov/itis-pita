@@ -1,0 +1,48 @@
+.timetable-header{
+    font-size: 18px;
+    text-align: center;
+}
+
+.timetable-header-text{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.timetable-line{
+    height: 1px;
+    background: #000;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+.timetable-day-warning{
+    color: red;
+}
+
+.timetable-button-submit:disabled {
+    background: rgba(43, 188, 149, 1) none;
+    cursor: not-allowed;
+}
+
+.timetable-button-submit{
+    margin: auto;
+    display: block;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px 25px;
+    font-size: 12px;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Open Sans,Helvetica Neue,sans-serif;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: rgba(44, 147, 119, 1) none;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
