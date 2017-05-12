@@ -48,9 +48,7 @@ public class StudentResultController {
         scores.addAll(studentScoreService.findAllBySemesterNumber(course*2));
 
         map.put("subjects",subjects);
-
         map.put("scores", getStudentWithScores(students,subjects,Helpers.getCurretStudyYear()-course,scores));
-        System.out.println(subjects.toString());
         return "student_result";
     }
     @GetMapping("")
@@ -65,15 +63,15 @@ public class StudentResultController {
         if(user instanceof Student) {
             Student student = (Student)user;
             int course = Helpers.getCurretStudyYear()- student.getAcademicGroup().getStart_year();
-            map.put("subjects",subjectService.findAllBySemesterNumberLessThanOrderBySemesterNumber(course+1));
 
+            List<Subject> subjects = subjectService.findAllBySemesterNumberLessThanOrderBySemesterNumber(course*2+1);
+            map.put("subjects",subjects);
             List<StudentScore> scores = studentScoreService.findAllByStudent(student);
-            student.setAverageScore(
-                    scores
-                    .stream()
-                    .collect(Collectors.averagingInt(p -> p.getExamScore()+p.getPraxisScore()))
-            );
-            map.put("scores",scores);
+
+            List<Student> students= new ArrayList<Student>();
+            students.add(student);
+
+            map.put("scores",getStudentWithScores(students, subjects, Helpers.getCurretStudyYear() - course, scores));
             map.put("student", student);
         } else  {
             return view(map);

@@ -17,11 +17,12 @@
             <#list entry.value as entry2>
                 ${entry2.value.score}
             </#list>
-
+         Average: ${entry.key.averageScore}
         </#list>
     <#else>
     not scores
     </#if>
+
 </#macro>
 
 <@display "рейтинг"></@display>
