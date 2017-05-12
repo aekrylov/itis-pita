@@ -6,7 +6,6 @@ import ru.kpfu.itis.pita.entity.Subject;
 import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.repository.SubjectRepository;
 import ru.kpfu.itis.pita.service.SubjectService;
-
 import java.util.List;
 
 /**
@@ -36,6 +35,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+
     public List<Subject> findAllBySemesterNumber(int semesterNumber) {
         return repository.findAllBySemesterNumber(semesterNumber);
     }
@@ -55,10 +55,13 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+
     public Subject save(Subject subject) {
         if(subject.getSemester() == null) {
             subject.setSemester(semesterRepository.findCurrentSemester());
         }
         return repository.save(subject);
     }
+
 }
+

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Lab;
-import ru.kpfu.itis.pita.form.CommunityCreateForm;
 import ru.kpfu.itis.pita.entity.User;
-import ru.kpfu.itis.pita.form.LabCreateForm;
+import ru.kpfu.itis.pita.form.community.CommunityCreateForm;
+import ru.kpfu.itis.pita.form.community.LabCreateForm;
 import ru.kpfu.itis.pita.service.UserService;
 
 import java.util.List;

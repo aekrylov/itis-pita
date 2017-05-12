@@ -1,7 +1,6 @@
 package ru.kpfu.itis.pita.service;
 
 import ru.kpfu.itis.pita.entity.Subject;
-
 import java.util.List;
 
 /**
@@ -12,6 +11,7 @@ public interface SubjectService {
 
     Subject findCurrentByName(String name);
     Subject findById(int id);
+
     Subject save(Subject subject);
     List<Subject> findAllBySemesterNumber(int semesterNumber);
     List<Subject> findAllSortBySemesterNumber();

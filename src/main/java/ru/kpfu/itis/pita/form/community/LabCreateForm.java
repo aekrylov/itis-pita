@@ -1,4 +1,4 @@
-package ru.kpfu.itis.pita.form;
+package ru.kpfu.itis.pita.form.community;
 
 import ru.kpfu.itis.pita.entity.Lab;
 

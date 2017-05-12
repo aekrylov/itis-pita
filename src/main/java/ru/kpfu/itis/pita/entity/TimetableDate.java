@@ -1,35 +1,39 @@
 package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
  * Date: 3/29/17 6:09 PM
+ *
+ * One date for some class
  */
 
 @Entity
 @Table(name = "timetable_dates")
-public class TimetableDate {
+public class TimetableDate implements Comparable<TimetableDate> {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne(optional = false)
     private TimetableClass timetableClass;
 
     @Column(name = "start_time", nullable = false)
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "place")
     private String place;
 
-    public TimetableDate(TimetableClass timetableClass, Date startTime) {
-        this.timetableClass = timetableClass;
-        this.startTime = startTime;
+    public TimetableDate() {
     }
 
-    public TimetableDate() {
+    public TimetableDate(TimetableClass timetableClass, LocalDateTime startTime, String place) {
+        this.timetableClass = timetableClass;
+        this.startTime = startTime;
+        this.place = place;
     }
 
     public int getId() {
@@ -48,11 +52,11 @@ public class TimetableDate {
         this.timetableClass = timetableClass;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
@@ -71,9 +75,9 @@ public class TimetableDate {
 
         TimetableDate that = (TimetableDate) o;
 
-        if (id != that.id) return false;
-        if (!timetableClass.equals(that.timetableClass)) return false;
-        return startTime.equals(that.startTime);
+        return id == that.getId()
+                && timetableClass.equals(that.getTimetableClass())
+                && startTime.equals(that.getStartTime());
     }
 
     @Override
@@ -82,5 +86,10 @@ public class TimetableDate {
         result = 31 * result + timetableClass.hashCode();
         result = 31 * result + startTime.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(TimetableDate o) {
+        return startTime.compareTo(o.getStartTime());
     }
 }

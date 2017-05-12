@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Event;
-import ru.kpfu.itis.pita.form.EventCreateForm;
+import ru.kpfu.itis.pita.form.community.EventCreateForm;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)

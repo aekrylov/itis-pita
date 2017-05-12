@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.Group;
 import ru.kpfu.itis.pita.entity.Interest;
-import ru.kpfu.itis.pita.form.GroupCreateForm;
+import ru.kpfu.itis.pita.form.community.GroupCreateForm;
 import ru.kpfu.itis.pita.service.InterestService;
 
 import java.util.List;

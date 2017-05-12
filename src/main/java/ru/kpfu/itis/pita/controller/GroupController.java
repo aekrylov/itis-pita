@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.Group;
-import ru.kpfu.itis.pita.form.CommunityCreateForm;
-import ru.kpfu.itis.pita.form.GroupCreateForm;
+import ru.kpfu.itis.pita.form.community.CommunityCreateForm;
+import ru.kpfu.itis.pita.form.community.GroupCreateForm;
 import ru.kpfu.itis.pita.service.GroupService;
 
 /**

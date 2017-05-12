@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  */
 public class Helpers {
 
+    @SuppressWarnings("unchecked")
     public static <T> List<T> filterByType(Collection<? super T> collection, Class<T> type) {
         return collection.stream()
                 .filter(item -> type.isAssignableFrom(item.getClass()))

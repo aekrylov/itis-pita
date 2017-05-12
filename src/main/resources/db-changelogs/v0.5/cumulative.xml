@@ -6,6 +6,10 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
     <include file="scores.xml" relativeToChangelogFile="true" />
+    <include file="01_timetable_classes.xml" relativeToChangelogFile="true" />
+    <include file="02_semester_end_date.xml" relativeToChangelogFile="true" />
+
 
 </databaseChangeLog>
