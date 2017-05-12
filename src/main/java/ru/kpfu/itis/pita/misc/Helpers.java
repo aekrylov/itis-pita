@@ -3,13 +3,12 @@ package ru.kpfu.itis.pita.misc;
 import com.cloudinary.Cloudinary;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.itis.pita.entity.Student;
 import ru.kpfu.itis.pita.entity.User;
 import ru.kpfu.itis.pita.security.UserDetails;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -53,5 +52,15 @@ public class Helpers {
             //todo
             return null;
         }
+    }
+
+    public static int getCurretStudyYear(){
+        Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        //if start new study years
+        if (cal.get(Calendar.MONTH)>7) year++;
+        return year;
     }
 }

@@ -18,6 +18,9 @@ public class Subject {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private int semester_number;
+
     @ManyToOne
     private Semester semester;
 
@@ -70,5 +73,13 @@ public class Subject {
         result = 31 * result + name.hashCode();
         result = 31 * result + (semester != null ? semester.hashCode() : 0);
         return result;
+    }
+
+    public int getSemester_number() {
+        return semester_number;
+    }
+
+    public void setSemester_number(int semester_number) {
+        this.semester_number = semester_number;
     }
 }

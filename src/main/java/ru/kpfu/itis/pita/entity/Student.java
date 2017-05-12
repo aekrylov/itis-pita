@@ -2,6 +2,7 @@ package ru.kpfu.itis.pita.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -16,6 +17,18 @@ public class Student extends User {
     private Lab lab;
     private AcademicGroup academicGroup;
     private Collection<Interest> interests;
+
+    @Transient
+    private double averageScore;
+
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
 
     public Student() {
     }
