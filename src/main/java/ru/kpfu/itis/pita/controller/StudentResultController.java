@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping("/student_result")
-//@PreAuthorize("isFullyAuthenticated()")
+@PreAuthorize("isFullyAuthenticated()")
 public class StudentResultController {
 
     private StudentScoreService studentScoreService;
@@ -48,8 +48,9 @@ public class StudentResultController {
         scores.addAll(studentScoreService.findAllBySemesterNumber(course*2));
 
         map.put("subjects",subjects);
-        map.put("scores", getStudentWithScores(students,subjects,Helpers.getCurretStudyYear()-course,scores));
 
+        map.put("scores", getStudentWithScores(students,subjects,Helpers.getCurretStudyYear()-course,scores));
+        System.out.println(subjects.toString());
         return "student_result";
     }
     @GetMapping("")
@@ -60,6 +61,7 @@ public class StudentResultController {
     @GetMapping("/my")
     public String myView(ModelMap map) {
         User user = Helpers.getCurrentUser();
+        user = userService.findById(user.getId());//yjdjt
         if(user instanceof Student) {
             Student student = (Student)user;
             int course = Helpers.getCurretStudyYear()- student.getAcademicGroup().getStart_year();
@@ -71,7 +73,7 @@ public class StudentResultController {
                     .stream()
                     .collect(Collectors.averagingInt(p -> p.getExamScore()+p.getPraxisScore()))
             );
-            map.put("score",scores);
+            map.put("scores",scores);
             map.put("student", student);
         } else  {
             return view(map);
@@ -79,7 +81,7 @@ public class StudentResultController {
         return "student_result";
     }
 
-    private LinkedHashMap getStudentWithScores(List<Student> students, List<Subject> subjects ,int year,List<StudentScore> scores){
+    private ArrayList getStudentWithScores(List<Student> students, List<Subject> subjects ,int year,List<StudentScore> scores){
 
         //sort Student by name
         students.stream()
@@ -117,8 +119,12 @@ public class StudentResultController {
                 .sorted((s1, s2) -> {
                 return Double.compare(s1.getKey().getAverageScore(),s2.getKey().getAverageScore());
                 });
-
-        return result;
+        //convert to arrayList because freemarker bad work with map
+        ArrayList a = new ArrayList(result.entrySet());
+        for (Object e :a){
+            ((Map.Entry)e).setValue(((LinkedHashMap)((Map.Entry) e).getValue()).entrySet());
+        }
+        return a;
     }
 
 

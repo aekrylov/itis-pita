@@ -19,7 +19,7 @@ public class Subject {
     private String name;
 
     @Column(nullable = false)
-    private int semester_number;
+    private int semesterNumber;
 
     @ManyToOne
     private Semester semester;
@@ -75,11 +75,11 @@ public class Subject {
         return result;
     }
 
-    public int getSemester_number() {
-        return semester_number;
+    public int getSemesterNumber() {
+        return semesterNumber;
     }
 
-    public void setSemester_number(int semester_number) {
-        this.semester_number = semester_number;
+    public void setSemesterNumber(int semester_number) {
+        this.semesterNumber = semester_number;
     }
 }

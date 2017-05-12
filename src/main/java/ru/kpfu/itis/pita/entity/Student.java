@@ -21,11 +21,11 @@ public class Student extends User {
     @Transient
     private double averageScore;
 
-
+    @Transient
     public double getAverageScore() {
         return averageScore;
     }
-
+    @Transient
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
