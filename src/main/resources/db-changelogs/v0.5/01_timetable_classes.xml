@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="anth" id="1493737267558-1">
+        <createSequence sequenceName="timetable_classes_id_seq" />
+        <addDefaultValue columnDataType="int" columnName="id" defaultValueComputed="nextval('timetable_classes_id_seq'::regclass)" tableName="timetable_classes"/>
+    </changeSet>
+</databaseChangeLog>

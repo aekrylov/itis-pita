@@ -1,8 +1,9 @@
-package ru.kpfu.itis.pita.form;
+package ru.kpfu.itis.pita.form.community;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.itis.pita.entity.Community;
+import ru.kpfu.itis.pita.form.InfoForm;
 import ru.kpfu.itis.pita.misc.Helpers;
 
 /**

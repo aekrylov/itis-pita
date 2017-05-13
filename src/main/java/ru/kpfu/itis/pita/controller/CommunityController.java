@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.pita.entity.Community;
 import ru.kpfu.itis.pita.entity.User;
-import ru.kpfu.itis.pita.form.CommunityCreateForm;
+import ru.kpfu.itis.pita.form.community.CommunityCreateForm;
 import ru.kpfu.itis.pita.misc.EntityNotFoundException;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.CommunityService;

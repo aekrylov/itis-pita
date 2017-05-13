@@ -1,7 +1,6 @@
-package ru.kpfu.itis.pita.form;
+package ru.kpfu.itis.pita.form.community;
 
 
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.kpfu.itis.pita.entity.Event;
 
 import java.text.ParseException;
