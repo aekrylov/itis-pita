@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kpfu.itis.pita.entity.*;
 import ru.kpfu.itis.pita.misc.Helpers;
 import ru.kpfu.itis.pita.service.StudentScoreService;
@@ -82,45 +83,37 @@ public class StudentResultController {
     private ArrayList getStudentWithScores(List<Student> students, List<Subject> subjects ,int year,List<StudentScore> scores){
 
         //sort Student by name
-        students.stream()
-                .sorted((s1, s2) -> {
-                    return s1.getName().compareTo(s2.getName());
-                });
+        students.sort(Comparator.comparing(User::getName));
 
         //map of all subject
-        LinkedHashMap<Subject,Score> subjectScore = new LinkedHashMap<>();
+        HashMap<Subject,Score> subjectScore = new LinkedHashMap<>();
         subjects.stream()
                 .forEach(subject -> subjectScore.put(subject,new Score()) );
+
         //map of all student with all subject
-        LinkedHashMap<Student,LinkedHashMap<Subject,Score>> result = new LinkedHashMap<>();
+        HashMap<Student, Map<Subject,Score>> result = new LinkedHashMap<>();
         students.stream()
-                .forEach( student -> result.put(student,(LinkedHashMap<Subject,Score>)subjectScore.clone()));
+                .forEach( student -> result.put(student,(HashMap<Subject,Score>)subjectScore.clone()));
 
         //fill table
         scores.stream()
                 .forEach(sc -> result.get(sc.getStudent()).get(sc.getSubject()).setScore(sc.getExamScore()+sc.getPraxisScore()));
 
         //set average score to students
-        for (Map.Entry entry : result.entrySet()) {
-            int sum = 0;
-            int n = 0;
-            for (Map.Entry entry2: ((LinkedHashMap<Subject,Score>)entry.getValue()).entrySet()){
-                if(((Score)entry2.getValue()).getScore()!= -1) {
-                    sum += ((Score) entry2.getValue()).getScore();
-                    n++;
-                }
-            }
-            if (n != 0) ((Student)entry.getKey()).setAverageScore(sum/n);
+        for (Map.Entry<Student, Map<Subject, Score>> entry : result.entrySet()) {
+            double averageScore = entry.getValue().values().stream()
+                    .collect(Collectors.averagingInt(Score::getScore));
+
+            entry.getKey().setAverageScore(averageScore);
         }
         //sort Student by average_score
-        result.entrySet().stream()
-                .sorted((s1, s2) -> {
-                return Double.compare(s1.getKey().getAverageScore(),s2.getKey().getAverageScore());
-                });
+//        result.entrySet().stream()
+//                .sorted(Comparator.comparingDouble(s -> s.getKey().getAverageScore()));
+
         //convert to arrayList because freemarker bad work with map
-        ArrayList a = new ArrayList(result.entrySet());
+        ArrayList<Map.Entry> a = new ArrayList<>(result.entrySet());
         for (Object e :a){
-            ((Map.Entry)e).setValue(((LinkedHashMap)((Map.Entry) e).getValue()).entrySet());
+            ((Map.Entry)e).setValue(((Map)((Map.Entry) e).getValue()).entrySet());
         }
         return a;
     }
