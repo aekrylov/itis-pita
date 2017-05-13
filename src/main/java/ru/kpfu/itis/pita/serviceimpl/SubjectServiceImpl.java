@@ -6,6 +6,7 @@ import ru.kpfu.itis.pita.entity.Subject;
 import ru.kpfu.itis.pita.repository.SemesterRepository;
 import ru.kpfu.itis.pita.repository.SubjectRepository;
 import ru.kpfu.itis.pita.service.SubjectService;
+import java.util.List;
 
 /**
  * By Anton Krylov (anthony.kryloff@gmail.com)
@@ -34,10 +35,33 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+
+    public List<Subject> findAllBySemesterNumber(int semesterNumber) {
+        return repository.findAllBySemesterNumber(semesterNumber);
+    }
+
+    @Override
+    public List<Subject> findAllBySemesterNumberLessThanOrderBySemesterNumber (int semesterNumber) {
+        return repository.findAllBySemesterNumberLessThanOrderBySemesterNumber(semesterNumber);
+    }
+
+    @Override
+    public List<Subject> findAllSortBySemesterNumber() {
+        return repository.findAllOrderBySemesterNumber();
+    }
+
+    public List<Subject> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+
     public Subject save(Subject subject) {
         if(subject.getSemester() == null) {
             subject.setSemester(semesterRepository.findCurrentSemester());
         }
         return repository.save(subject);
     }
+
 }
+

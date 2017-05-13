@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="anth (generated)" id="1493751687711-1">
+        <createTable tableName="scores">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true" primaryKeyName="scoresPK"/>
+            </column>
+            <column name="closed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="examScore" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="praxisScore" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subject_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493751687711-2">
+        <addForeignKeyConstraint baseColumnNames="subject_id" baseTableName="scores" constraintName="FK1aicois4dtfaxk4hshrs35yd4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="subjects"/>
+    </changeSet>
+    <changeSet author="anth (generated)" id="1493751687711-3">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="scores" constraintName="FKpmp9k9d20q6euqo2g35a00wyl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="students"/>
+    </changeSet>
+</databaseChangeLog>

@@ -18,6 +18,12 @@ public class AcademicGroup {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private int start_year;
+
+    @Column(nullable = false)
+    private int finish_year;
+
     public int getId() {
         return id;
     }
@@ -32,5 +38,21 @@ public class AcademicGroup {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getStart_year() {
+        return start_year;
+    }
+
+    public void setStart_year(int start_year) {
+        this.start_year = start_year;
+    }
+
+    public int getFinish_year() {
+        return finish_year;
+    }
+
+    public void setFinish_year(int finish_year) {
+        this.finish_year = finish_year;
     }
 }
